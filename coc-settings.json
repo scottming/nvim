@@ -1,0 +1,20 @@
+{
+  "coc.preferences.formatOnSaveFiletypes": ["css", "markdown", "javascript", "graphql", "html", "yaml",  "json", "python", "elixir"],
+  // Elixir settings
+  "elixirLS.dialyzerEnabled": true,
+  "elixir.pathToElixirLS": "~/.elixir-ls/release/language_server.sh",
+  "snippets.ultisnips.directories":
+  [
+    "UltiSnips",
+    "~/.config/nvim/utils/snips"
+  ],
+  // Explorer
+  "explorer.width": 30,
+  "explorer.icon.enableNerdfont": true,
+  "explorer.previewAction.onHover": false,
+  "explorer.keyMappings.global": {
+    "<cr>": ["expandable?", "expand", "open"],
+    "v": "open:vsplit"
+  },
+  "coc.preferences.extensionUpdateCheck": "daily"
+}
