@@ -18,6 +18,9 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'mhinz/vim-signify'
     Plug 'tpope/vim-fugitive'
     Plug 'tpope/vim-rhubarb'
-    Plug 'junegunn/gv.vim'
+    Plug 'junegunn/gv.vim',
+    Plug 'justinmk/vim-sneak'
+    Plug 'unblevable/quick-scope'
+    Plug 'liuchengxu/vim-which-key'
 
 call plug#end()

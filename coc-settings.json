@@ -1,5 +1,5 @@
 {
-  "coc.preferences.formatOnSaveFiletypes": ["css", "markdown", "javascript", "graphql", "html", "yaml",  "json", "python", "elixir"],
+  "coc.preferences.formatOnSaveFiletypes": ["css", "markdown", "javascript", "graphql", "html", "yaml",  "json", "pyright", "elixir", "tabnine"],
   // Elixir settings
   "elixirLS.dialyzerEnabled": true,
   "elixir.pathToElixirLS": "~/.elixir-ls/release/language_server.sh",
@@ -16,5 +16,11 @@
     "<cr>": ["expandable?", "expand", "open"],
     "v": "open:vsplit"
   },
-  "coc.preferences.extensionUpdateCheck": "daily"
+  "coc.preferences.extensionUpdateCheck": "daily",
+  "list.insertMappings": {
+    "<C-g>": "do:exit"
+  },
+  "list.normalMappings": {
+    "<C-g>": "do:exit"
+  }
 }

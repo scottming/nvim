@@ -11,7 +11,7 @@ let g:startify_bookmarks = [
             \ { 'c': '~/Documents/WorkRepo/crypto-ops/mix.exs'},
             \ { 'i': '~/.config/nvim/init.vim' },
             \ { 'z': '~/.zshrc' },
-            \ { 'h': '~/.hammerspoon/private/config.lua'},
+            \ { 'm': '~/.hammerspoon/private/config.lua'},
             \ '~/Code',
             \ ]
 
