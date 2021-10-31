@@ -22,9 +22,9 @@ nnoremap <TAB> :bnext<CR>
 nnoremap <S-TAB> :bprevious<CR>
 
 " Alternate way to save
-nnoremap <leader>ww :w<CR>
+nnoremap <leader>w :w<CR>
 " Alternate way to quit
-nnoremap <leader>qq :wq!<CR>
+nnoremap <leader>q :wq!<CR>
 " Use control-c instead of escape
 nnoremap <C-c> <Esc>
 " <TAB>: completion.
@@ -38,7 +38,7 @@ vnoremap > >gv
 nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
-nnoremap <C-l> <C-w>L
+nnoremap <C-l> <C-w>l
 
 nnoremap <Leader>o o<Esc>^Da
 nnoremap <Leader>O O<Esc>^Da
