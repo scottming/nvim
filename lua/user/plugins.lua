@@ -40,6 +40,9 @@ packer.init {
 
 -- Install your plugins here
 return packer.startup(function(use)
+  -- Pernal plugins here
+  use "simrat39/symbols-outline.nvim"
+
   -- My plugins here
   use "wbthomason/packer.nvim" -- Have packer manage itself
   use "nvim-lua/popup.nvim" -- An implementation of the Popup API from vim in Neovim
