@@ -44,3 +44,8 @@ end
 vim.cmd "set whichwrap+=<,>,[,],h,l"
 vim.cmd [[set iskeyword+=-]]
 vim.cmd [[set formatoptions-=cro]] -- TODO: this doesn't seem to work
+
+-- folding
+vim.cmd "set foldmethod=expr"
+vim.cmd "set foldexpr=nvim_treesitter#foldexpr()"
+vim.cmd "set foldlevelstart=99"

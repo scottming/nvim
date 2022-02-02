@@ -41,7 +41,7 @@ packer.init({
 -- Install your plugins here
 return packer.startup(function(use)
 	-- Pernal plugins here
-	use("simrat39/symbols-outline.nvim")
+	-- use("simrat39/symbols-outline.nvim")
 	use({
 		"karb94/neoscroll.nvim",
 		config = function()
@@ -52,6 +52,14 @@ return packer.startup(function(use)
 		"blackCauldron7/surround.nvim",
 		config = function()
 			require("surround").setup({ mappings_style = "surround" })
+		end,
+	})
+	use("nvim-treesitter/playground")
+	use({
+		"anuvyklack/pretty-fold.nvim",
+		config = function()
+			require("pretty-fold").setup({})
+			require("pretty-fold.preview").setup({ key = "h" })
 		end,
 	})
 

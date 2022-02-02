@@ -5,7 +5,7 @@ end
 
 configs.setup({
 	-- one of "all", "maintained" (parsers with maintainers), or a list of languages
-	ensure_installed = { "eex", "heex", "elixir", "lua" },
+	ensure_installed = { "eex", "heex", "elixir", "lua", "html", "javascript" },
 	sync_install = false, -- install languages synchronously (only applied to `ensure_installed`)
 	ignore_install = { "haskell" }, -- List of parsers to ignore installing
 	autopairs = {
@@ -16,9 +16,12 @@ configs.setup({
 		disable = { "" }, -- list of language that will be disabled
 		additional_vim_regex_highlighting = true,
 	},
-	indent = { enable = true, disable = { "yaml", "elixir" } },
+	indent = { enable = true, disable = { "yaml" } },
 	context_commentstring = {
 		enable = true,
 		enable_autocmd = false,
+	},
+	playground = {
+		enable = true,
 	},
 })
