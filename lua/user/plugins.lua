@@ -62,6 +62,7 @@ return packer.startup(function(use)
 			require("pretty-fold.preview").setup({ key = "h" })
 		end,
 	})
+	use("projekt0n/github-nvim-theme")
 
 	-- My plugins here
 	use("wbthomason/packer.nvim") -- Have packer manage itself
@@ -85,7 +86,6 @@ return packer.startup(function(use)
 	-- Colorschemes
 	-- use "lunarvim/colorschemes" -- A bunch of colorschemes you can try out
 	use("lunarvim/darkplus.nvim")
-	use("folke/tokyonight.nvim")
 
 	-- cmp plugins
 	use("hrsh7th/nvim-cmp") -- The completion plugin
