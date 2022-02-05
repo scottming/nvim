@@ -23,7 +23,7 @@ lsp_installer.on_server_ready(function(server)
 
 	if server.name == "elixirls" then
 		local elixir_opts = require("user.lsp.settings.elixirls")
-    opts.settings = elixir_opts.settings
+		opts = vim.tbl_deep_extend("force", elixir_opts, opts)
 	end
 
 	-- This setup() function is exactly the same as lspconfig's setup function.
