@@ -42,6 +42,7 @@ packer.init({
 return packer.startup(function(use)
 	-- Pernal plugins here
 	-- use("simrat39/symbols-outline.nvim")
+	use("romgrk/barbar.nvim")
 	use({
 		"karb94/neoscroll.nvim",
 		config = function()

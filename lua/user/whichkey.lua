@@ -77,13 +77,22 @@ local opts = {
 	noremap = true, -- use `noremap` when creating keymaps
 	nowait = true, -- use `nowait` when creating keymaps
 }
+local vopts = {
+	mode = "v", -- VISUAL mode
+	prefix = "<leader>",
+	buffer = nil, -- Global mappings. Specify a buffer number for buffer local mappings
+	silent = true, -- use `silent` when creating keymaps
+	noremap = true, -- use `noremap` when creating keymaps
+	nowait = true, -- use `nowait` when creating keymaps
+}
+-- NOTE: Prefer using : over <cmd> as the latter avoids going back in normal-mode.
+-- see https://neovim.io/doc/user/map.html#:map-cmd
+local vmappings = {
+	["/"] = { "<ESC><CMD>lua require('Comment.api').toggle_linewise_op(vim.fn.visualmode())<CR>", "Comment" },
+}
 
 local mappings = {
 	["a"] = { "<cmd>Alpha<cr>", "Alpha" },
-	["b"] = {
-		"<cmd>lua require('telescope.builtin').buffers(require('telescope.themes').get_dropdown{previewer = false})<cr>",
-		"Buffers",
-	},
 	["e"] = { "<cmd>NvimTreeToggle<cr>", "Explorer" },
 	["w"] = { "<cmd>w!<CR>", "Save" },
 	["q"] = { "<cmd>q!<CR>", "Quit" },
@@ -104,6 +113,30 @@ local mappings = {
 		s = { "<cmd>PackerSync<cr>", "Sync" },
 		S = { "<cmd>PackerStatus<cr>", "Status" },
 		u = { "<cmd>PackerUpdate<cr>", "Update" },
+	},
+	b = {
+		name = "Buffers",
+		j = { "<cmd>BufferPick<cr>", "Jump" },
+		f = { "<cmd>Telescope buffers<cr>", "Find" },
+		b = { "<cmd>b#<cr>", "Previous" },
+		w = { "<cmd>BufferWipeout<cr>", "Wipeout" },
+		e = {
+			"<cmd>BufferCloseAllButCurrent<cr>",
+			"Close all but current",
+		},
+		h = { "<cmd>BufferCloseBuffersLeft<cr>", "Close all to the left" },
+		l = {
+			"<cmd>BufferCloseBuffersRight<cr>",
+			"Close all to the right",
+		},
+		D = {
+			"<cmd>BufferOrderByDirectory<cr>",
+			"Sort by directory",
+		},
+		L = {
+			"<cmd>BufferOrderByLanguage<cr>",
+			"Sort by language",
+		},
 	},
 
 	g = {
@@ -186,3 +219,4 @@ local mappings = {
 
 which_key.setup(setup)
 which_key.register(mappings, opts)
+which_key.register(vmappings, vopts)
