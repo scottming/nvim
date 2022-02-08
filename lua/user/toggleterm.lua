@@ -68,3 +68,9 @@ local python = Terminal:new({ cmd = "python", hidden = true })
 function _PYTHON_TOGGLE()
 	python:toggle()
 end
+
+local iex = Terminal:new({ cmd = "iex -S mix phx.server", hidden = true })
+
+function _IEX_TOGGLE()
+	iex:toggle()
+end
