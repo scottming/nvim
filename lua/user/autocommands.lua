@@ -32,6 +32,8 @@ vim.cmd [[
   augroup _elixir
     autocmd!
     autocmd BufNewFile,BufRead *.eex,*.leex,*.heex set filetype=heex
+    autocmd FileType elixir setlocal indentkeys+=end
+    autocmd FileType eelixir setlocal indentkeys+=end
   augroup end
 ]]
 
