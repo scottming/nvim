@@ -2,7 +2,7 @@ return {
 	settings = {
 
 		elixirLS = {
-			dialyzerenabled = true,
+			dialyzerenabled = false,
 			dialyzerwarnopts = {},
 			dialyzerformat = "dialyxir_long",
 		},

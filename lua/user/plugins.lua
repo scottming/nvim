@@ -40,15 +40,15 @@ packer.init({
 
 -- Install your plugins here
 return packer.startup(function(use)
-	-- Pernal plugins here
+	-- Personal plugins here
 	-- use("simrat39/symbols-outline.nvim")
 	use("romgrk/barbar.nvim")
-	use({
-		"karb94/neoscroll.nvim",
-		config = function()
-			require("neoscroll").setup()
-		end,
-	})
+	-- use({
+	-- 	"karb94/neoscroll.nvim",
+	-- 	config = function()
+	-- 		require("neoscroll").setup()
+	-- 	end,
+	-- })
 	use({
 		"blackCauldron7/surround.nvim",
 		config = function()
@@ -72,7 +72,7 @@ return packer.startup(function(use)
 	use("windwp/nvim-autopairs") -- Autopairs, integrates with both cmp and treesitter
 	use("numToStr/Comment.nvim") -- Easily comment stuff
 	use("kyazdani42/nvim-web-devicons")
-	use("kyazdani42/nvim-tree.lua")
+	use({"kyazdani42/nvim-tree.lua", commit="2e1f82d8c0c57cbc2bfdc041a3aff26947559a1e"})
 	use("akinsho/bufferline.nvim")
 	use("moll/vim-bbye")
 	use("nvim-lualine/lualine.nvim")
