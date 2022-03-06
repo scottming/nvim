@@ -89,7 +89,7 @@ M.on_attach = function(client, bufnr)
 		client.resolved_capabilities.document_formatting = false
 	end
 
-	if client.name == "elixirls" then
+	if client.name == "elixirls" or client.name == "tsserver" then
 		vim.api.nvim_set_current_dir(client.config.root_dir)
 	end
 

@@ -64,6 +64,7 @@ return packer.startup(function(use)
 		end,
 	})
 	use("projekt0n/github-nvim-theme")
+	use({ "rcarriga/vim-ultest", requires = { "vim-test/vim-test" }, run = ":UpdateRemotePlugins" })
 
 	-- My plugins here
 	use("wbthomason/packer.nvim") -- Have packer manage itself
@@ -72,7 +73,8 @@ return packer.startup(function(use)
 	use("windwp/nvim-autopairs") -- Autopairs, integrates with both cmp and treesitter
 	use("numToStr/Comment.nvim") -- Easily comment stuff
 	use("kyazdani42/nvim-web-devicons")
-	use({"kyazdani42/nvim-tree.lua", commit="2e1f82d8c0c57cbc2bfdc041a3aff26947559a1e"})
+	-- use({ "kyazdani42/nvim-tree.lua", commit = "2e1f82d8c0c57cbc2bfdc041a3aff26947559a1e" })
+	use("kyazdani42/nvim-tree.lua")
 	use("akinsho/bufferline.nvim")
 	use("moll/vim-bbye")
 	use("nvim-lualine/lualine.nvim")
