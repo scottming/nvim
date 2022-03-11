@@ -204,8 +204,22 @@ local mappings = {
 		k = { "<cmd>Telescope keymaps<cr>", "Keymaps" },
 		C = { "<cmd>Telescope commands<cr>", "Commands" },
 	},
-
+	u = {
+		name = "UlTest",
+		t = { "<cmd>UltestNearest<cr>", "Ulttest nearest" },
+		T = { "<cmd>Ultest<cr>", "Test the file with Ulttest" },
+		s = { "<cmd>UltestSummary<cr>", "Ulttest summaary" },
+		l = { "<cmd>UltestLast<cr>", "Run the last test with Ultest" },
+		o = { "<cmd>UltestOutput<cr>", "Ulttest Output" },
+	},
 	t = {
+		name = "TestFile",
+		t = { "<cmd>TestNearest<cr>", "Test Nearest" },
+		T = { "<cmd>TestFile<cr>", "Test File" },
+		l = { "<cmd>TestLast<cr>", "Run the last test" },
+		g = { "<cmd>TestVisit<cr>", "Visit the last test" },
+	},
+	m = {
 		name = "Terminal",
 		n = { "<cmd>lua _NODE_TOGGLE()<cr>", "Node" },
 		i = { "<cmd>lua _IEX_TOGGLE()<cr>", "IEx" },

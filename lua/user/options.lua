@@ -49,3 +49,7 @@ vim.cmd [[set formatoptions-=cro]] -- TODO: this doesn't seem to work
 vim.cmd "set foldmethod=expr"
 vim.cmd "set foldexpr=nvim_treesitter#foldexpr()"
 vim.cmd "set foldlevelstart=99"
+
+-- for vim test
+vim.g["test#strategy"] = "neovim"
+-- vim.g["test#neovim#start_normal"] = 1
