@@ -65,6 +65,17 @@ return packer.startup(function(use)
 	})
 	use("projekt0n/github-nvim-theme")
 	use({ "rcarriga/vim-ultest", requires = { "vim-test/vim-test" }, run = ":UpdateRemotePlugins" })
+	use({
+		"folke/trouble.nvim",
+		requires = "kyazdani42/nvim-web-devicons",
+		config = function()
+			require("trouble").setup({
+				-- your configuration comes here
+				-- or leave it empty to use the default settings
+				-- refer to the configuration section below
+			})
+		end,
+	})
 
 	-- My plugins here
 	use("wbthomason/packer.nvim") -- Have packer manage itself
