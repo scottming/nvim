@@ -204,7 +204,7 @@ local mappings = {
 		k = { "<cmd>Telescope keymaps<cr>", "Keymaps" },
 		C = { "<cmd>Telescope commands<cr>", "Commands" },
 	},
-	u = {
+	t = {
 		name = "UlTest",
 		t = { "<cmd>UltestNearest<cr>", "Ulttest nearest" },
 		T = { "<cmd>Ultest<cr>", "Test the file with Ulttest" },
@@ -212,7 +212,7 @@ local mappings = {
 		l = { "<cmd>UltestLast<cr>", "Run the last test with Ultest" },
 		o = { "<cmd>UltestOutput<cr>", "Ulttest Output" },
 	},
-	t = {
+	u = {
 		name = "TestFile",
 		t = { "<cmd>TestNearest<cr>", "Test Nearest" },
 		T = { "<cmd>TestFile<cr>", "Test File" },
