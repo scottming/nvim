@@ -6,6 +6,3 @@ end
 require("user.lsp.lsp-installer")
 require("user.lsp.handlers").setup()
 require("user.lsp.null-ls")
-
--- custom emmet lsp for elixir
-require("user.lsp.emmet_ls")

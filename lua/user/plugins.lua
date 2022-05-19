@@ -49,6 +49,7 @@ return packer.startup(function(use)
 	-- 		require("neoscroll").setup()
 	-- 	end,
 	-- })
+	use("navarasu/onedark.nvim")
 	use({
 		"blackCauldron7/surround.nvim",
 		config = function()
@@ -60,7 +61,7 @@ return packer.startup(function(use)
 		"anuvyklack/pretty-fold.nvim",
 		config = function()
 			require("pretty-fold").setup({})
-			require("pretty-fold.preview").setup({ key = "h" })
+			-- require("pretty-fold.preview").setup({ key = "h" })
 		end,
 	})
 	use("projekt0n/github-nvim-theme")
@@ -84,9 +85,8 @@ return packer.startup(function(use)
 	use("windwp/nvim-autopairs") -- Autopairs, integrates with both cmp and treesitter
 	use("numToStr/Comment.nvim") -- Easily comment stuff
 	use("kyazdani42/nvim-web-devicons")
-	-- use({ "kyazdani42/nvim-tree.lua", commit = "2e1f82d8c0c57cbc2bfdc041a3aff26947559a1e" })
 	use("kyazdani42/nvim-tree.lua")
-	use({ "akinsho/bufferline.nvim", commit = "29b29df893693342005a65869a4c53eea7835462" })
+  use("akinsho/bufferline.nvim")
 	use("moll/vim-bbye")
 	use("nvim-lualine/lualine.nvim")
 	use("akinsho/toggleterm.nvim")

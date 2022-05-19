@@ -211,6 +211,7 @@ local mappings = {
 		s = { "<cmd>UltestSummary<cr>", "Ulttest summaary" },
 		l = { "<cmd>UltestLast<cr>", "Run the last test with Ultest" },
 		o = { "<cmd>UltestOutput<cr>", "Ulttest Output" },
+		c = { "<cmd>UltestClear<cr>", "Ulttest Output" },
 	},
 	u = {
 		name = "TestFile",
