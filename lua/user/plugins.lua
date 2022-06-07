@@ -50,12 +50,7 @@ return packer.startup(function(use)
   -- 	end,
   -- })
   use("navarasu/onedark.nvim")
-  use {
-    "ur4ltz/surround.nvim",
-    config = function()
-      require "surround".setup { mappings_style = "sandwich" }
-    end
-  }
+  use "tpope/vim-surround"
   use("nvim-treesitter/playground")
   use({
     "anuvyklack/pretty-fold.nvim",
