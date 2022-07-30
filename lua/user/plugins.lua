@@ -59,8 +59,9 @@ return packer.startup(function(use)
       -- require("pretty-fold.preview").setup({ key = "h" })
     end,
   })
+
   use("projekt0n/github-nvim-theme")
-  use({ "rcarriga/vim-ultest", requires = { "vim-test/vim-test" }, run = ":UpdateRemotePlugins" })
+  use("vim-test/vim-test")
   use({
     "folke/trouble.nvim",
     requires = "kyazdani42/nvim-web-devicons",
