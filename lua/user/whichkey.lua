@@ -105,7 +105,6 @@ local mappings = {
 	},
 	["F"] = { "<cmd>Telescope live_grep theme=ivy<cr>", "Find Text" },
 	["P"] = { "<cmd>lua require('telescope').extensions.projects.projects()<cr>", "Projects" },
-	["t"] = { "<cmd>TestNearest<cr>", "Test Nearest" },
 
 	p = {
 		name = "Packer",
@@ -205,13 +204,13 @@ local mappings = {
 		k = { "<cmd>Telescope keymaps<cr>", "Keymaps" },
 		C = { "<cmd>Telescope commands<cr>", "Commands" },
 	},
-	-- t = {
-	-- 	name = "TestFile",
-	-- 	t = { "<cmd>TestNearest<cr>", "Test Nearest" },
-	-- 	T = { "<cmd>TestFile<cr>", "Test File" },
-	-- 	l = { "<cmd>TestLast<cr>", "Run the last test" },
-	-- 	g = { "<cmd>TestVisit<cr>", "Visit the last test" },
-	-- },
+	t = {
+		name = "TestFile",
+		t = { "<cmd>TestNearest<cr>", "Test Nearest" },
+		T = { "<cmd>TestFile<cr>", "Test File" },
+		l = { "<cmd>TestLast<cr>", "Run the last test" },
+		g = { "<cmd>TestVisit<cr>", "Visit the last test" },
+	},
 	m = {
 		name = "Terminal",
 		n = { "<cmd>lua _NODE_TOGGLE()<cr>", "Node" },
