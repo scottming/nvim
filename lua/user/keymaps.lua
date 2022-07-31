@@ -26,6 +26,8 @@ keymap("n", "<C-k>", "<C-w>k", opts)
 keymap("n", "<C-l>", "<C-w>l", opts)
 
 
+keymap("n", "q", "<Nop>", opts)
+
 -- 10j 10k
 keymap("n", "<C-d>", "10j", opts)
 keymap("n", "<C-u>", "10k", opts)
