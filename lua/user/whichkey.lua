@@ -116,7 +116,7 @@ local mappings = {
 	},
 	b = {
 		name = "Buffers",
-		j = { "<cmd>BufferPick<cr>", "Jump" },
+		j = { "<cmd>BufferLinePick<cr>", "Jump" },
 		f = { "<cmd>Telescope buffers<cr>", "Find" },
 		b = { "<cmd>b#<cr>", "Previous" },
 		w = { "<cmd>BufferWipeout<cr>", "Wipeout" },
@@ -124,9 +124,9 @@ local mappings = {
 			"<cmd>BufferCloseAllButCurrent<cr>",
 			"Close all but current",
 		},
-		h = { "<cmd>BufferCloseBuffersLeft<cr>", "Close all to the left" },
+		h = { "<cmd>BufferLineCloseLeft<cr>", "Close all to the left" },
 		l = {
-			"<cmd>BufferCloseBuffersRight<cr>",
+			"<cmd>BufferLineCloseRight<cr>",
 			"Close all to the right",
 		},
 		D = {
