@@ -55,10 +55,6 @@ M.setup = function()
 	-- signature
 	vim.keymap.set("n", "gs", "<Cmd>Lspsaga signature_help<CR>", { silent = true })
 
-	-- actions
-	vim.keymap.set("n", "<leader>ca", "<cmd>Lspsaga code_action<CR>", { silent = true })
-	vim.keymap.set("v", "<leader>ca", "<cmd><C-U>Lspsaga range_code_action<CR>", { silent = true })
-
 	-- rename
 	vim.keymap.set("n", "gr", "<cmd>Lspsaga rename<CR>", { silent = true })
 

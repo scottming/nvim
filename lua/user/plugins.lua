@@ -41,9 +41,11 @@ packer.init({
 -- Install your plugins here
 return packer.startup(function(use)
 	-- Personal plugins here
-	use("navarasu/onedark.nvim")
-	use("tpope/vim-surround")
+
+	-- treesitter
 	use("nvim-treesitter/playground")
+
+	-- folding
 	use({
 		"anuvyklack/pretty-fold.nvim",
 		config = function()
@@ -52,40 +54,10 @@ return packer.startup(function(use)
 		end,
 	})
 
-	use("projekt0n/github-nvim-theme")
+	-- vimscript plugins
 	use("vim-test/vim-test")
-	use("mfussenegger/nvim-dap")
-	use({
-		"nvim-neotest/neotest",
-		requires = {
-			"haydenmeade/neotest-jest",
-		},
-		config = function()
-			require("neotest").setup({
-				adapters = {
-					require("neotest-jest")({
-						jestCommand = "npm test --",
-						jestConfigFile = "custom.jest.config.ts",
-						env = { CI = true },
-						cwd = function(path)
-							return vim.fn.getcwd()
-						end,
-					}),
-				},
-			})
-		end,
-	})
-	use({
-		"folke/trouble.nvim",
-		requires = "kyazdani42/nvim-web-devicons",
-		config = function()
-			require("trouble").setup({
-				-- your configuration comes here
-				-- or leave it empty to use the default settings
-				-- refer to the configuration section below
-			})
-		end,
-	})
+	use("tpope/vim-surround")
+
 	-- My plugins here
 	use("wbthomason/packer.nvim") -- Have packer manage itself
 	use("nvim-lua/popup.nvim") -- An implementation of the Popup API from vim in Neovim
@@ -108,6 +80,8 @@ return packer.startup(function(use)
 	-- Colorschemes
 	-- use "lunarvim/colorschemes" -- A bunch of colorschemes you can try out
 	use("lunarvim/darkplus.nvim")
+	use("projekt0n/github-nvim-theme")
+	use("navarasu/onedark.nvim")
 
 	-- cmp plugins
 	use("hrsh7th/nvim-cmp") -- The completion plugin
@@ -134,17 +108,7 @@ return packer.startup(function(use)
 
 	-- LSP
 	use("neovim/nvim-lspconfig") -- enable LSP
-	use({
-		"glepnir/lspsaga.nvim",
-		branch = "main",
-		config = function()
-			local saga = require("lspsaga")
-
-			saga.init_lsp_saga({
-				-- your configuration
-			})
-		end,
-	})
+	use("glepnir/lspsaga.nvim")
 	use("williamboman/nvim-lsp-installer") -- simple to use language server installer
 	use("tamago324/nlsp-settings.nvim") -- language server settings defined in json for
 	use("jose-elias-alvarez/null-ls.nvim") -- for formatters and linters

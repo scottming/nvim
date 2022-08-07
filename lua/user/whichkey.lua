@@ -97,7 +97,7 @@ local mappings = {
 	["w"] = { "<cmd>w!<CR>", "Save" },
 	["q"] = { "<cmd>q!<CR>", "Quit" },
 	["/"] = { "<cmd>lua require('Comment.api').toggle_current_linewise()<CR>", "Comment" },
-	-- ["c"] = { "<cmd>Bdelete!<CR>", "Close Buffer" },
+	["c"] = { "<cmd>Bdelete!<CR>", "Close Buffer" },
 	["h"] = { "<cmd>nohlsearch<CR>", "No Highlight" },
 	["f"] = {
 		"<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown{previewer = false})<cr>",
@@ -113,11 +113,6 @@ local mappings = {
 		s = { "<cmd>PackerSync<cr>", "Sync" },
 		S = { "<cmd>PackerStatus<cr>", "Status" },
 		u = { "<cmd>PackerUpdate<cr>", "Update" },
-	},
-	c = {
-		name = "Code Actions",
-		a = { "<cmd>Lspsaga code_action<cr>" },
-		d = { "<cmd>Lspsaga show_cursor_diagnostics<cr>" },
 	},
 	b = {
 		name = "Buffers",
