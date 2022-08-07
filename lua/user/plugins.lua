@@ -86,9 +86,6 @@ return packer.startup(function(use)
 			})
 		end,
 	})
-	-- for dev
-	use("folke/lua-dev.nvim")
-
 	-- My plugins here
 	use("wbthomason/packer.nvim") -- Have packer manage itself
 	use("nvim-lua/popup.nvim") -- An implementation of the Popup API from vim in Neovim
