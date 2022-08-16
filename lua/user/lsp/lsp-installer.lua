@@ -12,7 +12,7 @@ lsp_installer.setup({
 })
 
 -- use the master branch of elixirls
-servers = { "jsonls", "sumneko_lua", "emmet_ls", "elixirls" }
+servers = { "jsonls", "sumneko_lua", "emmet_ls", "elixirls", "rust_analyzer" }
 
 for _, server in pairs(servers) do
   local opts = {

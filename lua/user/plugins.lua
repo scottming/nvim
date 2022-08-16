@@ -57,6 +57,7 @@ return packer.startup(function(use)
 	-- vimscript plugins
 	use("vim-test/vim-test")
 	use("tpope/vim-surround")
+	use("moll/vim-bbye") -- bdelete, <leader>c
 
 	-- My plugins here
 	use("wbthomason/packer.nvim") -- Have packer manage itself
@@ -66,12 +67,11 @@ return packer.startup(function(use)
 	use("numToStr/Comment.nvim") -- Easily comment stuff
 	use("kyazdani42/nvim-web-devicons")
 	use("kyazdani42/nvim-tree.lua")
-	use("akinsho/bufferline.nvim")
-	use("moll/vim-bbye")
-	use("nvim-lualine/lualine.nvim")
+	use({ "akinsho/bufferline.nvim", tag = "v2.5.1" })
+	use("nvim-lualine/lualine.nvim") -- status line plugin
 	use("akinsho/toggleterm.nvim")
-	use("ahmedkhalf/project.nvim")
-	use("lewis6991/impatient.nvim")
+	use("ahmedkhalf/project.nvim") -- project manager
+	use("lewis6991/impatient.nvim") -- improve startup time
 	use("lukas-reineke/indent-blankline.nvim")
 	use("goolord/alpha-nvim")
 	use("antoinemadec/FixCursorHold.nvim") -- This is needed to fix lsp doc highlight
