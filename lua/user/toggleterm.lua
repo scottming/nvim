@@ -45,8 +45,25 @@ function _LAZYGIT_TOGGLE()
 	lazygit:toggle()
 end
 
-local iex = Terminal:new({ cmd = "iex -S mix phx.server", hidden = true })
+local tt = require "toggleterm"
+local ttt = require "toggleterm.terminal"
 
-function _IEX_TOGGLE()
-	iex:toggle()
-end
+vim.g["test#custom_strategies"] = {
+  tterm = function(cmd)
+    tt.exec(cmd)
+  end,
+
+  tterm_close = function(cmd)
+    local term_id = 0
+    tt.exec(cmd, term_id)
+    ttt.get_or_create_term(term_id):close()
+  end,
+}
+
+vim.g["test#strategy"] = "tterm"
+
+--[[ local iex = Terminal:new({ cmd = "iex -S mix phx.server", hidden = true }) ]]
+--[[]]
+--[[ function _IEX_TOGGLE() ]]
+--[[ 	iex:toggle() ]]
+--[[ end ]]

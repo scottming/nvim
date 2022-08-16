@@ -69,7 +69,7 @@ return packer.startup(function(use)
 	use("kyazdani42/nvim-tree.lua")
 	use({ "akinsho/bufferline.nvim", tag = "v2.5.1" })
 	use("nvim-lualine/lualine.nvim") -- status line plugin
-	use("akinsho/toggleterm.nvim")
+	use({ "akinsho/toggleterm.nvim", tag = "v2.1.0" })
 	use("ahmedkhalf/project.nvim") -- project manager
 	use("lewis6991/impatient.nvim") -- improve startup time
 	use("lukas-reineke/indent-blankline.nvim")
@@ -77,6 +77,17 @@ return packer.startup(function(use)
 	use("antoinemadec/FixCursorHold.nvim") -- This is needed to fix lsp doc highlight
 	use("folke/which-key.nvim")
 	use("szw/vim-maximizer")
+
+	-- test
+	use({ "nvim-neotest/neotest-python" })
+	use({
+		"nvim-neotest/neotest",
+		requires = {
+			"nvim-lua/plenary.nvim",
+			"nvim-treesitter/nvim-treesitter",
+			"antoinemadec/FixCursorHold.nvim",
+		},
+	})
 
 	-- Colorschemes
 	-- use "lunarvim/colorschemes" -- A bunch of colorschemes you can try out

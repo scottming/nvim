@@ -25,7 +25,6 @@ keymap("n", "<C-j>", "<C-w>j", opts)
 keymap("n", "<C-k>", "<C-w>k", opts)
 keymap("n", "<C-l>", "<C-w>l", opts)
 
-
 keymap("n", "q", "<Nop>", opts)
 
 -- 10j 10k
@@ -37,15 +36,13 @@ keymap("n", "<C-Up>", ":resize -2<CR>", opts)
 keymap("n", "<C-Down>", ":resize +2<CR>", opts)
 keymap("n", "<C-Left>", ":vertical resize -2<CR>", opts)
 keymap("n", "<C-Right>", ":vertical resize +2<CR>", opts)
+keymap("n", "_", ":vertical resize -2<CR>", opts)
+keymap("n", "+", ":vertical resize +2<CR>", opts)
 
 -- Navigate buffers
 keymap("n", "<S-l>", "<cmd>BufferLineCycleNext<CR>", opts)
 keymap("n", "<S-h>", "<cmd>BufferLineCyclePrev<CR>", opts)
 keymap("n", "<leader>z", "<cmd>MaximizerToggle<CR>", opts)
-
--- Toggle iex
-keymap("n", "<C-t>", "<cmd>lua _IEX_TOGGLE()<cr>", opts)
-keymap("n", "<M-p>", ":e .<cr>", opts)
 
 -- Move text up and down
 -- keymap("n", "<A-j>", "<Esc>:m .+1<CR>==gi", opts)
