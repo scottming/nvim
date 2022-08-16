@@ -41,6 +41,7 @@ keymap("n", "<C-Right>", ":vertical resize +2<CR>", opts)
 -- Navigate buffers
 keymap("n", "<S-l>", "<cmd>BufferLineCycleNext<CR>", opts)
 keymap("n", "<S-h>", "<cmd>BufferLineCyclePrev<CR>", opts)
+keymap("n", "<leader>z", "<cmd>MaximizerToggle<CR>", opts)
 
 -- Toggle iex
 keymap("n", "<C-t>", "<cmd>lua _IEX_TOGGLE()<cr>", opts)
