@@ -61,6 +61,7 @@ return packer.startup(function(use)
 	use("vim-test/vim-test")
 	use("tpope/vim-surround")
 	use("moll/vim-bbye") -- bdelete, <leader>c
+  use("tpope/vim-projectionist")
 
 	-- My plugins here
 	use("wbthomason/packer.nvim") -- Have packer manage itself

@@ -40,9 +40,10 @@ keymap("n", "_", "10<C-w><<cmd>lua require('bufresize').register()<CR>", opts)
 keymap("n", "+", "10<C-w>><cmd>lua require('bufresize').register()<CR>", opts)
 
 -- Navigate buffers
-keymap("n", "<S-l>", "<cmd>BufferLineCycleNext<CR>", opts)
-keymap("n", "<S-h>", "<cmd>BufferLineCyclePrev<CR>", opts)
+keymap("n", "<S-l>", "<cmd>BufferNext<CR>", opts)
+keymap("n", "<S-h>", "<cmd>BufferPrevious<CR>", opts)
 keymap("n", "<leader>z", "<cmd>MaximizerToggle<CR>", opts)
+keymap("n", "<A-\\>", "<cmd>ToggleTermSendCurrentLine<CR> j", opts)
 
 -- Move text up and down
 -- keymap("n", "<A-j>", "<Esc>:m .+1<CR>==gi", opts)
