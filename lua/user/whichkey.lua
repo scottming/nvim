@@ -88,7 +88,7 @@ local vopts = {
 -- NOTE: Prefer using : over <cmd> as the latter avoids going back in normal-mode.
 -- see https://neovim.io/doc/user/map.html#:map-cmd
 local vmappings = {
-	["/"] = { "<ESC><CMD>lua require('Comment.api').toggle_linewise_op(vim.fn.visualmode())<CR>", "Comment" },
+	["/"] = { "<ESC><CMD>lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<CR>", "Comment" },
 }
 
 local mappings = {
@@ -96,7 +96,7 @@ local mappings = {
 	["e"] = { "<cmd>NvimTreeToggle<cr>", "Explorer" },
 	["w"] = { "<cmd>w!<CR>", "Save" },
 	["q"] = { "<cmd>q!<CR>", "Quit" },
-	["/"] = { "<cmd>lua require('Comment.api').toggle_current_linewise()<CR>", "Comment" },
+	["/"] = { "<cmd>lua require('Comment.api').toggle.linewise()<CR>", "Comment" },
 	["c"] = { "<cmd>Bdelete!<CR>", "Close Buffer" },
 	["h"] = { "<cmd>nohlsearch<CR>", "No Highlight" },
 	["f"] = {
@@ -173,7 +173,7 @@ local mappings = {
 			"<cmd>Telescope lsp_workspace_diagnostics<cr>",
 			"Workspace Diagnostics",
 		},
-		f = { "<cmd>lua vim.lsp.buf.format({async = true})<cr>", "Format" },
+		f = { "<cmd>lua vim.lsp.buf.formatting({async = true})<cr>", "Format" },
 		i = { "<cmd>LspInfo<cr>", "Info" },
 		I = { "<cmd>LspInstallInfo<cr>", "Installer Info" },
 		j = {

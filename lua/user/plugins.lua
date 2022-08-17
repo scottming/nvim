@@ -54,6 +54,9 @@ return packer.startup(function(use)
 		end,
 	})
 
+	-- resize window when use
+	use("kwkarlwang/bufresize.nvim")
+
 	-- vimscript plugins
 	use("vim-test/vim-test")
 	use("tpope/vim-surround")
