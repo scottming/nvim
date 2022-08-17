@@ -1,4 +1,4 @@
-vim.cmd [[
+vim.cmd([[
   augroup _general_settings
     autocmd!
     autocmd FileType qf,help,man,lspinfo nnoremap <silent> <buffer> q :close<CR> 
@@ -34,7 +34,12 @@ vim.cmd [[
     autocmd FileType elixir setlocal indentkeys+=0=end
     autocmd FileType eelixir setlocal indentkeys+=0=end
   augroup end
-]]
+
+  augroup _resize
+    autocmd!
+    autocmd VimResized * lua require('bufresize').resize()
+  augroup end
+]])
 
 -- Autoformat
 -- augroup _lsp
