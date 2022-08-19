@@ -46,13 +46,7 @@ return packer.startup(function(use)
 	use("nvim-treesitter/playground")
 
 	-- folding
-	use({
-		"anuvyklack/pretty-fold.nvim",
-		config = function()
-			require("pretty-fold").setup({})
-			-- require("pretty-fold.preview").setup({ key = "h" })
-		end,
-	})
+  use {'kevinhwang91/nvim-ufo', requires = 'kevinhwang91/promise-async'}
 
 	-- resize window when use
 	use("kwkarlwang/bufresize.nvim")
