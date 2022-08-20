@@ -65,7 +65,7 @@ return packer.startup(function(use)
 	use("numToStr/Comment.nvim") -- Easily comment stuff
 	use("kyazdani42/nvim-web-devicons")
 	use("kyazdani42/nvim-tree.lua")
-	use({ "akinsho/bufferline.nvim", tag = "v2.5.1" })
+	use({ "akinsho/bufferline.nvim", tag = "v2.7.0" })
 	use("romgrk/barbar.nvim") -- only use BufferCloseAllButCurrent command
 	use("nvim-lualine/lualine.nvim") -- status line plugin
 	use({ "akinsho/toggleterm.nvim", tag = "v2.1.0" })
