@@ -1,4 +1,5 @@
-require("user.bufferline")
+require("user.barbar")
+--[[ require("user.bufferline") ]]
 require("user.plugins")
 require("user.options")
 require("user.keymaps")
