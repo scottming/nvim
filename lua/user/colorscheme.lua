@@ -1,6 +1,6 @@
 vim.cmd [[
 try
-  colorscheme onedark
+  colorscheme dracula_pro
 catch /^Vim\%((\a\+)\)\=:E185/
   colorscheme default
   set background=dark

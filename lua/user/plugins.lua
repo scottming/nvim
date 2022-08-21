@@ -78,15 +78,15 @@ return packer.startup(function(use)
 	use("szw/vim-maximizer")
 
 	-- test
-	use({ "nvim-neotest/neotest-python" })
-	use({
-		"nvim-neotest/neotest",
-		requires = {
-			"nvim-lua/plenary.nvim",
-			"nvim-treesitter/nvim-treesitter",
-			"antoinemadec/FixCursorHold.nvim",
-		},
-	})
+	--[[ use({ "nvim-neotest/neotest-python" }) ]]
+	--[[ use({ ]]
+	--[[ 	"nvim-neotest/neotest", ]]
+	--[[ 	requires = { ]]
+	--[[ 		"nvim-lua/plenary.nvim", ]]
+	--[[ 		"nvim-treesitter/nvim-treesitter", ]]
+	--[[ 		"antoinemadec/FixCursorHold.nvim", ]]
+	--[[ 	}, ]]
+	--[[ }) ]]
 
 	-- Colorschemes
 	-- use "lunarvim/colorschemes" -- A bunch of colorschemes you can try out
