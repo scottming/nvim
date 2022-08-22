@@ -42,7 +42,7 @@ for k, v in pairs(options) do
 end
 
 -- folding
--- when only compile nvim at local 
+-- when only compile nvim at local
 vim.o.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
 
 vim.o.foldcolumn = '1'
