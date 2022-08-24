@@ -1,9 +1,9 @@
-require("user.barbar")
---[[ require("user.bufferline") ]]
+--[[ require("user.barbar") ]]
 require("user.plugins")
 require("user.options")
 require("user.keymaps")
 require("user.colorscheme")
+require("user.bufferline")
 require("user.cmp")
 require("user.lsp")
 require("user.lspsaga")

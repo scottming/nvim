@@ -120,10 +120,14 @@ local mappings = {
 		f = { "<cmd>Telescope buffers<cr>", "Find" },
 		b = { "<cmd>b#<cr>", "Previous" },
 		w = { "<cmd>BufferWipeout<cr>", "Wipeout" },
-    r = { "<cmd>lua require('bufresize').resize()<cr>", "Window Resize"},
+		r = { "<cmd>lua require('bufresize').resize()<cr>", "Window Resize" },
 		e = {
-			"<cmd>BufferCloseAllButCurrent<cr>",
+			"<cmd>%bd|e#|bd#<cr>",
 			"Close all but current",
+		},
+		p = {
+			"<cmd>BufferLinePick<cr>",
+			"Pick the buffer",
 		},
 		D = {
 			"<cmd>BufferOrderByDirectory<cr>",

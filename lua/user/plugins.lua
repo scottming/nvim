@@ -73,8 +73,8 @@ return packer.startup(function(use)
 	use("numToStr/Comment.nvim") -- Easily comment stuff
 	use("kyazdani42/nvim-web-devicons")
 	use("kyazdani42/nvim-tree.lua")
-	--[[ use({ "akinsho/bufferline.nvim", tag = "v2.7.0" }) ]]
-	use("romgrk/barbar.nvim")
+	--[[ use("romgrk/barbar.nvim") ]]
+	use({ "akinsho/bufferline.nvim", tag = "v2.8.0" })
 	use("nvim-lualine/lualine.nvim") -- status line plugin
 	use({ "akinsho/toggleterm.nvim", tag = "v2.1.0" })
 	use("ahmedkhalf/project.nvim") -- project manager
