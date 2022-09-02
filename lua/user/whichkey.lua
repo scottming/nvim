@@ -92,7 +92,7 @@ local vmappings = {
 }
 
 local mappings = {
-	["a"] = { "<cmd>Alpha<cr>", "Alpha" },
+	["a"] = { "<cmd>SymbolsOutline<cr>", "Symbols Outline" },
 	["e"] = { "<cmd>NvimTreeToggle<cr>", "Explorer" },
 	["w"] = { "<cmd>w!<CR>", "Save" },
 	["q"] = { "<cmd>q!<CR>", "Quit" },
@@ -178,7 +178,7 @@ local mappings = {
 			"<cmd>Telescope lsp_workspace_diagnostics<cr>",
 			"Workspace Diagnostics",
 		},
-		f = { "<cmd>lua vim.lsp.buf.formatting({async = true})<cr>", "Format" },
+		f = { "<cmd>lua vim.lsp.buf.format({async = true})<cr>", "Format" },
 		i = { "<cmd>LspInfo<cr>", "Info" },
 		I = { "<cmd>LspInstallInfo<cr>", "Installer Info" },
 		j = {
