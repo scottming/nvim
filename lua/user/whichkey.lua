@@ -89,6 +89,10 @@ local vopts = {
 -- see https://neovim.io/doc/user/map.html#:map-cmd
 local vmappings = {
 	["/"] = { "<ESC><CMD>lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<CR>", "Comment" },
+  l = {
+    name = "lsp",
+    f = {"<ESC><cmd>lua vim.lsp.buf.range_formatting()<CR>", "format"}
+  }
 }
 
 local mappings = {
