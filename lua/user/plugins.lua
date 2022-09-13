@@ -137,7 +137,7 @@ return packer.startup(function(use)
 
 	-- LSP
 	use("neovim/nvim-lspconfig") -- enable LSP
-	use({ "glepnir/lspsaga.nvim", commit = "37bb464d55ba068ad14befd048c82cef007cea4d" })
+	use({"glepnir/lspsaga.nvim", commit = "757f38218ae0b17cc537ebbc2e7fe4adac620001"})
 	use("williamboman/nvim-lsp-installer") -- simple to use language server installer
 	use("tamago324/nlsp-settings.nvim") -- language server settings defined in json for
 	use("jose-elias-alvarez/null-ls.nvim") -- for formatters and linters
