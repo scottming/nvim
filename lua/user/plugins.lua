@@ -50,7 +50,7 @@ return packer.startup(function(use)
 
 	use({
 		"simrat39/symbols-outline.nvim",
-    commit = "e459f3262c4c79a62e654ada0fbbb9758313c968",
+		commit = "e459f3262c4c79a62e654ada0fbbb9758313c968",
 		config = function()
 			require("symbols-outline").setup()
 		end,
@@ -96,16 +96,16 @@ return packer.startup(function(use)
 	use("szw/vim-maximizer")
 
 	-- test
-	--[[ use({ "nvim-neotest/neotest-python" }) ]]
-	--[[ use({ ]]
-	--[[ 	"nvim-neotest/neotest", ]]
-	--[[ 	requires = { ]]
-	--[[ 		"nvim-lua/plenary.nvim", ]]
-	--[[ 		"nvim-treesitter/nvim-treesitter", ]]
-	--[[ 		"antoinemadec/FixCursorHold.nvim", ]]
-	--[[ 	}, ]]
-	--[[ }) ]]
-
+	use({
+		"nvim-neotest/neotest",
+		requires = {
+			"nvim-lua/plenary.nvim",
+			"nvim-treesitter/nvim-treesitter",
+			"antoinemadec/FixCursorHold.nvim",
+			"jfpedroza/neotest-elixir",
+			"nvim-neotest/neotest-python",
+		},
+	})
 	-- Colorschemes
 	-- use "lunarvim/colorschemes" -- A bunch of colorschemes you can try out
 	use("lunarvim/darkplus.nvim")
@@ -137,7 +137,7 @@ return packer.startup(function(use)
 
 	-- LSP
 	use("neovim/nvim-lspconfig") -- enable LSP
-	use({"glepnir/lspsaga.nvim", commit = "757f38218ae0b17cc537ebbc2e7fe4adac620001"})
+	use({ "glepnir/lspsaga.nvim", commit = "757f38218ae0b17cc537ebbc2e7fe4adac620001" })
 	use("williamboman/nvim-lsp-installer") -- simple to use language server installer
 	use("tamago324/nlsp-settings.nvim") -- language server settings defined in json for
 	use("jose-elias-alvarez/null-ls.nvim") -- for formatters and linters

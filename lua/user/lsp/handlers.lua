@@ -48,9 +48,9 @@ M.setup = function()
 	-- 	action.smart_scroll_with_saga(1)
 	-- end, { silent = true })
 	-- scroll up hover doc
-	vim.keymap.set("n", "<C-b>", function()
-		action.smart_scroll_with_saga(-1)
-	end, { silent = true })
+	--[[ vim.keymap.set("n", "<C-b>", function() ]]
+	--[[ 	action.smart_scroll_with_saga(-1) ]]
+	--[[ end, { silent = true }) ]]
 
 	-- signature
 	vim.keymap.set("n", "gs", "<Cmd>Lspsaga signature_help<CR>", { silent = true })
@@ -61,7 +61,7 @@ M.setup = function()
 	-- or use command
 	vim.keymap.set("n", "]e", "<cmd>Lspsaga diagnostic_jump_next<CR>", { silent = true })
 	vim.keymap.set("n", "[e", "<cmd>Lspsaga diagnostic_jump_prev<CR>", { silent = true })
-  vim.keymap.set("n", "gl", "<cmd>Lspsaga show_line_diagnostics<CR>", { silent = true })
+	vim.keymap.set("n", "gl", "<cmd>Lspsaga show_line_diagnostics<CR>", { silent = true })
 end
 
 return M
