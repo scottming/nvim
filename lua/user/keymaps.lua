@@ -26,6 +26,7 @@ keymap("n", "<C-k>", "<C-w>k", opts)
 keymap("n", "<C-l>", "<C-w>l", opts)
 
 keymap("n", "q", "<Nop>", opts)
+keymap("n", "*", "*``", opts)
 
 -- 10j 10k
 keymap("n", "<C-d>", "10j", opts)
@@ -63,6 +64,7 @@ keymap("v", ">", ">gv", opts)
 keymap("v", "<A-j>", ":m .+1<CR>==", opts)
 keymap("v", "<A-k>", ":m .-2<CR>==", opts)
 keymap("v", "p", '"_dP', opts)
+keymap("v", "*", "*``", opts)
 
 -- Visual Block --
 -- Move text up and down
