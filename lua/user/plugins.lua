@@ -49,8 +49,9 @@ return packer.startup(function(use)
 	use({ "kevinhwang91/nvim-ufo", requires = "kevinhwang91/promise-async" })
 
 	use({
-		"simrat39/symbols-outline.nvim",
-		commit = "e459f3262c4c79a62e654ada0fbbb9758313c968",
+		"scottming/symbols-outline.nvim",
+		--[[ commit = "e459f3262c4c79a62e654ada0fbbb9758313c968", ]]
+    branch = "support-elixir-private-functions",
 		config = function()
 			require("symbols-outline").setup()
 		end,
