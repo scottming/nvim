@@ -89,10 +89,10 @@ local vopts = {
 -- see https://neovim.io/doc/user/map.html#:map-cmd
 local vmappings = {
 	["/"] = { "<ESC><CMD>lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<CR>", "Comment" },
-  l = {
-    name = "lsp",
-    f = {"<ESC><cmd>lua vim.lsp.buf.range_formatting()<CR>", "format"}
-  }
+	l = {
+		name = "lsp",
+		f = { "<ESC><cmd>lua vim.lsp.buf.range_formatting()<CR>", "format" },
+	},
 }
 
 local mappings = {
@@ -225,6 +225,14 @@ local mappings = {
 		f = { "<cmd>ToggleTerm direction=float<cr>", "Float" },
 		h = { "<cmd>ToggleTerm size=10 direction=horizontal<cr>", "Horizontal" },
 		v = { "<cmd>ToggleTerm size=80 direction=vertical<cr>", "Vertical" },
+	},
+	d = {
+		name = "Debug",
+		b = { '<cmd>lua require("dap").toggle_breakpoint()<cr>', "Toggle Breakpoint" },
+		n = { '<cmd>lua require("dap").continue()<cr>', "Continue" },
+		l = { '<cmd>lua require("dap").step_into()<cr>', "Step into" },
+		i = { '<cmd>require"dap.ui.widgets".hover()<CR>', "Hover" },
+		j = { '<cmd>lua require("dap").step_over()<cr>', "Step Over" },
 	},
 }
 

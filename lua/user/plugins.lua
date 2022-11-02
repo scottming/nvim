@@ -51,7 +51,7 @@ return packer.startup(function(use)
 	use({
 		"scottming/symbols-outline.nvim",
 		--[[ commit = "e459f3262c4c79a62e654ada0fbbb9758313c968", ]]
-    branch = "support-elixir-private-functions",
+		branch = "support-elixir-private-functions",
 		config = function()
 			require("symbols-outline").setup()
 		end,
@@ -96,6 +96,12 @@ return packer.startup(function(use)
 	use("folke/which-key.nvim")
 	use("szw/vim-maximizer")
 
+	-- icons
+	use({
+		"yamatsum/nvim-nonicons",
+		requires = { "kyazdani42/nvim-web-devicons" },
+	})
+
 	-- test
 	use({
 		"nvim-neotest/neotest",
@@ -105,6 +111,7 @@ return packer.startup(function(use)
 			"antoinemadec/FixCursorHold.nvim",
 			"jfpedroza/neotest-elixir",
 			"nvim-neotest/neotest-python",
+			"nvim-neotest/neotest-plenary",
 		},
 	})
 	-- Colorschemes
@@ -143,13 +150,18 @@ return packer.startup(function(use)
 	use("tamago324/nlsp-settings.nvim") -- language server settings defined in json for
 	use("jose-elias-alvarez/null-ls.nvim") -- for formatters and linters
 
+	-- debug
+	use("mfussenegger/nvim-dap")
+	use("mfussenegger/nvim-dap-python")
+	use("jbyuki/one-small-step-for-vimkind")
+
 	-- Telescope
 	use("nvim-telescope/telescope.nvim")
 
 	-- Treesitter
 	use({
 		"nvim-treesitter/nvim-treesitter",
-    commit = "addc129a4f272aba0834bd0a7b6bd4ad5d8c801b",
+		commit = "addc129a4f272aba0834bd0a7b6bd4ad5d8c801b",
 		run = ":TSUpdate",
 	})
 	use("JoosepAlviste/nvim-ts-context-commentstring")
