@@ -96,12 +96,6 @@ return packer.startup(function(use)
 	use("folke/which-key.nvim")
 	use("szw/vim-maximizer")
 
-	-- icons
-	use({
-		"yamatsum/nvim-nonicons",
-		requires = { "kyazdani42/nvim-web-devicons" },
-	})
-
 	-- test
 	use({
 		"nvim-neotest/neotest",

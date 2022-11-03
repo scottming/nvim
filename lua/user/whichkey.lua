@@ -213,13 +213,20 @@ local mappings = {
 		k = { "<cmd>Telescope keymaps<cr>", "Keymaps" },
 		C = { "<cmd>Telescope commands<cr>", "Commands" },
 	},
-	t = {
+	u = {
 		name = "TestFile",
 		t = { "<cmd>TestNearest<cr>", "Test Nearest" },
 		T = { "<cmd>TestFile<cr>", "Test File" },
 		l = { "<cmd>TestLast<cr>", "Run the last test" },
 		g = { "<cmd>TestVisit<cr>", "Visit the last test" },
 	},
+  t = {
+    name = "Neotest",
+    t = { "<cmd>lua require('neotest').run.run()<cr>", "Test under cursor" },
+    T = { '<cmd>lua require("neotest").run.run({vim.fn.expand("%"), extra_args = {"--formatter", "ExUnitNotifier", "--timeout", "60"}})<cr>', "Test File" },
+    o = { '<cmd>lua require("neotest").output.open({ enter = true })<cr>', "Show neotest output" },
+    s = { '<cmd>lua require("neotest").summary.toggle()<cr>', "Toggle neotest summary" },
+  },
 	m = {
 		name = "Terminal",
 		f = { "<cmd>ToggleTerm direction=float<cr>", "Float" },

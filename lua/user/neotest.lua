@@ -36,8 +36,15 @@ neotest.setup({
 		non_collapsible = "─",
 		passed = "✔",
 		running = "🗘",
-		running_animated = { "/", "|", "\\", "-", "/", "|", "\\", "-" },
+    running_animated = { "/", "|", "\\", "-", "/", "|", "\\", "-" },
 		skipped = "ﰸ",
 		unknown = "?",
 	},
+
+  summary = {
+    mappings = {
+      next_failed = "]e",
+      prev_failed = "[e"
+    }
+  }
 })
