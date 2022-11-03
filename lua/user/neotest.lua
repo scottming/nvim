@@ -36,15 +36,28 @@ neotest.setup({
 		non_collapsible = "─",
 		passed = "✔",
 		running = "🗘",
-    running_animated = { "/", "|", "\\", "-", "/", "|", "\\", "-" },
+		running_animated = { "/", "|", "\\", "-", "/", "|", "\\", "-" },
 		skipped = "ﰸ",
 		unknown = "?",
 	},
 
-  summary = {
-    mappings = {
-      next_failed = "]e",
-      prev_failed = "[e"
-    }
-  }
+	summary = {
+		mappings = {
+			next_failed = "]e",
+			prev_failed = "[e",
+		},
+	},
+})
+
+local group = vim.api.nvim_create_augroup("NeotestConfig", {})
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "neotest-output",
+	group = group,
+	callback = function(opts)
+		vim.keymap.set("n", "q", function()
+			pcall(vim.api.nvim_win_close, 0, true)
+		end, {
+			buffer = opts.buf,
+		})
+	end,
 })
