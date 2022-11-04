@@ -9,6 +9,9 @@ neotest.setup({
 			dap = { justMyCode = false },
 		}),
 		require("neotest-plenary"),
+		require("neotest-rust")({
+			args = { "--no-capture" },
+		}),
 		require("neotest-elixir")({
 			-- Other formatters to pass to the test command as the formatters are overridden
 			-- Can be a function to return a dynamic value.

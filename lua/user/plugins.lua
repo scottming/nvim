@@ -40,14 +40,28 @@ packer.init({
 
 -- Install your plugins here
 return packer.startup(function(use)
-	-- Personal plugins here
+	-- LSP
+	use("neovim/nvim-lspconfig") -- enable LSP
+	use({ "glepnir/lspsaga.nvim", commit = "e5d5a3243616af78f0d7b7b29aa700a16e516a23" })
+	use("williamboman/nvim-lsp-installer") -- simple to use language server installer
+	use("tamago324/nlsp-settings.nvim") -- language server settings defined in json for
+	use("jose-elias-alvarez/null-ls.nvim") -- for formatters and linters
 
-	-- treesitter
+	-- Debug
+	use("mfussenegger/nvim-dap")
+	use("mfussenegger/nvim-dap-python")
+	use("jbyuki/one-small-step-for-vimkind")
+
+	-- Treesitter
 	use("nvim-treesitter/playground")
+	use({
+		"nvim-treesitter/nvim-treesitter",
+		commit = "addc129a4f272aba0834bd0a7b6bd4ad5d8c801b",
+		run = ":TSUpdate",
+	})
+	use("JoosepAlviste/nvim-ts-context-commentstring")
 
-	-- folding
-	use({ "kevinhwang91/nvim-ufo", requires = "kevinhwang91/promise-async" })
-
+  -- symbols
 	use({
 		"scottming/symbols-outline.nvim",
 		--[[ commit = "e459f3262c4c79a62e654ada0fbbb9758313c968", ]]
@@ -56,6 +70,23 @@ return packer.startup(function(use)
 			require("symbols-outline").setup()
 		end,
 	})
+
+	-- Test
+	use({
+		"nvim-neotest/neotest",
+		requires = {
+			"nvim-lua/plenary.nvim",
+			"nvim-treesitter/nvim-treesitter",
+			"antoinemadec/FixCursorHold.nvim",
+			"jfpedroza/neotest-elixir",
+			"nvim-neotest/neotest-python",
+			"nvim-neotest/neotest-plenary",
+			"rouge8/neotest-rust",
+		},
+	})
+
+	-- Folding
+	use({ "kevinhwang91/nvim-ufo", requires = "kevinhwang91/promise-async" })
 
 	-- move faster
 	use({
@@ -73,41 +104,40 @@ return packer.startup(function(use)
 	-- vimscript plugins
 	use("vim-test/vim-test")
 	use("tpope/vim-surround")
-	use("moll/vim-bbye") -- bdelete, <leader>c
+	-- bdelete, <leader>c
+	use("moll/vim-bbye")
 	use("tpope/vim-projectionist")
+	-- maximize the window by <leader>z
+	use("szw/vim-maximizer")
 
-	-- My plugins here
 	use("wbthomason/packer.nvim") -- Have packer manage itself
-	use("nvim-lua/popup.nvim") -- An implementation of the Popup API from vim in Neovim
-	use("nvim-lua/plenary.nvim") -- Useful lua functions used ny lots of plugins
-	use("windwp/nvim-autopairs") -- Autopairs, integrates with both cmp and treesitter
-	use("numToStr/Comment.nvim") -- Easily comment stuff
+	--[[ use("nvim-lua/popup.nvim") -- An implementation of the Popup API from vim in Neovim ]]
+	--[[ use("nvim-lua/plenary.nvim") -- Useful lua functions used ny lots of plugins ]]
+
 	use("kyazdani42/nvim-web-devicons")
 	use("kyazdani42/nvim-tree.lua")
-	--[[ use("romgrk/barbar.nvim") ]]
+
+	-- Basic plugins
+	---------------------
+	-- Autopairs, integrates with both cmp and treesitter
+	use("windwp/nvim-autopairs")
+	-- Easily comment stuff
+	use("numToStr/Comment.nvim")
+	-- improve startup time
+	use("lewis6991/impatient.nvim")
+	-- bufferline, lualine
 	use({ "akinsho/bufferline.nvim", tag = "v2.8.0" })
 	use("nvim-lualine/lualine.nvim") -- status line plugin
 	use({ "akinsho/toggleterm.nvim", tag = "v2.1.0" })
-	use("ahmedkhalf/project.nvim") -- project manager
-	use("lewis6991/impatient.nvim") -- improve startup time
-	use("lukas-reineke/indent-blankline.nvim")
+	-- project manager
+	use("ahmedkhalf/project.nvim")
 	use("goolord/alpha-nvim")
-	use("antoinemadec/FixCursorHold.nvim") -- This is needed to fix lsp doc highlight
+	use("lukas-reineke/indent-blankline.nvim")
+	-- This is needed to fix lsp doc highlight
+	use("antoinemadec/FixCursorHold.nvim")
 	use("folke/which-key.nvim")
-	use("szw/vim-maximizer")
+	---------------------
 
-	-- test
-	use({
-		"nvim-neotest/neotest",
-		requires = {
-			"nvim-lua/plenary.nvim",
-			"nvim-treesitter/nvim-treesitter",
-			"antoinemadec/FixCursorHold.nvim",
-			"jfpedroza/neotest-elixir",
-			"nvim-neotest/neotest-python",
-			"nvim-neotest/neotest-plenary",
-		},
-	})
 	-- Colorschemes
 	-- use "lunarvim/colorschemes" -- A bunch of colorschemes you can try out
 	use("lunarvim/darkplus.nvim")
@@ -137,28 +167,8 @@ return packer.startup(function(use)
 	use("L3MON4D3/LuaSnip") --snippet engine
 	use("rafamadriz/friendly-snippets") -- a bunch of snippets to use
 
-	-- LSP
-	use("neovim/nvim-lspconfig") -- enable LSP
-	use({ "glepnir/lspsaga.nvim", commit = "e5d5a3243616af78f0d7b7b29aa700a16e516a23" })
-	use("williamboman/nvim-lsp-installer") -- simple to use language server installer
-	use("tamago324/nlsp-settings.nvim") -- language server settings defined in json for
-	use("jose-elias-alvarez/null-ls.nvim") -- for formatters and linters
-
-	-- debug
-	use("mfussenegger/nvim-dap")
-	use("mfussenegger/nvim-dap-python")
-	use("jbyuki/one-small-step-for-vimkind")
-
 	-- Telescope
 	use("nvim-telescope/telescope.nvim")
-
-	-- Treesitter
-	use({
-		"nvim-treesitter/nvim-treesitter",
-		commit = "addc129a4f272aba0834bd0a7b6bd4ad5d8c801b",
-		run = ":TSUpdate",
-	})
-	use("JoosepAlviste/nvim-ts-context-commentstring")
 
 	-- Git
 	use("lewis6991/gitsigns.nvim")
