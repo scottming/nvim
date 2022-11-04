@@ -241,8 +241,8 @@ local mappings = {
 		b = { '<cmd>lua require("dap").toggle_breakpoint()<cr>', "Toggle Breakpoint" },
 		n = { '<cmd>lua require("dap").continue()<cr>', "Continue" },
 		l = { '<cmd>lua require("dap").step_into()<cr>', "Step into" },
-		i = { '<cmd>require"dap.ui.widgets".hover()<CR>', "Hover" },
 		j = { '<cmd>lua require("dap").step_over()<cr>', "Step Over" },
+		r = { '<cmd>lua require("dap").repl.open()<cr>', "Open REPL" },
 	},
 }
 

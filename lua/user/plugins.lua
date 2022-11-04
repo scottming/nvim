@@ -61,7 +61,7 @@ return packer.startup(function(use)
 	})
 	use("JoosepAlviste/nvim-ts-context-commentstring")
 
-  -- symbols
+	-- symbols
 	use({
 		"scottming/symbols-outline.nvim",
 		--[[ commit = "e459f3262c4c79a62e654ada0fbbb9758313c968", ]]
