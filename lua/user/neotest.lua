@@ -3,6 +3,8 @@ if not status_ok then
 	return
 end
 
+require("neotest.logging"):set_level("debug")
+
 neotest.setup({
 	adapters = {
 		require("neotest-python")({
@@ -26,6 +28,14 @@ neotest.setup({
 			-- Can be a function to return a dynamic value.
 			-- Default: 1000
 			write_delay = 1000,
+		}),
+		require("neotest-jest")({
+			jestCommand = "npm test --",
+			jestConfigFile = "custom.jest.config.ts",
+			env = { CI = true },
+			cwd = function(path)
+				return vim.fn.getcwd()
+			end,
 		}),
 	},
 	icons = {

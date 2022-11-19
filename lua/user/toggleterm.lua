@@ -61,8 +61,15 @@ vim.g["test#custom_strategies"] = {
 
 vim.g["test#strategy"] = "tterm"
 
---[[ local iex = Terminal:new({ cmd = "iex -S mix phx.server", hidden = true }) ]]
---[[]]
---[[ function _IEX_TOGGLE() ]]
---[[ 	iex:toggle() ]]
---[[ end ]]
+-- for elixir iex test
+
+vim.api.nvim_create_user_command("TestIexStart", function()
+	toggleterm.exec('MIX_ENV=test iex --no-pry -S mix run -e "TestIex.start()"', 1)
+	ttt.get_or_create_term(1):close()
+end, {})
+
+vim.api.nvim_create_user_command("TestIex", function()
+	local line_col = vim.api.nvim_win_get_cursor(0)[1]
+	local path = vim.fn.expand("%")
+	toggleterm.exec(string.format("TestIex.test(%q, %q)", path, line_col), 1)
+end, {})

@@ -82,6 +82,7 @@ return packer.startup(function(use)
 			"nvim-neotest/neotest-python",
 			"nvim-neotest/neotest-plenary",
 			"rouge8/neotest-rust",
+			"haydenmeade/neotest-jest",
 		},
 	})
 

@@ -229,6 +229,11 @@ local mappings = {
 		},
 		o = { '<cmd>lua require("neotest").output.open({ enter = true })<cr>', "Show neotest output" },
 		s = { '<cmd>lua require("neotest").summary.toggle()<cr>', "Toggle neotest summary" },
+		i = {
+			name = "TestIex",
+			t = { "<cmd>w | TestIex<cr>", "Test in IEx" },
+			i = { "<cmd>TestIexStart<cr>", "Start Iex and run TestIex.start()" },
+		},
 	},
 	m = {
 		name = "Terminal",
