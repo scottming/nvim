@@ -61,26 +61,33 @@ vim.g["test#custom_strategies"] = {
 
 vim.g["test#strategy"] = "tterm"
 
--- for elixir iex test
+-- For elixir iex test
 
 vim.api.nvim_create_user_command("TestIexStart", function()
-  -- Please add these lines to the `.iex.exs`
-  --[[ Code.eval_file("~/.test_iex/lib/test_iex.ex") ]]
-  --[[ System.get_env("MIX_ENV") && TestIex.start() ]]
-	toggleterm.exec('MIX_ENV=test iex --no-pry -S mix', 1)
+	local code = 'Code.eval_file("~/.test_iex/lib/test_iex.ex");TestIex.start()'
+	toggleterm.exec(string.format("MIX_ENV=test iex --no-pry -S mix run -e %q", code), 1)
 	ttt.get_or_create_term(1):close()
 end, {})
 
-vim.api.nvim_create_user_command("TestIex", function()
-  local line_col = vim.api.nvim_win_get_cursor(0)[1]
-  local path = vim.fn.expand("%")
-  local test_command = string.format("TestIex.test(%q, %q)", path, line_col)
-  if (vim.endswith(path, ".exs"))
-  then
-    toggleterm.exec(test_command, 1)
-    vim.g.last_test_iex_command = test_command
-  else
-    toggleterm.exec(vim.g.last_test_iex_command, 1)
-  end
+vim.api.nvim_create_user_command("TestFileAtCursorInIex", function()
+	local line_col = vim.api.nvim_win_get_cursor(0)[1]
+	local path = vim.fn.expand("%")
+	local test_command = string.format("TestIex.test(%q, %q)", path, line_col)
+	if vim.endswith(path, ".exs") then
+		toggleterm.exec(test_command, 1)
+		vim.g.last_test_in_iex_command = test_command
+	else
+		toggleterm.exec(vim.g.last_test_in_iex_command, 1)
+	end
 end, {})
 
+vim.api.nvim_create_user_command("TestFileInIex", function()
+	local path = vim.fn.expand("%")
+	local test_command = string.format("TestIex.test(%q)", path)
+	if vim.endswith(path, ".exs") then
+		toggleterm.exec(test_command, 1)
+		vim.g.last_test_in_iex_command = test_command
+	else
+		toggleterm.exec(vim.g.last_test_in_iex_command, 1)
+	end
+end, {})

@@ -231,7 +231,8 @@ local mappings = {
 		s = { '<cmd>lua require("neotest").summary.toggle()<cr>', "Toggle neotest summary" },
 		i = {
 			name = "TestIex",
-			t = { "<cmd>w | TestIex<cr>", "Test in IEx" },
+			t = { "<cmd>w | TestFileAtCursorInIex<cr>", "Test file at cursor in IEx" },
+			T = { "<cmd>j | TestFileInIex<cr>", "Test file in IEx" },
 			i = { "<cmd>TestIexStart<cr>", "Start Iex and run TestIex.start()" },
 		},
 	},
