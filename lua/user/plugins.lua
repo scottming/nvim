@@ -78,13 +78,15 @@ return packer.startup(function(use)
 			"nvim-lua/plenary.nvim",
 			"nvim-treesitter/nvim-treesitter",
 			"antoinemadec/FixCursorHold.nvim",
-			"jfpedroza/neotest-elixir",
 			"nvim-neotest/neotest-python",
 			"nvim-neotest/neotest-plenary",
 			"rouge8/neotest-rust",
 			"haydenmeade/neotest-jest",
 		},
 	})
+
+	use({ "jfpedroza/neotest-elixir", branch = "jp/iex_strategy" })
+	--[[ use('~/Code/neotest-elixir') ]]
 
 	-- Folding
 	use({ "kevinhwang91/nvim-ufo", requires = "kevinhwang91/promise-async" })
