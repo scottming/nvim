@@ -224,7 +224,7 @@ local mappings = {
 		name = "Neotest",
 		t = { "<cmd>lua require('neotest').run.run()<cr>", "Test under cursor" },
 		T = {
-			'<cmd>lua require("neotest").run.run({vim.fn.expand("%"), extra_args = {"--formatter", "ExUnitNotifier", "--timeout", "60"}})<cr>',
+			'<cmd>lua require("neotest").run.run({vim.fn.expand("%")})<cr>',
 			"Test File",
 		},
 		o = { '<cmd>lua require("neotest").output.open({ enter = true })<cr>', "Show neotest output" },
