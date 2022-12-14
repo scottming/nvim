@@ -11,10 +11,13 @@ local diagnostics = null_ls.builtins.diagnostics
 null_ls.setup({
 	debug = false,
 	sources = {
+		-- 1. lua: stylua
+		-- 2. ts: prettier
+		-- 3. python: black, flake8
 		-- formatting.prettier.with({ extra_args = { "--no-semi", "--single-quote", "--jsx-single-quote" } }),
+		formatting.stylua,
 		formatting.prettier.with({}),
 		formatting.black.with({ extra_args = { "--fast" } }),
-		formatting.stylua,
 		diagnostics.flake8,
 	},
 })
