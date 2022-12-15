@@ -42,7 +42,8 @@ packer.init({
 return packer.startup(function(use)
 	-- LSP
 	use("neovim/nvim-lspconfig") -- enable LSP
-	use({ "glepnir/lspsaga.nvim", commit = "e5d5a3243616af78f0d7b7b29aa700a16e516a23" })
+	--[[ use({ "glepnir/lspsaga.nvim", commit = "e5d5a3243616af78f0d7b7b29aa700a16e516a23" }) ]]
+	use("glepnir/lspsaga.nvim")
 	use("williamboman/nvim-lsp-installer") -- simple to use language server installer
 	use("tamago324/nlsp-settings.nvim") -- language server settings defined in json for
 	use("jose-elias-alvarez/null-ls.nvim") -- for formatters and linters
@@ -129,7 +130,7 @@ return packer.startup(function(use)
 	-- improve startup time
 	use("lewis6991/impatient.nvim")
 	-- bufferline, lualine
-	use({ "akinsho/bufferline.nvim", tag = "v2.8.0" })
+	use({ "akinsho/bufferline.nvim", tag = "v3.1.0" })
 	use("nvim-lualine/lualine.nvim") -- status line plugin
 	use({ "akinsho/toggleterm.nvim", tag = "v2.1.0" })
 	-- project manager
