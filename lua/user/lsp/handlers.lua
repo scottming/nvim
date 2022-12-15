@@ -47,7 +47,7 @@ M.setup = function()
 	vim.keymap.set("n", "<a-cr>", "<cmd>Lspsaga code_action<cr>", { silent = true })
 
 	-- signature
-	vim.keymap.set("n", "gs", "<Cmd>vim.lsp.buf.signature_help<CR>", { silent = true })
+	vim.keymap.set("n", "gs", "<cmd>lua vim.lsp.buf.signature_help()<cr>", { silent = true })
 
 	-- rename
 	vim.keymap.set("n", "gr", "<cmd>Lspsaga rename<CR>", { silent = true })
