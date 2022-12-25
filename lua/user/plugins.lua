@@ -15,7 +15,7 @@ vim.opt.runtimepath:prepend(lazypath)
 -- Install your plugins here
 return require("lazy").setup({
 	-- nvim dev
-	"folke/neodev.nvim",
+	{ "folke/neodev.nvim", lazy = true },
 	-- LSP
 	"neovim/nvim-lspconfig",
 	--[[ { "glepnir/lspsaga.nvim", commit = "e5d5a3243616af78f0d7b7b29aa700a16e516a23" }) ]]
