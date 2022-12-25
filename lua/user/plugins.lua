@@ -40,6 +40,8 @@ packer.init({
 
 -- Install your plugins here
 return packer.startup(function(use)
+  -- nvim dev
+	use("folke/neodev.nvim")
 	-- LSP
 	use("neovim/nvim-lspconfig") -- enable LSP
 	--[[ use({ "glepnir/lspsaga.nvim", commit = "e5d5a3243616af78f0d7b7b29aa700a16e516a23" }) ]]
