@@ -1,4 +1,3 @@
---[[ require("user.barbar") ]]
 require("user.plugins")
 require("user.options")
 require("user.keymaps")
@@ -25,3 +24,4 @@ require("user.whichkey")
 require("user.autocommands")
 require("user.dap")
 require("user.neotest")
+require("user.util")
