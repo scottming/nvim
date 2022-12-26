@@ -137,15 +137,6 @@ local mappings = {
 			"<cmd>BufferOrderByDirectory<cr>",
 			"Sort by directory",
 		},
-		--[[ h = { "<cmd>BufferLineCloseLeft<cr>", "Close all to the left" }, ]]
-		--[[ l = { ]]
-		--[[ 	"<cmd>BufferLineCloseRight<cr>", ]]
-		--[[ 	"Close all to the right", ]]
-		--[[ }, ]]
-		--[[ L = { ]]
-		--[[ 	"<cmd>BufferOrderByLanguage<cr>", ]]
-		--[[ 	"Sort by language", ]]
-		--[[ }, ]]
 	},
 
 	g = {
@@ -229,12 +220,6 @@ local mappings = {
 		},
 		o = { '<cmd>lua require("neotest").output.open({ enter = true })<cr>', "Show neotest output" },
 		s = { '<cmd>lua require("neotest").summary.toggle()<cr>', "Toggle neotest summary" },
-		i = {
-			name = "TestIex",
-			t = { "<cmd>w | TestFileAtCursorInIex<cr>", "Test file at cursor in IEx" },
-			T = { "<cmd>j | TestFileInIex<cr>", "Test file in IEx" },
-			i = { "<cmd>TestIexStart<cr>", "Start Iex and run TestIex.start()" },
-		},
 	},
 	m = {
 		name = "Terminal",
@@ -255,3 +240,18 @@ local mappings = {
 which_key.setup(setup)
 which_key.register(mappings, opts)
 which_key.register(vmappings, vopts)
+
+vim.cmd("autocmd FileType * lua set_test_keybindings()")
+
+function set_test_keybindings()
+	local file_type = vim.api.nvim_buf_get_option(0, "filetype")
+
+	if file_type == "elixir" then
+		which_key.register({
+			t = {
+				t = { "<cmd>TestFileAtCursorInIex<cr>", "Run test at cursor in IEx shell" },
+				T = { "<cmd>TestFileInIex<cr>", "Test file in IEx shell" },
+			},
+		}, opts)
+	end
+end
