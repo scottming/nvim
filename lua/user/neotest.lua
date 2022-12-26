@@ -20,6 +20,7 @@ neotest.setup({
 				return vim.fn.getcwd()
 			end,
 		}),
+		require("neotest-elixir"),
 	},
 	icons = {
 		child_indent = "│",
