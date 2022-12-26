@@ -76,11 +76,18 @@ local function start_and_mark()
 end
 
 local function run_test_and_cache(test_command, path)
+	local term = ttt.get_or_create_term(1)
+
+	if not term:is_open() then
+		term:open()
+	end
+
 	if vim.endswith(path, ".exs") then
-		toggleterm.exec(test_command, 1)
+		term:send(test_command, true)
 		vim.g.last_test_in_iex_command = test_command
 	else
-		toggleterm.exec(vim.g.last_test_in_iex_command or "", 1)
+		--[[ toggleterm.exec(vim.g.last_test_in_iex_command or "", 1) ]]
+		term:send(vim.g.last_test_in_iex_command or "", true)
 	end
 end
 

@@ -103,7 +103,7 @@ return require("lazy").setup({
 	-- bufferline, lualine
 	{ "akinsho/bufferline.nvim", version = "v3.1.0" },
 	"nvim-lualine/lualine.nvim", -- status line plugin
-	{ "akinsho/toggleterm.nvim", version = "v2.1.0" },
+	{ "akinsho/toggleterm.nvim", version = "v2.2.1" },
 	-- project manager
 	"ahmedkhalf/project.nvim",
 	"goolord/alpha-nvim",
