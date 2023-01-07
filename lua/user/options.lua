@@ -71,3 +71,6 @@ require("ufo").setup()
 -- for vim test
 vim.g["test#strategy"] = "neovim"
 -- vim.g["test#neovim#start_normal"] = 1
+
+-- for ablish highlight integration 
+vim.g["traces_abolish_integration"] = 1
