@@ -6,7 +6,7 @@ local options = {
 	conceallevel = 0, -- so that `` is visible in markdown files
 	fileencoding = "utf-8", -- the encoding written to a file
 	hlsearch = true, -- highlight all matches on previous search pattern
-	ignorecase = false, -- ignore case in search patterns
+	ignorecase = true, -- ignore case in search patterns
 	mouse = "a", -- allow the mouse to be used in neovim
 	pumheight = 10, -- pop up menu height
 	showmode = false, -- we don't need to see things like -- INSERT -- anymore
@@ -71,3 +71,6 @@ require("ufo").setup()
 -- for vim test
 vim.g["test#strategy"] = "neovim"
 -- vim.g["test#neovim#start_normal"] = 1
+
+-- for ablish highlight integration 
+vim.g["traces_abolish_integration"] = 1

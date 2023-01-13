@@ -82,6 +82,9 @@ return require("lazy").setup({
 
 	-- vimscript plugins
 	"vim-test/vim-test",
+	"tpope/vim-abolish",
+	-- for highlight the pattern: search and so on
+	"markonm/traces.vim",
 	"tpope/vim-surround",
 	-- bdelete, <leader>c
 	"moll/vim-bbye",
