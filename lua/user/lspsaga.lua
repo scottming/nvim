@@ -6,7 +6,7 @@ end
 -- change the lsp symbol kind
 
 -- use default config
-saga.init_lsp_saga({
+saga.setup({
 	show_outline = {
 		win_position = "right",
 		--set special filetype win that outline window split.like NvimTree neotree

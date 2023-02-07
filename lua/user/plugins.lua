@@ -17,10 +17,10 @@ return require("lazy").setup({
 	-- nvim dev
 	{ "folke/neodev.nvim", lazy = true },
 	-- LSP
-	"neovim/nvim-lspconfig",
-	--[[ { "glepnir/lspsaga.nvim", commit = "e5d5a3243616af78f0d7b7b29aa700a16e516a23" }) ]]
-	"glepnir/lspsaga.nvim",
-	"williamboman/nvim-lsp-installer", -- simple to use language server installer
+	{ "neovim/nvim-lspconfig", commit = "f11fdff7e8b5b415e5ef1837bdcdd37ea6764dda" },
+	{ "williamboman/mason.nvim", commit = "bfc5997e52fe9e20642704da050c415ea1d4775f" },
+	{ "williamboman/mason-lspconfig.nvim", commit = "0eb7cfefbd3a87308c1875c05c3f3abac22d367c" },
+	{ "glepnir/lspsaga.nvim", commit = "8bd402ad4f138af23948115dc380319069b79a01" },
 	"tamago324/nlsp-settings.nvim", -- language server settings defined in json for
 	"jose-elias-alvarez/null-ls.nvim", -- for formatters and linters
 
@@ -65,6 +65,12 @@ return require("lazy").setup({
 	{ "jfpedroza/neotest-elixir", branch = "jp/iex_strategy" },
 
 	-- Folding
+	{
+		"luukvbaal/statuscol.nvim",
+		config = function()
+			require("statuscol").setup({ foldfunc = "builtin", setopt = true })
+		end,
+	},
 	{ "kevinhwang91/nvim-ufo", dependencies = "kevinhwang91/promise-async" },
 
 	-- move faster
