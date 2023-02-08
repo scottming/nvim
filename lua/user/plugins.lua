@@ -138,17 +138,8 @@ return require("lazy").setup({
 	"hrsh7th/cmp-cmdline", -- cmdline completions
 	"saadparwaiz1/cmp_luasnip", -- snippet completions
 	"hrsh7th/cmp-nvim-lsp",
-	{
-		"tzachar/cmp-tabnine",
-		config = function()
-			local tabnine = require("cmp_tabnine.config")
-			tabnine:setup({
-				max_lines = 1000,
-				max_num_results = 20,
-				sort = true,
-			})
-		end,
-	},
+	-- copilot
+	"github/copilot.vim",
 
 	-- snippets
 	"L3MON4D3/LuaSnip", --snippet engine
