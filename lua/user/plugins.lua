@@ -51,6 +51,7 @@ return require("lazy").setup({
 	-- Test
 	{
 		"nvim-neotest/neotest",
+		version = "v2.6.4",
 		dependencies = {
 			"nvim-lua/plenary.nvim",
 			"nvim-treesitter/nvim-treesitter",
@@ -59,10 +60,11 @@ return require("lazy").setup({
 			"nvim-neotest/neotest-plenary",
 			"rouge8/neotest-rust",
 			"haydenmeade/neotest-jest",
+			"jfpedroza/neotest-elixir", -- for elixir
 		},
 	},
 
-	{ "jfpedroza/neotest-elixir", branch = "jp/iex_strategy" },
+	--[[ { "jfpedroza/neotest-elixir", branch = "jp/iex_strategy" }, ]]
 
 	-- Folding
 	{
