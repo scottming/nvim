@@ -39,9 +39,24 @@ end
 
 local opts = {}
 
+local ts_on_attach = function(client, bufnr)
+	-- https://github.com/typescript-language-server/typescript-language-server/issues/257
+	client.server_capabilities.document_formatting = false
+	client.server_capabilities.document_range_formatting = false
+	client.server_capabilities.documentRangeFormattingProvider = false
+	client.server_capabilities.documentFormattingProvider = false
+end
+
 for _, server in pairs(servers) do
+	local on_attach
+	if server == "tsserver" then
+		on_attach = ts_on_attach
+	else
+		on_attach = require("user.lsp.handlers").on_attach
+	end
+
 	opts = {
-		on_attach = require("user.lsp.handlers").on_attach,
+		on_attach = on_attach,
 		capabilities = require("user.lsp.handlers").capabilities,
 	}
 
