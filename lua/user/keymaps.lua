@@ -24,6 +24,7 @@ keymap("n", "<C-h>", "<C-w>h", opts)
 keymap("n", "<C-j>", "<C-w>j", opts)
 keymap("n", "<C-k>", "<C-w>k", opts)
 keymap("n", "<C-l>", "<C-w>l", opts)
+-- I use q when there is a lspsaga hover window
 keymap("n", "q", "<Nop>", opts)
 
 -- 10j 10k

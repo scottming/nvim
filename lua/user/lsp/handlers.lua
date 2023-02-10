@@ -43,6 +43,15 @@ M.setup = function()
 	-- hover
 	vim.keymap.set("n", "K", "<cmd>Lspsaga hover_doc<CR>", { silent = true })
 
+	-- make the hover window close when pressing q
+	vim.keymap.set("n", "q", function()
+		local hover = require("lspsaga.hover")
+		if hover:has_hover() then
+			vim.api.nvim_win_close(hover.preview_winid, true)
+			hover:remove_data()
+		end
+	end, { silent = true })
+
 	-- action
 	vim.keymap.set("n", "<a-cr>", "<cmd>Lspsaga code_action<cr>", { silent = true })
 
