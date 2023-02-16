@@ -68,12 +68,20 @@ return require("lazy").setup({
 
 	-- Folding
 	{
-		"luukvbaal/statuscol.nvim",
-		config = function()
-			require("statuscol").setup({ foldfunc = "builtin", setopt = true })
-		end,
+		"kevinhwang91/nvim-ufo",
+		dependencies = {
+			"kevinhwang91/promise-async",
+			{
+				"luukvbaal/statuscol.nvim",
+				config = function()
+					require("statuscol").setup({
+						foldfunc = "builtin",
+						setopt = true,
+					})
+				end,
+			},
+		},
 	},
-	{ "kevinhwang91/nvim-ufo", dependencies = "kevinhwang91/promise-async" },
 
 	-- move faster
 	{
@@ -86,12 +94,7 @@ return require("lazy").setup({
 	},
 
 	-- resize window when use
-	{
-		"beauwilliams/focus.nvim",
-		config = function()
-			require("focus").setup()
-		end,
-	},
+	"beauwilliams/focus.nvim",
 
 	-- vimscript plugins
 	"vim-test/vim-test",
