@@ -86,7 +86,12 @@ return require("lazy").setup({
 	},
 
 	-- resize window when use
-	"kwkarlwang/bufresize.nvim",
+	{
+		"beauwilliams/focus.nvim",
+		config = function()
+			require("focus").setup()
+		end,
+	},
 
 	-- vimscript plugins
 	"vim-test/vim-test",

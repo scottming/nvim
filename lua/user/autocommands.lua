@@ -34,11 +34,6 @@ vim.cmd([[
     autocmd FileType elixir setlocal indentkeys+=0=end
     autocmd FileType eelixir setlocal indentkeys+=0=end
   augroup end
-
-  augroup _resize
-    autocmd!
-    autocmd VimResized * lua require('bufresize').resize()
-  augroup end
 ]])
 
 ---Highlight yanked text
