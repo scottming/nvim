@@ -20,7 +20,7 @@ return require("lazy").setup({
 	{ "neovim/nvim-lspconfig", commit = "f11fdff7e8b5b415e5ef1837bdcdd37ea6764dda" },
 	{ "williamboman/mason.nvim", commit = "bfc5997e52fe9e20642704da050c415ea1d4775f" },
 	{ "williamboman/mason-lspconfig.nvim", commit = "0eb7cfefbd3a87308c1875c05c3f3abac22d367c" },
-	{ "glepnir/lspsaga.nvim", commit = "43bbc17bb34b40e7e8fdef2f634a7c60dfe7e807" },
+	{ "glepnir/lspsaga.nvim", commit = "2f0dfe5834b41ff790eb1e00daf201afced0ed5a" },
 	"tamago324/nlsp-settings.nvim", -- language server settings defined in json for
 	"jose-elias-alvarez/null-ls.nvim", -- for formatters and linters
 
