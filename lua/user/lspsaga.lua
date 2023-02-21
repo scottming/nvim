@@ -20,4 +20,9 @@ saga.setup({
 		-- auto refresh when change buffer
 		auto_refresh = true,
 	},
+	--[[ definition = { ]]
+	--[[ 	back = "<C-o>", ]]
+ --[[    next = 'gd', ]]
+	--[[ }, ]]
+	ui = { kind = { ["Folder"] = { " ", "@comment" }, }, },
 })
