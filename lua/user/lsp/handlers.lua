@@ -38,7 +38,7 @@ M.setup = function()
 	local opts = { silent = true }
 	vim.keymap.set("n", "gh", "<cmd>Lspsaga lsp_finder<CR>", opts)
 	vim.keymap.set("n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
-	vim.keymap.set("n", "gp", "<cmd>Lspsaga peek_definition<CR>", { silent = true })
+	vim.keymap.set("n", "gp", "<cmd>lua require('lspsaga-mini.definition'):peek_definition(1)<CR>", { silent = true })
 
 	-- hover
 	vim.keymap.set("n", "K", "<cmd>Lspsaga hover_doc<CR>", { silent = true })
