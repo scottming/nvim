@@ -36,8 +36,6 @@ return require("lazy").setup({
 		end,
 	},
 
-	-- nvim dev
-	{ "folke/neodev.nvim", lazy = true },
 	-- LSP
 	{ "neovim/nvim-lspconfig", commit = "f11fdff7e8b5b415e5ef1837bdcdd37ea6764dda" },
 	{ "williamboman/mason.nvim", commit = "bfc5997e52fe9e20642704da050c415ea1d4775f" },
@@ -98,7 +96,7 @@ return require("lazy").setup({
 			"kevinhwang91/promise-async",
 			{
 				"luukvbaal/statuscol.nvim",
-				commit = "3fd51ad7f39762b8605808b501cfca3d816edf58",
+				commit = "1c277254fed841680ea66aa9c93ac62a8aa4c74b",
 				config = function()
 					local builtin = require("statuscol.builtin")
 					require("statuscol").setup({
@@ -106,7 +104,10 @@ return require("lazy").setup({
 						segments = {
 							{ text = { " ", "%s" }, click = "v:lua.ScSa" }, -- signs
 							{ text = { builtin.lnumfunc }, click = "v:lua.ScLa" }, -- line number
-							{ text = { builtin.foldfunc, " " }, click = "v:lua.ScFa" }, -- folding icon
+							{
+								text = { builtin.foldfunc, " " },
+								click = "v:lua.ScFa",
+							}, -- folding icon
 						},
 					})
 				end,

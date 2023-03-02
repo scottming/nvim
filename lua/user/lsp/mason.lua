@@ -55,16 +55,6 @@ for _, server in pairs(servers) do
 		on_attach = require("user.lsp.handlers").on_attach
 	end
 
-	if server == "sumneko_lua" then
-		-- lua_dev_exist, lua_dev = pcall(require, "lua-dev")
-		local lua_dev_exist, lua_dev = pcall(require, "neodev")
-		if lua_dev_exist then
-			lua_dev.setup({})
-		else
-			vim.notify("lua-dev load failed")
-		end
-	end
-
 	opts = {
 		on_attach = on_attach,
 		capabilities = require("user.lsp.handlers").capabilities,
