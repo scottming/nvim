@@ -65,11 +65,12 @@ vim.g["test#strategy"] = "tterm"
 vim.g.iex_started = false
 
 local function starting_command()
-	local code = 'Code.eval_file("~/.test_iex/lib/test_iex.ex");TestIex.start()'
+	local code = 'Code.eval_file("~/.iex_unit/lib/iex_unit.ex");IExUnit.start()'
 	return string.format("MIX_ENV=test iex --no-pry -S mix run -e %q", code)
 end
 
 local function start_and_mark()
+	-- I don't know why need to exec
 	toggleterm.exec(starting_command(), 1, nil, nil, "horizontal")
 	vim.g.iex_started = true
 	ttt.get_or_create_term(1):close()
@@ -103,7 +104,7 @@ vim.api.nvim_create_user_command("TestFileAtCursorInIex", function()
 	local line_col = vim.api.nvim_win_get_cursor(0)[1]
 
 	local path = vim.fn.expand("%")
-	local test_command = string.format("TestIex.test(%q, %q)", path, line_col)
+	local test_command = string.format("IExUnit.run(%q, line: %q)", path, line_col)
 	run_test_and_cache(test_command, path)
 end, {})
 
@@ -112,6 +113,6 @@ vim.api.nvim_create_user_command("TestFileInIex", function()
 		start_and_mark()
 	end
 	local path = vim.fn.expand("%")
-	local test_command = string.format("TestIex.test(%q)", path)
+	local test_command = string.format("IExUnit.run(%q)", path)
 	run_test_and_cache(test_command, path)
 end, {})

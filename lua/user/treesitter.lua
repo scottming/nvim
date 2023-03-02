@@ -5,7 +5,18 @@ end
 
 configs.setup({
 	-- one of "all", "maintained" (parsers with maintainers), or a list of languages
-	ensure_installed = { "eex", "heex", "elixir", "lua", "html", "javascript", "typescript", "rust" },
+	ensure_installed = {
+		"eex",
+		"heex",
+		"elixir",
+		"markdown",
+		"markdown_inline",
+		"lua",
+		"html",
+		"javascript",
+		"typescript",
+		"rust",
+	},
 	sync_install = false, -- install languages synchronously (only applied to `ensure_installed`)
 	ignore_install = { "haskell" }, -- List of parsers to ignore installing
 	autopairs = {

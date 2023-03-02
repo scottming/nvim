@@ -8,34 +8,19 @@ neotest.setup({
 		require("neotest-python")({
 			dap = { justMyCode = false },
 		}),
-		require("neotest-plenary"),
-		require("neotest-rust")({
-			args = { "--no-capture" },
-		}),
-		require("neotest-jest")({
-			jestCommand = "npm test --",
-			jestConfigFile = "custom.jest.config.ts",
-			env = { CI = true },
-			cwd = function(path)
-				return vim.fn.getcwd()
-			end,
-		}),
 		require("neotest-elixir"),
-	},
-	icons = {
-		child_indent = "│",
-		child_prefix = "├",
-		collapsed = "─",
-		expanded = "╮",
-		failed = "✖",
-		final_child_indent = " ",
-		final_child_prefix = "╰",
-		non_collapsible = "─",
-		passed = "✔",
-		running = "🗘",
-		running_animated = { "/", "|", "\\", "-", "/", "|", "\\", "-" },
-		skipped = "ﰸ",
-		unknown = "?",
+		require("neotest-plenary"),
+		--[[ require("neotest-rust")({ ]]
+		--[[ 	args = { "--no-capture" }, ]]
+		--[[ }), ]]
+		--[[ require("neotest-jest")({ ]]
+		--[[ 	jestCommand = "npm test --", ]]
+		--[[ 	jestConfigFile = "custom.jest.config.ts", ]]
+		--[[ 	env = { CI = true }, ]]
+		--[[ 	cwd = function(path) ]]
+		--[[ 		return vim.fn.getcwd() ]]
+		--[[ 	end, ]]
+		--[[ }), ]]
 	},
 
 	summary = {
@@ -43,6 +28,14 @@ neotest.setup({
 			next_failed = "]e",
 			prev_failed = "[e",
 		},
+	},
+
+	output_panel = {
+		enabled = false,
+	},
+
+	quickfix = {
+		enabled = false,
 	},
 
 	log_level = vim.log.levels.INFO, -- default is WARN
@@ -66,10 +59,9 @@ vim.api.nvim_create_autocmd("FileType", {
 	end,
 })
 
-
 -- for vim test
 vim.g["test#strategy"] = "neovim"
 -- vim.g["test#neovim#start_normal"] = 1
 
--- for ablish highlight integration 
+-- for ablish highlight integration
 vim.g["traces_abolish_integration"] = 1

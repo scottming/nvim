@@ -3,9 +3,7 @@ require("user.plugins")
 require("user.keymaps")
 require("user.colorscheme")
 require("user.bufferline")
--- IMPORTANT: make sure to setup neodev BEFORE lspconfig
 require("user.cmp")
---[[ require("user.neodev") ]]
 require("user.lsp")
 require("user.lspsaga")
 require("user.lspsaga-mini")

@@ -1,5 +1,5 @@
 return {
-  cmd = { "/Users/scottming/Code/elixir-ls/release/language_server.sh" },
+  cmd = { "/Users/scottming/.elixir-ls/release/language_server.sh" },
 	settings = {
 
 		elixirLS = {

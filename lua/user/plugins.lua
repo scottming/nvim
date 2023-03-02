@@ -14,6 +14,28 @@ vim.opt.runtimepath:prepend(lazypath)
 
 -- Install your plugins here
 return require("lazy").setup({
+	{
+		"rafcamlet/nvim-luapad",
+		config = function()
+			require("luapad").setup({
+				count_limit = 150000,
+				error_indicator = false,
+				eval_on_move = true,
+				error_highlight = "WarningMsg",
+				split_orientation = "vertical",
+				on_init = function()
+					print("Hello from Luapad!")
+				end,
+				context = {
+					the_answer = 42,
+					shout = function(str)
+						return (string.upper(str) .. "!")
+					end,
+				},
+			})
+		end,
+	},
+
 	-- nvim dev
 	{ "folke/neodev.nvim", lazy = true },
 	-- LSP
@@ -51,22 +73,23 @@ return require("lazy").setup({
 	},
 
 	-- Test
+
 	{
 		"nvim-neotest/neotest",
-		version = "v2.6.4",
+		version = "v2.8.0",
 		dependencies = {
 			"nvim-lua/plenary.nvim",
 			"nvim-treesitter/nvim-treesitter",
 			"antoinemadec/FixCursorHold.nvim",
+			-- Adpters
 			"nvim-neotest/neotest-python",
 			"nvim-neotest/neotest-plenary",
-			"rouge8/neotest-rust",
-			"haydenmeade/neotest-jest",
-			"jfpedroza/neotest-elixir", -- for elixir
+			--[[ "rouge8/neotest-rust", ]]
+			--[[ "haydenmeade/neotest-jest", ]]
 		},
 	},
 
-	--[[ { "jfpedroza/neotest-elixir", branch = "jp/iex_strategy" }, ]]
+	{ dir = "~/Code/neotest-elixir" },
 
 	-- Folding
 	{
@@ -75,10 +98,16 @@ return require("lazy").setup({
 			"kevinhwang91/promise-async",
 			{
 				"luukvbaal/statuscol.nvim",
+				commit = "3fd51ad7f39762b8605808b501cfca3d816edf58",
 				config = function()
+					local builtin = require("statuscol.builtin")
 					require("statuscol").setup({
-						foldfunc = "builtin",
-						setopt = true,
+						relculright = true,
+						segments = {
+							{ text = { " ", "%s" }, click = "v:lua.ScSa" }, -- signs
+							{ text = { builtin.lnumfunc }, click = "v:lua.ScLa" }, -- line number
+							{ text = { builtin.foldfunc, " " }, click = "v:lua.ScFa" }, -- folding icon
+						},
 					})
 				end,
 			},
@@ -109,6 +138,8 @@ return require("lazy").setup({
 	"tpope/vim-projectionist",
 	-- maximize the window by <leader>z
 	"szw/vim-maximizer",
+	-- Switch between single-line and multiline forms of code
+	{ "AndrewRadev/splitjoin.vim", commit = "e6af44293c55431d78cc2ddd4335ed68e6fcf6ed" },
 
 	"kyazdani42/nvim-web-devicons",
 	"kyazdani42/nvim-tree.lua",
