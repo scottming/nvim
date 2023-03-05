@@ -103,11 +103,11 @@ return require("lazy").setup({
 						relculright = true,
 						segments = {
 							{ text = { " ", "%s" }, click = "v:lua.ScSa" }, -- signs
-							{ text = { builtin.lnumfunc }, click = "v:lua.ScLa" }, -- line number
-							{
-								text = { builtin.foldfunc, " " },
-								click = "v:lua.ScFa",
-							}, -- folding icon
+							{ text = { builtin.lnumfunc, " "}, click = "v:lua.ScLa" }, -- line number
+							--[[ { ]]
+							--[[ 	text = { builtin.foldfunc, " " }, ]]
+							--[[ 	click = "v:lua.ScFa", ]]
+							--[[ }, -- folding icon ]]
 						},
 					})
 				end,

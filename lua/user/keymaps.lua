@@ -32,8 +32,8 @@ keymap("n", "<C-d>", "10j", opts)
 keymap("n", "<C-u>", "10k", opts)
 
 -- Resize with arrows
-keymap("n", "<C-Up>", ":resize -5<CR>", opts)
-keymap("n", "<C-Down>", ":resize +5<CR>", opts)
+keymap("n", "<C-Up>", ":resize +5<CR>", opts)
+keymap("n", "<C-Down>", ":resize -5<CR>", opts)
 keymap("n", "<C-Left>", ":vertical resize -5<CR>", opts)
 keymap("n", "<C-Right>", ":vertical resize +5<CR>", opts)
 keymap("n", "_", "10<C-w><<CR>", opts)
@@ -73,7 +73,6 @@ keymap("x", "<A-j>", ":move '>+1<CR>gv-gv", opts)
 keymap("x", "<A-k>", ":move '<-2<CR>gv-gv", opts)
 
 -- Terminal --
-keymap("t", "<C-t>", "<cmd>lua _IEX_TOGGLE()<cr>", term_opts)
 -- Better terminal navigation
 -- keymap("t", "<C-h>", "<C-\\><C-N><C-w>h", term_opts)
 -- keymap("t", "<C-j>", "<C-\\><C-N><C-w>j", term_opts)

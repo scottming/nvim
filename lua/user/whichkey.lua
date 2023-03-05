@@ -196,6 +196,12 @@ local mappings = {
 		k = { "<cmd>Telescope keymaps<cr>", "Keymaps" },
 		C = { "<cmd>Telescope commands<cr>", "Commands" },
 	},
+
+	p = {
+		name = "Project",
+		f = { "<cmd>Telescope git_files<cr>", "Find File in project" },
+	},
+
 	u = {
 		name = "TestFile",
 		t = { "<cmd>TestNearest<cr>", "Test Nearest" },
