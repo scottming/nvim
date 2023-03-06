@@ -42,4 +42,9 @@ vim.opt.formatoptions:remove({ "c", "r", "o" }) -- This is a sequence of letters
 vim.opt.linebreak = true
 
 -- for neovide
-vim.o.guifont = "MonoLisa Nerd Font:h12"
+vim.g.neovide_padding_top = 10
+
+if vim.g.neovide then
+  vim.o.guifont = "MonoLisa Nerd Font:h12"
+  vim.g.neovide_input_macos_alt_is_meta = true
+end

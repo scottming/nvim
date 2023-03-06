@@ -57,8 +57,9 @@ return require("lazy").setup({
 		"nvim-treesitter/nvim-treesitter",
 		commit = "addc129a4f272aba0834bd0a7b6bd4ad5d8c801b",
 		run = ":TSUpdate",
+		event = "VeryLazy",
 	},
-	"JoosepAlviste/nvim-ts-context-commentstring",
+	{ "JoosepAlviste/nvim-ts-context-commentstring", event = "VeryLazy" },
 
 	-- symbols
 	{
@@ -68,6 +69,7 @@ return require("lazy").setup({
 		config = function()
 			require("symbols-outline").setup()
 		end,
+		event = { "BufReadPost", "BufNewFile" },
 	},
 
 	-- Test
@@ -179,6 +181,6 @@ return require("lazy").setup({
 	{
 		"lewis6991/gitsigns.nvim",
 		commit = "3b6c0a6412b31b91eb26bb8f712562cf7bb1d3be",
-		event = { "BufReadPre", "BufNewFile" },
+		event = { "BufReadPost", "BufNewFile" },
 	},
 })
