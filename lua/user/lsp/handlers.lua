@@ -54,6 +54,7 @@ M.setup = function()
 
 	-- action
 	vim.keymap.set("n", "<a-cr>", "<cmd>Lspsaga code_action<cr>", { silent = true })
+	-- Just for neovide
 	vim.keymap.set("n", "<M-cr>", "<cmd>Lspsaga code_action<cr>", { silent = true })
 
 	-- signature

@@ -1,6 +1,6 @@
 local opts = { noremap = true, silent = true }
 
-local term_opts = { silent = true }
+--[[ local term_opts = { silent = true } ]]
 
 -- Shorten function name
 local keymap = vim.api.nvim_set_keymap
@@ -44,8 +44,6 @@ keymap("n", "<S-l>", "<cmd>BufferLineCycleNext<CR>", opts)
 keymap("n", "<S-h>", "<cmd>BufferLineCyclePrev<CR>", opts)
 keymap("n", "<leader>z", "<cmd>MaximizerToggle<CR>", opts)
 keymap("n", "<A-\\>", "<cmd>ToggleTermSendCurrentLine<CR> j", opts)
-keymap("n", "z1", "<cmd>set foldlevel=1<cr>", opts)
-keymap("n", "z2", "<cmd>set foldlevel=2<cr>", opts)
 
 -- Move text up and down
 -- keymap("n", "<A-j>", "<Esc>:m .+1<CR>==gi", opts)

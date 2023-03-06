@@ -1,13 +1,8 @@
 {
-    "$schema": "https://raw.githubusercontent.com/sumneko/vscode-lua/master/setting/schema.json",
-    "Lua": {
-        "runtime.version": "LuaJIT",
-        "workspace.checkThirdParty": false
-    },
-    "Lua.diagnostics.globals": [
-        "vim",
-        "pcall",
-        "require",
-        "set_test_keybindings"
-    ]
+  "$schema": "https://raw.githubusercontent.com/sumneko/vscode-lua/master/setting/schema.json",
+  "Lua": {
+    "runtime.version": "LuaJIT",
+    "workspace.checkThirdParty": false
+  },
+  "Lua.diagnostics.globals": ["vim", "pcall", "require", "set_test_keybindings"]
 }

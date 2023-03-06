@@ -41,7 +41,8 @@ return require("lazy").setup({
 	{ "neovim/nvim-lspconfig", commit = "f11fdff7e8b5b415e5ef1837bdcdd37ea6764dda", event = "VeryLazy" },
 	{ "williamboman/mason.nvim", commit = "bfc5997e52fe9e20642704da050c415ea1d4775f", event = "VeryLazy" },
 	{ "williamboman/mason-lspconfig.nvim", commit = "0eb7cfefbd3a87308c1875c05c3f3abac22d367c", event = "VeryLazy" },
-	{ "glepnir/lspsaga.nvim", commit = "7ebc947071defc7a1f570d4efac6236d6d7b81d5", event = "VeryLazy" },
+	--[[ { "glepnir/lspsaga.nvim",  event = "VeryLazy" }, ]]
+	{ dir = "~/Code/lspsaga.nvim", event = "VeryLazy" },
 	{ dir = "~/Code/lspsaga-mini.nvim", event = "VeryLazy" },
 	{ "tamago324/nlsp-settings.nvim", commit = "7be82f345f82f304ae817e3910d001aa96be01b1", event = "VeryLazy" }, -- language server settings defined in json for
 	{ "jose-elias-alvarez/null-ls.nvim", commit = "456cd2754c56c991c5e4df60a807d054c1bc7148", event = "VeryLazy" }, -- for formatters and linters
@@ -52,7 +53,7 @@ return require("lazy").setup({
 	{ "jbyuki/one-small-step-for-vimkind", commit = "aef1bdbb8347e6daaf33d5109002f3df243ebfe9", event = "VeryLazy" },
 
 	-- Treesitter
-	"nvim-treesitter/playground",
+	{ "nvim-treesitter/playground", event = "VeryLazy" },
 	{
 		"nvim-treesitter/nvim-treesitter",
 		commit = "addc129a4f272aba0834bd0a7b6bd4ad5d8c801b",

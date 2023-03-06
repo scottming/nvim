@@ -9,8 +9,8 @@ return {
 					[vim.fn.expand("$VIMRUNTIME/lua")] = true,
 					--[[ [vim.fn.expand("$VIMRUNTIME/lua/vim/lsp")] = true, ]]
 					[vim.fn.stdpath("config") .. "/lua"] = true,
+					[vim.fn.stdpath("data") .. "/lazy/neotest"] = true,
 					-- for developing neotest
-					--[[ ["~/Code/neotest/lua"] = true, ]]
 				},
 			},
 			telemetry = {
