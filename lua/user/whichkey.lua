@@ -216,6 +216,7 @@ local mappings = {
 			'<cmd>lua require("neotest").run.run({vim.fn.expand("%")})<cr>',
 			"Test File",
 		},
+		l = { '<cmd>lua require("neotest").run.run_last()<cr>', "Run the last test" },
 		o = { '<cmd>lua require("neotest").output.open({ enter = true })<cr>', "Show neotest output" },
 		s = { '<cmd>lua require("neotest").summary.toggle()<cr>', "Toggle neotest summary" },
 	},

@@ -44,6 +44,8 @@ keymap("n", "<S-l>", "<cmd>BufferLineCycleNext<CR>", opts)
 keymap("n", "<S-h>", "<cmd>BufferLineCyclePrev<CR>", opts)
 keymap("n", "<leader>z", "<cmd>MaximizerToggle<CR>", opts)
 keymap("n", "<A-\\>", "<cmd>ToggleTermSendCurrentLine<CR> j", opts)
+keymap("n", "z1", "<cmd>set foldlevel=1<cr>", opts)
+keymap("n", "z2", "<cmd>set foldlevel=2<cr>", opts)
 
 -- Move text up and down
 -- keymap("n", "<A-j>", "<Esc>:m .+1<CR>==gi", opts)
@@ -109,3 +111,8 @@ keymap("v", "f", f, opts)
 keymap("v", "F", uf, opts)
 keymap("v", "t", t, opts)
 keymap("v", "T", ut, opts)
+
+-- for neovide
+keymap("i", "<D-v>", "<C-r>+", opts)
+keymap("n", "<D-v>", '"+p', opts)
+keymap("c", "<D-v>", "<C-r>+", opts)
