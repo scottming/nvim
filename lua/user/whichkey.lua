@@ -239,18 +239,3 @@ local mappings = {
 which_key.setup(setup)
 which_key.register(mappings, opts)
 which_key.register(vmappings, vopts)
-
---[[ vim.cmd("autocmd FileType * lua set_test_keybindings()") ]]
---[[]]
---[[ function set_test_keybindings() ]]
---[[ 	local file_type = vim.api.nvim_buf_get_option(0, "filetype") ]]
---[[]]
---[[ 	if file_type == "elixir" then ]]
---[[ 		which_key.register({ ]]
---[[ 			t = { ]]
---[[ 				t = { "<cmd>TestFileAtCursorInIex<cr>", "Run test at cursor in IEx shell" }, ]]
---[[ 				T = { "<cmd>TestFileInIex<cr>", "Test file in IEx shell" }, ]]
---[[ 			}, ]]
---[[ 		}, opts) ]]
---[[ 	end ]]
---[[ end ]]
