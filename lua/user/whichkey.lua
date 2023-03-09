@@ -160,6 +160,9 @@ local mappings = {
 		f = { "<cmd>lua require('harpoon.ui').nav_next()<cr>", "Next" },
 		b = { "<cmd>lua require('harpoon.ui').nav_prev()<cr>", "Prev" },
 		o = { "<cmd>nohlsearch<CR>", "No Highlight" },
+		["1"] = { "<cmd>lua require('harpoon.ui').nav_file(1)<cr>", "File 1" },
+		["2"] = { "<cmd>lua require('harpoon.ui').nav_file(2)<cr>", "File 2" },
+		["3"] = { "<cmd>lua require('harpoon.ui').nav_file(3)<cr>", "File 3" },
 	},
 
 	l = {
