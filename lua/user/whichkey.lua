@@ -103,7 +103,6 @@ local mappings = {
 	--[[ ["q"] = { "<cmd>q!<CR>", "Quit" }, ]]
 	["/"] = { "<cmd>lua require('Comment.api').toggle.linewise()<CR>", "Comment" },
 	["c"] = { "<cmd>Bdelete!<CR>", "Close Buffer" },
-	["h"] = { "<cmd>nohlsearch<CR>", "No Highlight" },
 	["f"] = {
 		"<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown{previewer = false})<cr>",
 		"Find files",
@@ -152,6 +151,15 @@ local mappings = {
 			"<cmd>Gitsigns diffthis HEAD<cr>",
 			"Diff",
 		},
+	},
+
+	h = {
+		name = "Harpoon",
+		h = { "<cmd>lua require('harpoon.ui').toggle_quick_menu()<cr>", "Toggle Harpoon" },
+		a = { "<cmd>lua require('harpoon.mark').add_file()<cr>", "Add File" },
+		f = { "<cmd>lua require('harpoon.ui').nav_next()<cr>", "Next" },
+		b = { "<cmd>lua require('harpoon.ui').nav_prev()<cr>", "Prev" },
+		o = { "<cmd>nohlsearch<CR>", "No Highlight" },
 	},
 
 	l = {
@@ -235,6 +243,27 @@ local mappings = {
 		r = { '<cmd>lua require("dap").repl.open()<cr>', "Open REPL" },
 	},
 }
+
+-- only for Harpoon
+local group = vim.api.nvim_create_augroup("HarpoonConfig", {})
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "harpoon",
+	group = group,
+	callback = function(opts)
+		vim.keymap.set("n", "o", "<Cmd>lua require('harpoon.ui').select_menu_item()<CR>", {
+			buffer = opts.buf,
+		})
+		vim.keymap.set("n", "1", "<Cmd>lua require('harpoon.ui').nav_file(1)<CR>", {
+			buffer = opts.buf,
+		})
+		vim.keymap.set("n", "2", "<Cmd>lua require('harpoon.ui').nav_file(2)<CR>", {
+			buffer = opts.buf,
+		})
+		vim.keymap.set("n", "3", "<Cmd>lua require('harpoon.ui').nav_file(3)<CR>", {
+			buffer = opts.buf,
+		})
+	end,
+})
 
 which_key.setup(setup)
 which_key.register(mappings, opts)

@@ -37,6 +37,13 @@ return require("lazy").setup({
 		end,
 	},
 
+  -- navigating between main file and other file
+	{
+		"ThePrimeagen/harpoon",
+		commit = "f7040fd0c44e7a4010369136547de5604b9c22a1",
+		dependencies = "nvim-lua/plenary.nvim",
+		event = "VeryLazy",
+	},
 	-- LSP
 	{ "neovim/nvim-lspconfig", commit = "f11fdff7e8b5b415e5ef1837bdcdd37ea6764dda", event = "VeryLazy" },
 	{ "williamboman/mason.nvim", commit = "bfc5997e52fe9e20642704da050c415ea1d4775f", event = "VeryLazy" },
