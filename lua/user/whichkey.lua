@@ -248,25 +248,25 @@ local mappings = {
 }
 
 -- only for Harpoon
-local group = vim.api.nvim_create_augroup("HarpoonConfig", {})
-vim.api.nvim_create_autocmd("FileType", {
-	pattern = "harpoon",
-	group = group,
-	callback = function(opts)
-		vim.keymap.set("n", "o", "<Cmd>lua require('harpoon.ui').select_menu_item()<CR>", {
-			buffer = opts.buf,
-		})
-		vim.keymap.set("n", "1", "<Cmd>lua require('harpoon.ui').nav_file(1)<CR>", {
-			buffer = opts.buf,
-		})
-		vim.keymap.set("n", "2", "<Cmd>lua require('harpoon.ui').nav_file(2)<CR>", {
-			buffer = opts.buf,
-		})
-		vim.keymap.set("n", "3", "<Cmd>lua require('harpoon.ui').nav_file(3)<CR>", {
-			buffer = opts.buf,
-		})
-	end,
-})
+--[[ local group = vim.api.nvim_create_augroup("HarpoonConfig", {}) ]]
+--[[ vim.api.nvim_create_autocmd("FileType", { ]]
+--[[ 	pattern = "harpoon", ]]
+--[[ 	group = group, ]]
+--[[ 	callback = function(opts) ]]
+--[[ 		vim.keymap.set("n", "o", "<Cmd>lua require('harpoon.ui').select_menu_item()<CR>", { ]]
+--[[ 			buffer = opts.buf, ]]
+--[[ 		}) ]]
+--[[ 		vim.keymap.set("n", "1", "<Cmd>lua require('harpoon.ui').nav_file(1)<CR>", { ]]
+--[[ 			buffer = opts.buf, ]]
+--[[ 		}) ]]
+--[[ 		vim.keymap.set("n", "2", "<Cmd>lua require('harpoon.ui').nav_file(2)<CR>", { ]]
+--[[ 			buffer = opts.buf, ]]
+--[[ 		}) ]]
+--[[ 		vim.keymap.set("n", "3", "<Cmd>lua require('harpoon.ui').nav_file(3)<CR>", { ]]
+--[[ 			buffer = opts.buf, ]]
+--[[ 		}) ]]
+--[[ 	end, ]]
+--[[ }) ]]
 
 which_key.setup(setup)
 which_key.register(mappings, opts)

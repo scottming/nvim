@@ -37,7 +37,7 @@ return require("lazy").setup({
 		end,
 	},
 
-  -- navigating between main file and other file
+	-- navigating between main file and other file
 	{
 		"ThePrimeagen/harpoon",
 		commit = "f7040fd0c44e7a4010369136547de5604b9c22a1",
@@ -84,7 +84,8 @@ return require("lazy").setup({
 
 	{
 		"nvim-neotest/neotest",
-		version = "v2.8.0",
+		--[[ version = "v2.8.0", ]]
+		commit = "95f95e346090ad96c657f021ad4d47f93c915598",
 		dependencies = {
 			"nvim-lua/plenary.nvim",
 			"nvim-treesitter/nvim-treesitter",
