@@ -45,9 +45,9 @@ return require("lazy").setup({
 		event = "VeryLazy",
 	},
 	-- LSP
-	{ "neovim/nvim-lspconfig", commit = "f11fdff7e8b5b415e5ef1837bdcdd37ea6764dda", event = "VeryLazy" },
-	{ "williamboman/mason.nvim", commit = "bfc5997e52fe9e20642704da050c415ea1d4775f", event = "VeryLazy" },
-	{ "williamboman/mason-lspconfig.nvim", commit = "0eb7cfefbd3a87308c1875c05c3f3abac22d367c", event = "VeryLazy" },
+	{ "neovim/nvim-lspconfig", commit = "4bb0f1845c5cc6465aecedc773fc2d619fcd8faf", event = "VeryLazy" },
+	{ "williamboman/mason.nvim", commit = "698cd0c4f10480991e665f31977650858d625af1", event = "VeryLazy" },
+	{ "williamboman/mason-lspconfig.nvim", commit = "a81503f0019942111fe464209237f8b4e85f4687", event = "VeryLazy" },
 	--[[ { "glepnir/lspsaga.nvim",  event = "VeryLazy" }, ]]
 	{ dir = "~/Code/lspsaga.nvim", event = "VeryLazy" },
 	{ dir = "~/Code/lspsaga-mini.nvim", event = "VeryLazy" },
