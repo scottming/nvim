@@ -154,7 +154,7 @@ return require("lazy").setup({
 	{ "akinsho/toggleterm.nvim", version = "v2.2.1", event = "VeryLazy" },
 	-- project manager
 	"ahmedkhalf/project.nvim",
-	"goolord/alpha-nvim",
+	{"goolord/alpha-nvim", commit = 'b3eef69e95674905bf26c7740dd4bbb09b355494'},
 	{ "lukas-reineke/indent-blankline.nvim", event = { "BufReadPost", "BufNewFile" } },
 	-- This is needed to fix lsp doc highlight
 	"antoinemadec/FixCursorHold.nvim",
