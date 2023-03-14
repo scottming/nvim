@@ -154,7 +154,7 @@ return require("lazy").setup({
 	{ "akinsho/toggleterm.nvim", version = "v2.2.1", event = "VeryLazy" },
 	-- project manager
 	"ahmedkhalf/project.nvim",
-	{"goolord/alpha-nvim", commit = 'b3eef69e95674905bf26c7740dd4bbb09b355494'},
+	{"goolord/alpha-nvim", commit = '3847d6baf74da61e57a13e071d8ca185f104dc96'},
 	{ "lukas-reineke/indent-blankline.nvim", event = { "BufReadPost", "BufNewFile" } },
 	-- This is needed to fix lsp doc highlight
 	"antoinemadec/FixCursorHold.nvim",
@@ -177,7 +177,7 @@ return require("lazy").setup({
 	{ "saadparwaiz1/cmp_luasnip", commit = "18095520391186d634a0045dacaa346291096566", event = "InsertEnter" },
 	{ "hrsh7th/cmp-nvim-lsp", commit = "0e6b2ed705ddcff9738ec4ea838141654f12eeef", event = "InsertEnter" },
 	-- copilot
-	"github/copilot.vim",
+	--[[ "github/copilot.vim", ]]
 
 	-- snippets
 	{ "L3MON4D3/LuaSnip", commit = "9b5be5e9b460fad7134991d3fd0434466959db08", event = "InsertEnter" },

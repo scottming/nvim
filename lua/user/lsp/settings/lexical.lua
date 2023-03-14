@@ -9,7 +9,7 @@ local configs = require("lspconfig.configs")
 
 local lexical = {
 	filetypes = { "elixir", "eelixir", "heex", "surface" },
-	cmd = { "/Users/scottming/Code/lexical/_build/prod/rel/lexical/start_lexical.sh" },
+	cmd = { "/Users/scottming/Code/lexical/_build/dev/rel/lexical/start_lexical.sh" },
 	settings = {},
 }
 
@@ -24,6 +24,7 @@ if not configs.lexical then
 			root_dir = function(fname)
 				return lspconfig.util.root_pattern("mix.exs", ".git")(fname) or vim.loop.os_homedir()
 			end,
+			cmd = lexical.cmd,
 		},
 	}
 end
@@ -32,8 +33,4 @@ lspconfig.lexical.setup({
 	capabilities = require("user.lsp.handlers").capabilities, -- optional
 	on_attach = custom_attach,
 	settings = lexical.settings,
-	cmd = lexical.cmd,
-	root_dir = function(fname)
-		return lspconfig.util.root_pattern("mix.exs", ".git")(fname) or vim.loop.os_homedir()
-	end,
 })

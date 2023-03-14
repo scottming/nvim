@@ -30,6 +30,8 @@ keymap("n", "q", "<Nop>", opts)
 -- 10j 10k
 keymap("n", "<C-d>", "10j", opts)
 keymap("n", "<C-u>", "10k", opts)
+keymap("n", '[g', '<cmd>lua require"gitsigns".prev_hunk()<cr>', opts)
+keymap("n", ']g', '<cmd>lua require"gitsigns".next_hunk()<cr>', opts)
 
 -- Resize with arrows
 keymap("n", "<C-Up>", ":resize +5<CR>", opts)
