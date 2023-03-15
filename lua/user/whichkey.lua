@@ -190,7 +190,10 @@ local mappings = {
 		l = { "<cmd>lua vim.lsp.codelens.run()<cr>", "CodeLens Action" },
 		q = { "<cmd>lua vim.lsp.diagnostic.set_loclist()<cr>", "Quickfix" },
 		r = { "<cmd>lua vim.lsp.buf.rename()<cr>", "Rename" },
-		s = { "<cmd>lua require('user.lsp.disable_client').disable_elixirls_in('/Users/scottming/Code/dummy')<cr>", "Stop" },
+		s = {
+			"<cmd>lua require('user.lsp.disable_client').disable_elixirls_in('/Users/scottming/Code/dummy')<cr>",
+			"Stop",
+		},
 		S = {
 			"<cmd>Telescope lsp_dynamic_workspace_symbols<cr>",
 			"Workspace Symbols",
@@ -211,6 +214,9 @@ local mappings = {
 	p = {
 		name = "Project",
 		f = { "<cmd>Telescope git_files<cr>", "Find File in project" },
+		p = { "<cmd>Telescope projects <cr>", "Projects" },
+		r = { "<cmd>Telescope oldfiles <cr>", "  Recently used files" },
+		c = { ":e ~/.config/nvim/init.lua <CR>", "  Configuration" },
 	},
 
 	u = {
