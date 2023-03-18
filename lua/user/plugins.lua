@@ -37,6 +37,11 @@ return require("lazy").setup({
 		end,
 	},
 
+	{
+		"goolord/alpha-nvim",
+		dependencies = "nvim-tree/nvim-web-devicons",
+		commit = "3847d6baf74da61e57a13e071d8ca185f104dc96",
+	},
 	-- navigating between main file and other file
 	{
 		"ThePrimeagen/harpoon",
@@ -166,6 +171,7 @@ return require("lazy").setup({
 	"projekt0n/github-nvim-theme",
 	"navarasu/onedark.nvim",
 	{ dir = "~/Code/dracula_pro" },
+	{ "Mofiqul/dracula.nvim" },
 
 	-- cmp plugins
 	{ "hrsh7th/nvim-cmp", commit = "feed47fd1da7a1bad2c7dca456ea19c8a5a9823a", event = "InsertEnter" }, -- The completion plugin

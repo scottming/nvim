@@ -68,3 +68,7 @@ indent_blankline.setup({
 	--   "IndentBlanklineIndent3",
 	-- },
 })
+
+-- #848b98
+vim.cmd [[highlight IndentBlanklineContextChar guifg=#7a818e gui=nocombine]]
+vim.cmd [[highlight IndentBlanklineContextStart guifg=#7a818e gui=nocombine]]
