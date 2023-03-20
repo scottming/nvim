@@ -1,6 +1,6 @@
 vim.cmd([[
 try
-  colorscheme dracula_pro_buffy
+  colorscheme onedark
 catch /^Vim\%((\a\+)\)\=:E185/
   colorscheme default
   set background=dark
@@ -8,5 +8,5 @@ endtry
 ]])
 
 -- only for onedark
---[[ require("onedark").setup({ style = "cool" }) ]]
---[[ require("onedark").load() ]]
+require("onedark").setup({ style = "cool" })
+require("onedark").load()

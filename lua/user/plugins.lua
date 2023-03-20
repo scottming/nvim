@@ -164,6 +164,11 @@ return require("lazy").setup({
 	"antoinemadec/FixCursorHold.nvim",
 	"folke/which-key.nvim",
 	---------------------
+	{
+		"folke/persistence.nvim",
+		event = "BufReadPre",
+		opts = { options = { "buffers", "curdir", "tabpages", "winsize", "help", "globals" } },
+	},
 
 	-- Colorschemes
 	-- use "lunarvim/colorschemes" -- A bunch of colorschemes you can try out

@@ -7,7 +7,7 @@ local servers = {
 	"cssls",
 	"emmet_ls",
 	-- main languages
-	"elixirls",
+	--[[ "elixirls", ]]
 	"tsserver",
 	"pyright",
 	"rust_analyzer",
