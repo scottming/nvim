@@ -22,7 +22,13 @@ if not configs.lexical then
 		default_config = {
 			filetypes = lexical.filetypes,
 			root_dir = function(fname)
-				return lspconfig.util.root_pattern("mix.exs", ".git")(fname) or vim.loop.os_homedir()
+				-- Set `~/Code/lexical` as root_dir for lexical project
+				local project = lspconfig.util.root_pattern(".git")(fname)
+				if project and string.sub(project, -12) == "Code/lexical" then
+					return project
+				else
+					return lspconfig.util.root_pattern("mix.exs", ".git")(fname) or vim.loop.os_homedir()
+				end
 			end,
 			cmd = lexical.cmd,
 		},
