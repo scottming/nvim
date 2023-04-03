@@ -65,10 +65,11 @@ return require("lazy").setup({
 	{ "jbyuki/one-small-step-for-vimkind", commit = "aef1bdbb8347e6daaf33d5109002f3df243ebfe9", event = "VeryLazy" },
 
 	-- Treesitter
-	{ "nvim-treesitter/playground", event = "VeryLazy" },
+	--[[ { "nvim-treesitter/playground", event = "VeryLazy" }, ]]
+	{ dir = "~/Code/playground", event = "VeryLazy" },
 	{
 		"nvim-treesitter/nvim-treesitter",
-		commit = "addc129a4f272aba0834bd0a7b6bd4ad5d8c801b",
+		commit = "6f5a4f6306e6dfd23f93c8b60493871c9a600cc0",
 		run = ":TSUpdate",
 		event = "VeryLazy",
 	},
@@ -78,7 +79,7 @@ return require("lazy").setup({
 	{
 		"scottming/symbols-outline.nvim",
 		--[[ commit = "e459f3262c4c79a62e654ada0fbbb9758313c968", ]]
-		branch = "support-elixir-private-functions",
+		branch = "master",
 		config = function()
 			require("symbols-outline").setup()
 		end,
@@ -111,6 +112,7 @@ return require("lazy").setup({
 		dependencies = {
 			"kevinhwang91/promise-async",
 		},
+		commit = "9e829d5cfa3de6a2ff561d86399772b0339ae49d",
 	},
 
 	-- move faster
@@ -194,7 +196,7 @@ return require("lazy").setup({
 	{ "rafamadriz/friendly-snippets", commit = "009887b76f15d16f69ae1341f86a7862f61cf2a1", event = "InsertEnter" }, -- a bunch of snippets to use
 
 	-- Telescope
-	{ "nvim-telescope/telescope.nvim", commit = "a3f17d3baf70df58b9d3544ea30abe52a7a832c2" },
+	{ "nvim-telescope/telescope.nvim", commit = "942fe5faef47b21241e970551eba407bc10d9547" },
 
 	-- Git
 	{

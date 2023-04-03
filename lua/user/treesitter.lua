@@ -16,6 +16,7 @@ configs.setup({
 		"javascript",
 		"typescript",
 		"rust",
+		"query",
 	},
 	sync_install = false, -- install languages synchronously (only applied to `ensure_installed`)
 	ignore_install = { "haskell" }, -- List of parsers to ignore installing
