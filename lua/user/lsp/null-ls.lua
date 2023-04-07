@@ -8,6 +8,14 @@ local formatting = null_ls.builtins.formatting
 -- https://github.com/jose-elias-alvarez/null-ls.nvim/tree/main/lua/null-ls/builtins/diagnostics
 local diagnostics = null_ls.builtins.diagnostics
 
+local custom = require("user.lsp.code_actions")
+
+local add_dbg = {
+	method = null_ls.methods.CODE_ACTION,
+	filetypes = { "elixir" },
+	generator = { fn = custom.add_dbg },
+}
+
 null_ls.setup({
 	debug = false,
 	sources = {
@@ -19,5 +27,9 @@ null_ls.setup({
 		formatting.prettier.with({}),
 		formatting.black.with({ extra_args = { "--fast" } }),
 		diagnostics.flake8,
+		add_dbg,
 	},
 })
+
+-- set custom actions
+require("user.lsp.code_actions")

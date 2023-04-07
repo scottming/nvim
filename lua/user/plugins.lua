@@ -89,7 +89,8 @@ return require("lazy").setup({
 	-- Test
 
 	{
-		"nvim-neotest/neotest",
+    dir = "~/Code/neotest",
+		--[[ "nvim-neotest/neotest", ]]
 		--[[ version = "v2.8.0", ]]
 		commit = "95f95e346090ad96c657f021ad4d47f93c915598",
 		dependencies = {

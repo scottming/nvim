@@ -10,6 +10,7 @@ return {
 					--[[ [vim.fn.expand("$VIMRUNTIME/lua/vim/lsp")] = true, ]]
 					[vim.fn.stdpath("config") .. "/lua"] = true,
 					[vim.fn.stdpath("data") .. "/lazy/neotest"] = true,
+					[vim.fn.stdpath("data") .. "/lazy/nvim-treesitter"] = true,
 					-- for developing neotest
 				},
 			},
