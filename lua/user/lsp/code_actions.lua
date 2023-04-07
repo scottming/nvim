@@ -9,7 +9,7 @@ local generate_dbg_action = function(bufnr, start_row, start_col, end_row, end_c
 	}
 end
 
-M.add_dbg = function(context)
+M.add_or_remove_dbg = function(context)
 	local context_row = context.range.row
 	local root_lang_tree = parsers.get_parser(context.bufnr, "elixir")
 	local root_node = ts_utils.get_root_for_position(0, 0, root_lang_tree)
@@ -42,7 +42,6 @@ M.add_dbg = function(context)
 					title = "Remove dbg",
 					action = function()
 						local new_text = string.gsub(line_text(), " |> dbg%(%)", "")
-						print(new_text, "new_text")
 						generate_dbg_action(context.bufnr, start_row, 0, end_row, string.len(line_text()), new_text)
 					end,
 				}
