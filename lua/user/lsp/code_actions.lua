@@ -57,15 +57,16 @@ M.add_or_remove_dbg = function(context)
 	local root_lang_tree = parsers.get_parser(context.bufnr, "elixir")
 	local root_node = ts_utils.get_root_for_position(0, 0, root_lang_tree)
 	local actions = {}
+
 	-- dbg for remote function calls
-	local alias_call_query = [[
+	local remote_call_query_scm = [[
       (call
         (dot
           (alias) 
           (identifier))
         (arguments)) @alias_call
     ]]
-	local query = vim.treesitter.query.parse("elixir", alias_call_query)
+	local query = vim.treesitter.query.parse("elixir", remote_call_query_scm)
 	for _, node, _ in query:iter_captures(root_node, context.bufnr) do
 		local text = vim.treesitter.get_node_text(node, context.bufnr)
 		local start_row, start_col, end_row, end_col = node:range()
@@ -83,6 +84,35 @@ M.add_or_remove_dbg = function(context)
 	end
 
 	-- dbg for local function calls
+	local function line_ends_with_do()
+		local line = line_text()
+		local trimed = line:match("^%s*(.-)%s*$")
+		return string.sub(trimed, -2) == "do"
+	end
+
+	local local_call_query_scm = [[
+    (call
+      target: (identifier) @ignore
+      (#not-match? @ignore "^(def|defp|defdelegate|defguard|defguardp|defmacro|defmacrop|defn|defnp|defmodule|defprotocol|defimpl|defstruct|defexception|defoverridable|alias|case|cond|else|for|if|import|quote|raise|receive|require|reraise|super|throw|try|unless|unquote|unquote_splicing|use|with|doctest|test|describe|assert)$")) @local_function_call
+    ]]
+
+	local local_func_query = vim.treesitter.query.parse("elixir", local_call_query_scm)
+	for id, node, _ in local_func_query:iter_captures(root_node, context.bufnr) do
+		local name = local_func_query.captures[id]
+		local start_row, start_col, end_row, end_col = node:range()
+		if name == "local_function_call" and start_row == zero_based_range.start.line and not line_ends_with_do() then
+			if already_has_dbg() then
+				local action = generate_remove_dbg(context.bufnr, start_row, 0, end_row)
+				table.insert(actions, action)
+			else
+				local text = vim.treesitter.get_node_text(node, context.bufnr)
+				local new_text = text .. " |> dbg()"
+				local action = generate_add_dbg(context.bufnr, start_row, start_col, end_row, end_col, new_text)
+				table.insert(actions, action)
+			end
+		end
+	end
+
 	return actions
 end
 
