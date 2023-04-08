@@ -113,6 +113,37 @@ M.add_or_remove_dbg = function(context)
 		end
 	end
 
+	-- dbg for the single variable at a line
+	local single_var_query_scm = [[
+    (identifier) @single_var
+  ]]
+
+	local function eq_var_range(node)
+		local start_row, start_col, _, end_col = node:range()
+		local trimed = line_text():match("^(.-)%s*$")
+		local var_start_col = trimed and trimed:find("%S") - 1
+		local var_end_col = trimed:find("$") - 1
+
+		return start_row == zero_based_range.start.line and start_col == var_start_col and end_col == var_end_col
+	end
+
+	local single_var_query = vim.treesitter.query.parse("elixir", single_var_query_scm)
+	for id, node, _ in single_var_query:iter_captures(root_node, context.bufnr) do
+		local name = single_var_query.captures[id]
+		local start_row, start_col, end_row, end_col = node:range()
+		if name == "single_var" and eq_var_range(node) then
+			if already_has_dbg() then
+				local action = generate_remove_dbg(context.bufnr, start_row, 0, end_row)
+				table.insert(actions, action)
+			else
+				local text = vim.treesitter.get_node_text(node, context.bufnr)
+				local new_text = text .. " |> dbg()"
+				local action = generate_add_dbg(context.bufnr, start_row, start_col, end_row, end_col, new_text)
+				table.insert(actions, action)
+			end
+		end
+	end
+
 	return actions
 end
 
