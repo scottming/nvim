@@ -21,32 +21,27 @@ M.add_or_remove_dbg = function(context)
 		},
 	}
 
-	local function line_text()
-		return vim.api.nvim_buf_get_lines(
-			context.bufnr,
-			zero_based_range.start.line,
-			zero_based_range.start.line + 1,
-			false
-		)[1]
-	end
-
-	local function already_has_dbg()
-		return line_text():find("|> dbg") ~= nil
-	end
+	local current_line_text = vim.api.nvim_buf_get_lines(
+		context.bufnr,
+		zero_based_range.start.line,
+		zero_based_range.start.line + 1,
+		false
+	)[1]
 
 	local function generate_remove_dbg(bufnr, start_row, start_col, end_row, _)
 		return {
 			title = "Remove dbg",
 			action = function()
-				local new_text = string.gsub(line_text(), " |> dbg%(%)", "")
-				generate_dbg_action(bufnr, start_row, start_col, end_row, string.len(line_text()), new_text)
+				local new_text = string.gsub(current_line_text, " |> dbg%(%)", "")
+				generate_dbg_action(bufnr, start_row, start_col, end_row, string.len(current_line_text), new_text)
 			end,
 		}
 	end
 
-	local function generate_add_dbg(bufnr, start_row, start_col, end_row, end_col, new_text)
+	local function generate_add_dbg(bufnr, start_row, start_col, end_row, end_col, new_text, text)
+		local title = text and string.format("Add dbg to: %s", text) or "Add dbg"
 		return {
-			title = "Add dbg",
+			title = title,
 			action = function()
 				generate_dbg_action(bufnr, start_row, start_col, end_row, end_col, new_text)
 			end,
@@ -57,6 +52,15 @@ M.add_or_remove_dbg = function(context)
 	local root_lang_tree = parsers.get_parser(context.bufnr, "elixir")
 	local root_node = ts_utils.get_root_for_position(0, 0, root_lang_tree)
 	local actions = {}
+	local function already_has_dbg()
+		return current_line_text:find("|> dbg") ~= nil
+	end
+
+	if already_has_dbg() then
+		local action = generate_remove_dbg(context.bufnr, zero_based_range.start.line, 0, zero_based_range.start.line)
+		table.insert(actions, action)
+		return actions
+	end
 
 	-- dbg for remote function calls
 	local remote_call_query_scm = [[
@@ -72,22 +76,18 @@ M.add_or_remove_dbg = function(context)
 		local start_row, start_col, end_row, end_col = node:range()
 
 		if start_row == zero_based_range.start.line then
-			if already_has_dbg() then
-				local action = generate_remove_dbg(context.bufnr, start_row, 0, end_row)
-				table.insert(actions, action)
-			else
-				local new_text = text .. " |> dbg()"
-				local action = generate_add_dbg(context.bufnr, start_row, start_col, end_row, end_col, new_text)
-				table.insert(actions, action)
-			end
+			local new_text = text .. " |> dbg()"
+			local action = generate_add_dbg(context.bufnr, start_row, start_col, end_row, end_col, new_text, text)
+			table.insert(actions, action)
 		end
 	end
 
 	-- dbg for local function calls
-	local function line_ends_with_do()
-		local line = line_text()
-		local trimed = line:match("^%s*(.-)%s*$")
-		return string.sub(trimed, -2) == "do"
+	-- we should filter out the build-in functions, like `def|defp`
+	local function line_not_ends_with_do(node)
+		local start_row, _, _, _ = node:range()
+		local trimed = current_line_text:match("^%s*(.-)%s*$")
+		return zero_based_range.start.line == start_row and string.sub(trimed, -2) ~= "do"
 	end
 
 	local local_call_query_scm = [[
@@ -100,16 +100,11 @@ M.add_or_remove_dbg = function(context)
 	for id, node, _ in local_func_query:iter_captures(root_node, context.bufnr) do
 		local name = local_func_query.captures[id]
 		local start_row, start_col, end_row, end_col = node:range()
-		if name == "local_function_call" and start_row == zero_based_range.start.line and not line_ends_with_do() then
-			if already_has_dbg() then
-				local action = generate_remove_dbg(context.bufnr, start_row, 0, end_row)
-				table.insert(actions, action)
-			else
-				local text = vim.treesitter.get_node_text(node, context.bufnr)
-				local new_text = text .. " |> dbg()"
-				local action = generate_add_dbg(context.bufnr, start_row, start_col, end_row, end_col, new_text)
-				table.insert(actions, action)
-			end
+		if name == "local_function_call" and line_not_ends_with_do(node) then
+			local text = vim.treesitter.get_node_text(node, context.bufnr)
+			local new_text = text .. " |> dbg()"
+			local action = generate_add_dbg(context.bufnr, start_row, start_col, end_row, end_col, new_text, text)
+			table.insert(actions, action)
 		end
 	end
 
@@ -120,7 +115,7 @@ M.add_or_remove_dbg = function(context)
 
 	local function eq_var_range(node)
 		local start_row, start_col, _, end_col = node:range()
-		local trimed = line_text():match("^(.-)%s*$")
+		local trimed = current_line_text:match("^(.-)%s*$")
 		local var_start_col = trimed and trimed:find("%S") - 1
 		local var_end_col = trimed:find("$") - 1
 
@@ -132,15 +127,10 @@ M.add_or_remove_dbg = function(context)
 		local name = single_var_query.captures[id]
 		local start_row, start_col, end_row, end_col = node:range()
 		if name == "single_var" and eq_var_range(node) then
-			if already_has_dbg() then
-				local action = generate_remove_dbg(context.bufnr, start_row, 0, end_row)
-				table.insert(actions, action)
-			else
-				local text = vim.treesitter.get_node_text(node, context.bufnr)
-				local new_text = text .. " |> dbg()"
-				local action = generate_add_dbg(context.bufnr, start_row, start_col, end_row, end_col, new_text)
-				table.insert(actions, action)
-			end
+			local text = vim.treesitter.get_node_text(node, context.bufnr)
+			local new_text = text .. " |> dbg()"
+			local action = generate_add_dbg(context.bufnr, start_row, start_col, end_row, end_col, new_text)
+			table.insert(actions, action)
 		end
 	end
 
