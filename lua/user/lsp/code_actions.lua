@@ -66,7 +66,7 @@ M.add_or_remove_dbg = function(context)
 	local remote_call_query_scm = [[
       (call
         (dot
-          (alias) 
+          (alias)
           (identifier))
         (arguments)) @alias_call
     ]]
@@ -116,7 +116,8 @@ M.add_or_remove_dbg = function(context)
 	local function eq_var_range(node)
 		local start_row, start_col, _, end_col = node:range()
 		local trimed = current_line_text:match("^(.-)%s*$")
-		local var_start_col = trimed and trimed:find("%S") - 1
+		local start_match = trimed:find("%S")
+		local var_start_col = start_match and start_match - 1
 		local var_end_col = trimed:find("$") - 1
 
 		return start_row == zero_based_range.start.line and start_col == var_start_col and end_col == var_end_col
