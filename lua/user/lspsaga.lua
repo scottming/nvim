@@ -20,5 +20,10 @@ saga.setup({
 		-- auto refresh when change buffer
 		auto_refresh = true,
 	},
+	lightbulb = {
+		enable = true,
+		enable_in_insert = false,
+    virtual_text = true,
+	},
 	ui = { kind = { ["Folder"] = "@comment" } },
 })

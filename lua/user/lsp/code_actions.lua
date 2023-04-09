@@ -48,6 +48,11 @@ M.add_or_remove_dbg = function(context)
 		}
 	end
 
+	local function line_not_starts_with_at_symbol()
+		local trimed = string.match(current_line_text, "^%s*(.-)$")
+		return trimed:find("^@") == nil
+	end
+
 	-- parse the whole file
 	local root_lang_tree = parsers.get_parser(context.bufnr, "elixir")
 	local root_node = ts_utils.get_root_for_position(0, 0, root_lang_tree)
@@ -75,7 +80,7 @@ M.add_or_remove_dbg = function(context)
 		local text = vim.treesitter.get_node_text(node, context.bufnr)
 		local start_row, start_col, end_row, end_col = node:range()
 
-		if start_row == zero_based_range.start.line then
+		if start_row == zero_based_range.start.line and line_not_starts_with_at_symbol() then
 			local new_text = text .. " |> dbg()"
 			local action = generate_add_dbg(context.bufnr, start_row, start_col, end_row, end_col, new_text, text)
 			table.insert(actions, action)
@@ -93,14 +98,14 @@ M.add_or_remove_dbg = function(context)
 	local local_call_query_scm = [[
     (call
       target: (identifier) @ignore
-      (#not-match? @ignore "^(def|defp|defdelegate|defguard|defguardp|defmacro|defmacrop|defn|defnp|defmodule|defprotocol|defimpl|defstruct|defexception|defoverridable|alias|case|cond|else|for|if|import|quote|raise|receive|require|reraise|super|throw|try|unless|unquote|unquote_splicing|use|with|doctest|test|describe|assert)$")) @local_function_call
+      (#not-match? @ignore "^(def|defp|defdelegate|defguard|defguardp|defmacro|defmacrop|defn|defnp|defmodule|defprotocol|defimpl|defstruct|defexception|defoverridable|alias|case|cond|else|for|if|import|quote|raise|receive|require|reraise|super|throw|try|unless|unquote|unquote_splicing|use|with|doctest|test|describe|assert|setup)$")) @local_function_call
     ]]
 
 	local local_func_query = vim.treesitter.query.parse("elixir", local_call_query_scm)
 	for id, node, _ in local_func_query:iter_captures(root_node, context.bufnr) do
 		local name = local_func_query.captures[id]
 		local start_row, start_col, end_row, end_col = node:range()
-		if name == "local_function_call" and line_not_ends_with_do(node) then
+		if name == "local_function_call" and line_not_starts_with_at_symbol() and line_not_ends_with_do(node) then
 			local text = vim.treesitter.get_node_text(node, context.bufnr)
 			local new_text = text .. " |> dbg()"
 			local action = generate_add_dbg(context.bufnr, start_row, start_col, end_row, end_col, new_text, text)
