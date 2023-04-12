@@ -89,7 +89,7 @@ return require("lazy").setup({
 	-- Test
 
 	{
-    dir = "~/Code/neotest",
+		dir = "~/Code/neotest",
 		--[[ "nvim-neotest/neotest", ]]
 		--[[ version = "v2.8.0", ]]
 		commit = "95f95e346090ad96c657f021ad4d47f93c915598",
@@ -161,7 +161,7 @@ return require("lazy").setup({
 	{ "nvim-lualine/lualine.nvim", commit = "e99d733e0213ceb8f548ae6551b04ae32e590c80", event = "VeryLazy" }, -- status line plugin
 	{ "akinsho/toggleterm.nvim", version = "v2.2.1", event = "VeryLazy" },
 	-- project manager
-	"ahmedkhalf/project.nvim",
+	{ dir = "~/Code/project.nvim" },
 	{ "lukas-reineke/indent-blankline.nvim", event = { "BufReadPost", "BufNewFile" } },
 	-- This is needed to fix lsp doc highlight
 	"antoinemadec/FixCursorHold.nvim",

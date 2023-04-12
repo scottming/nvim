@@ -55,11 +55,6 @@ neotest.setup({
 	log_level = vim.log.levels.INFO, -- default is WARN
 })
 
---[[ neotest.setup_project(vim.loop.cwd(), { ]]
---[[ 	adapters = { require("neotest-elixir") }, ]]
---[[ 	default_strategy = "iex", ]]
---[[ }) ]]
-
 local group = vim.api.nvim_create_augroup("NeotestConfig", {})
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = "neotest-output",

@@ -2,6 +2,33 @@ local status_ok, project = pcall(require, "project_nvim")
 if not status_ok then
 	return
 end
+
+local function is_mix_project()
+	local cwd = vim.fn.getcwd()
+	local uv = vim.loop
+
+	local req = uv.fs_scandir(cwd)
+	if req == nil then
+		return false
+	end
+
+	local is_mix = false
+
+	while true do
+		local file = uv.fs_scandir_next(req)
+
+		if file == "mix.exs" then
+			is_mix = true
+		end
+
+		if file == nil then
+			break
+		end
+	end
+
+	return is_mix
+end
+
 project.setup({
 	---@usage set to false to disable project.nvim.
 	--- This is on by default since it's currently the expected behavior.
@@ -38,6 +65,18 @@ project.setup({
 	---@type string
 	---@usage path to store the project history for use in telescope
 	datapath = vim.fn.stdpath("data"),
+
+	-- use a callback to setup neotest default_strategy as 'iex' when change to mix project
+	after_changed_cwd_callback = function()
+		if is_mix_project() then
+			local neotest = require("neotest")
+			neotest.setup_project(vim.loop.cwd(), {
+				adapters = { require("neotest-elixir") },
+				default_strategy = "iex",
+			})
+			vim.notify("setup neotest default_strategy as `iex`")
+		end
+	end,
 })
 
 local tele_status_ok, telescope = pcall(require, "telescope")
