@@ -3,13 +3,6 @@ local parsers = require("nvim-treesitter.parsers")
 
 local M = {}
 
-local generate_dbg_action = function(bufnr, range, new_text)
-	local start_row, start_col, end_row, end_col = unpack(range)
-	return {
-		vim.api.nvim_buf_set_text(bufnr, start_row, start_col, end_row, end_col, { new_text }),
-	}
-end
-
 local function eq_var_range(node_range, current_line_text)
 	local _, start_col, _, end_col = unpack(node_range)
 	local trimed = current_line_text:match("^(.-)%s*$")
@@ -27,6 +20,13 @@ end
 local function line_not_starts_with_at_symbol(current_line_text)
 	local trimed = string.match(current_line_text, "^%s*(.-)$")
 	return trimed:find("^@") == nil
+end
+
+local generate_dbg_action = function(bufnr, range, new_text)
+	local start_row, start_col, end_row, end_col = unpack(range)
+	return {
+		vim.api.nvim_buf_set_text(bufnr, start_row, start_col, end_row, end_col, { new_text }),
+	}
 end
 
 M.add_or_remove_dbg = function(context)
@@ -105,7 +105,7 @@ M.add_or_remove_dbg = function(context)
       ) @local_function_call
     ]]
 
-  local single_var_query_scm = [[
+	local single_var_query_scm = [[
       ;; query
       (identifier) @single_var
   ]]
@@ -118,9 +118,9 @@ M.add_or_remove_dbg = function(context)
 	local query = vim.treesitter.query.parse("elixir", query_str)
 	for id, node, _ in query:iter_captures(root_node, context.bufnr) do
 		local start_row, _, _, _ = node:range()
-    if start_row ~= current_line_range.start.line then
-      goto continue
-    end
+		if start_row ~= current_line_range.start.line then
+			goto continue
+		end
 
 		local node_range = { node:range() }
 		local text = vim.treesitter.get_node_text(node, context.bufnr)
@@ -131,8 +131,10 @@ M.add_or_remove_dbg = function(context)
 			local action = generate_add_dbg(context.bufnr, node_range, new_text, text)
 			table.insert(actions, action)
 		elseif
-			name == "local_function_call" and line_not_starts_with_at_symbol(current_line_text) and line_not_ends_with_do(current_line_text)
-    then
+			name == "local_function_call"
+			and line_not_starts_with_at_symbol(current_line_text)
+			and line_not_ends_with_do(current_line_text)
+		then
 			local new_text = text .. " |> dbg()"
 			local action = generate_add_dbg(context.bufnr, node_range, new_text, text)
 			table.insert(actions, action)
@@ -142,7 +144,7 @@ M.add_or_remove_dbg = function(context)
 			table.insert(actions, action)
 		end
 
-    ::continue::
+		::continue::
 	end
 
 	return actions
