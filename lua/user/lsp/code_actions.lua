@@ -146,4 +146,13 @@ M.add_or_remove_dbg = function(context)
 	return actions
 end
 
+local null_ls = require("null-ls")
+
+M.elixir_dbg = {
+	name = "dbg",
+	method = null_ls.methods.CODE_ACTION,
+	filetypes = { "elixir" },
+	generator = { fn = M.add_or_remove_dbg },
+}
+
 return M

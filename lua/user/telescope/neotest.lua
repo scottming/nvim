@@ -42,13 +42,7 @@ local function toggle_dbg()
 		print("Unregistered dbg code actions")
 	else
 		local custom = require("user.lsp.code_actions")
-		local elixir_dbg = {
-			name = "dbg",
-			method = null_ls.methods.CODE_ACTION,
-			filetypes = { "elixir" },
-			generator = { fn = custom.add_or_remove_dbg },
-		}
-		null_ls.register({ elixir_dbg })
+		null_ls.register({ custom.elixir_dbg })
 		print("Registered dbg code actions")
 	end
 end
