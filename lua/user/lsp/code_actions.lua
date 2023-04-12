@@ -117,8 +117,8 @@ M.add_or_remove_dbg = function(context)
 
 	local query = vim.treesitter.query.parse("elixir", query_str)
 	for id, node, _ in query:iter_captures(root_node, context.bufnr) do
-		local start_row, _, _, _ = node:range()
-		if start_row ~= current_line_range.start.line then
+		local start_row, _, end_row, _ = node:range()
+		if start_row ~= current_line_range.start.line or start_row ~= end_row then
 			goto continue
 		end
 
