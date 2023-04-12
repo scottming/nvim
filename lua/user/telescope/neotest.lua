@@ -1,4 +1,7 @@
 local neotest = require("neotest")
+local neotest_config = require("neotest.config")
+local null_ls = require("null-ls")
+local null_ls_sources = require("null-ls.sources")
 local pickers = require("telescope.pickers")
 local finders = require("telescope.finders")
 local conf = require("telescope.config").values
@@ -8,23 +11,79 @@ local action_state = require("telescope.actions.state")
 
 local M = {}
 
+local function dbg_registered()
+	local registered = null_ls_sources.get_all()
+	for _, v in pairs(registered) do
+		if v.name == "dbg" then
+			return true
+		end
+	end
+	return false
+end
+
+local function dbg_display()
+	if dbg_registered() then
+		return " dbg"
+	else
+		return " dbg"
+	end
+end
+
+local function config_neotest_strategy(cwd, strategy)
+	neotest.setup_project(cwd, {
+		adapters = { require("neotest-elixir") },
+		default_strategy = strategy,
+	})
+end
+
+local function toggle_dbg()
+	if dbg_registered() then
+		null_ls.deregister("dbg")
+		print("Unregistered dbg code actions")
+	else
+		local custom = require("user.lsp.code_actions")
+		local elixir_dbg = {
+			name = "dbg",
+			method = null_ls.methods.CODE_ACTION,
+			filetypes = { "elixir" },
+			generator = { fn = custom.add_or_remove_dbg },
+		}
+		null_ls.register({ elixir_dbg })
+		print("Registered dbg code actions")
+	end
+end
+
 M.strategies = function(opts)
 	local cwd = vim.loop.cwd()
 	local project = string.match(cwd, ".*%/(.*)")
+	local default_strategy = neotest_config.projects[cwd].default_strategy
+
+	local switch_strategy
+	if default_strategy == "integrated" then
+		switch_strategy = "iex"
+	else
+		switch_strategy = "integrated"
+	end
 
 	opts = opts or {}
 	pickers
 		.new(opts, {
-			prompt_title = project .. " - Select test strategy",
+			prompt_title = project .. " - Config Test Strategies/Tools",
 			finder = finders.new_table({
 				results = {
-					{ "iex", "iex" },
-					{ "integrated", "integrated" },
+					{ switch_strategy, "strategy" },
+					{ "dbg", "dbg" },
 				},
 				entry_maker = function(entry)
+					local display
+					if entry[2] == "strategy" then
+						display = "󱇖 " .. entry[1]
+					else
+						display = dbg_display()
+					end
 					return {
 						value = entry,
-						display = entry[1],
+						display = display,
 						ordinal = entry[1],
 					}
 				end,
@@ -34,15 +93,15 @@ M.strategies = function(opts)
 				actions.select_default:replace(function()
 					actions.close(prompt_bufnr)
 					local selection = action_state.get_selected_entry()
+					local kind = selection.value[2]
 
-					local strategy = selection.value[2]
-
-					neotest.setup_project(cwd, {
-						adapters = { require("neotest-elixir") },
-						default_strategy = strategy,
-					})
-
-					print("Configured " .. strategy .. " for: " .. cwd)
+					if kind == "strategy" then
+						local strategy = selection.value[1]
+						config_neotest_strategy(cwd, strategy)
+						print("Configured " .. strategy .. " for: " .. cwd)
+					else
+						toggle_dbg()
+					end
 				end)
 				return true
 			end,

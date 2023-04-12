@@ -14,7 +14,7 @@ local lexical = {
 }
 
 local custom_attach = function()
-	print("Lexical has started.")
+	--[[ print("Lexical has started.") ]]
 end
 
 if not configs.lexical then

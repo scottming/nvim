@@ -21,7 +21,7 @@ saga.setup({
 		auto_refresh = true,
 	},
 	lightbulb = {
-		enable = false,
+		enable = true,
 		enable_in_insert = false,
     virtual_text = true,
 	},
