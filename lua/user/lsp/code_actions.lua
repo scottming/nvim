@@ -124,23 +124,19 @@ M.add_or_remove_dbg = function(context)
 
 		local node_range = { node:range() }
 		local text = vim.treesitter.get_node_text(node, context.bufnr)
-		local name = query.captures[id]
+    local new_text = text .. " |> dbg()"
+		local action = generate_add_dbg(context.bufnr, node_range, new_text, text)
 
+		local name = query.captures[id]
 		if name == "alias_call" and line_not_starts_with_at_symbol(current_line_text) then
-			local new_text = text .. " |> dbg()"
-			local action = generate_add_dbg(context.bufnr, node_range, new_text, text)
 			table.insert(actions, action)
 		elseif
 			name == "local_function_call"
 			and line_not_starts_with_at_symbol(current_line_text)
 			and line_not_ends_with_do(current_line_text)
 		then
-			local new_text = text .. " |> dbg()"
-			local action = generate_add_dbg(context.bufnr, node_range, new_text, text)
 			table.insert(actions, action)
 		elseif name == "single_var" and eq_var_range(node_range, current_line_text) then
-			local new_text = text .. " |> dbg()"
-			local action = generate_add_dbg(context.bufnr, node_range, new_text)
 			table.insert(actions, action)
 		end
 
