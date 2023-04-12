@@ -3,27 +3,25 @@ local parsers = require("nvim-treesitter.parsers")
 
 local M = {}
 
-local generate_dbg_action = function(bufnr, start_row, start_col, end_row, end_col, new_text)
+local generate_dbg_action = function(bufnr, range, new_text)
+	local start_row, start_col, end_row, end_col = unpack(range)
 	return {
 		vim.api.nvim_buf_set_text(bufnr, start_row, start_col, end_row, end_col, { new_text }),
 	}
 end
 
-local function eq_var_range(node, current_line_text, current_line_range)
-	local start_row, start_col, _, end_col = node:range()
+local function eq_var_range(node_range, current_line_text)
+	local _, start_col, _, end_col = unpack(node_range)
 	local trimed = current_line_text:match("^(.-)%s*$")
 	local start_match = trimed:find("%S")
 	local var_start_col = start_match and start_match - 1
 	local var_end_col = trimed:find("$") - 1
-
-	return start_row == current_line_range.start.line and start_col == var_start_col and end_col == var_end_col
+	return start_col == var_start_col and end_col == var_end_col
 end
 
--- we should filter out the build-in functions, like `def|defp`
-local function line_not_ends_with_do(node, current_line_text, current_line_range)
-	local start_row, _, _, _ = node:range()
+local function line_not_ends_with_do(current_line_text)
 	local trimed = current_line_text:match("^%s*(.-)%s*$")
-	return current_line_range.start.line == start_row and string.sub(trimed, -2) ~= "do"
+	return string.sub(trimed, -2) ~= "do"
 end
 
 local function line_not_starts_with_at_symbol(current_line_text)
@@ -50,29 +48,26 @@ M.add_or_remove_dbg = function(context)
 		false
 	)[1]
 
-	local function generate_remove_dbg(bufnr, start_row, start_col, end_row, _)
+	local function generate_remove_dbg(bufnr, range)
 		return {
 			title = "Remove dbg",
 			action = function()
 				local new_text = string.gsub(current_line_text, " |> dbg%(%)", "")
-				generate_dbg_action(bufnr, start_row, start_col, end_row, string.len(current_line_text), new_text)
+				generate_dbg_action(bufnr, range, new_text)
 			end,
 		}
 	end
 
-	local function generate_add_dbg(bufnr, start_row, start_col, end_row, end_col, new_text, text)
+	local function generate_add_dbg(bufnr, range, new_text, text)
 		local title = text and string.format("Add dbg to: %s", text) or "Add dbg"
 		return {
 			title = title,
 			action = function()
-				generate_dbg_action(bufnr, start_row, start_col, end_row, end_col, new_text)
+				generate_dbg_action(bufnr, range, new_text)
 			end,
 		}
 	end
 
-	-- parse the whole file
-	local root_lang_tree = parsers.get_parser(context.bufnr, "elixir")
-	local root_node = ts_utils.get_root_for_position(0, 0, root_lang_tree)
 	local actions = {}
 
 	local function already_has_dbg()
@@ -80,8 +75,9 @@ M.add_or_remove_dbg = function(context)
 	end
 
 	if already_has_dbg() then
-		local action =
-			generate_remove_dbg(context.bufnr, current_line_range.start.line, 0, current_line_range.start.line)
+		local remove_range =
+			{ current_line_range.start.line, 0, current_line_range.start.line, string.len(current_line_text) }
+		local action = generate_remove_dbg(context.bufnr, remove_range)
 		table.insert(actions, action)
 		return actions
 	end
@@ -95,57 +91,58 @@ M.add_or_remove_dbg = function(context)
           (identifier))
         (arguments)) @alias_call
     ]]
-	local query = vim.treesitter.query.parse("elixir", remote_call_query_scm)
-	for _, node, _ in query:iter_captures(root_node, context.bufnr) do
-		local text = vim.treesitter.get_node_text(node, context.bufnr)
-		local start_row, start_col, end_row, end_col = node:range()
-
-		if start_row == current_line_range.start.line and line_not_starts_with_at_symbol(current_line_text) then
-			local new_text = text .. " |> dbg()"
-			local action = generate_add_dbg(context.bufnr, start_row, start_col, end_row, end_col, new_text, text)
-			table.insert(actions, action)
-		end
-	end
-
 	local local_call_query_scm = [[
     ;; query
     (call
       target: (identifier) @ignore
-      (#not-match? @ignore "^(def|defp|defdelegate|defguard|defguardp|defmacro|defmacrop|defn|defnp|defmodule|defprotocol|defimpl|defstruct|defexception|defoverridable|alias|case|cond|else|for|if|import|quote|raise|receive|require|reraise|super|throw|try|unless|unquote|unquote_splicing|use|with|doctest|test|describe|assert|setup)$")) @local_function_call
+      (#not-any-of? @ignore 
+      ;; def
+      "def" "defp" "defdelegate" "defguard" "defguardp" "defmacro" "defmacrop" "defn" "defnp" "defmodule" "defprotocol" "defimpl" "defstruct" "defexception" "defoverridable"
+      ;; keywords
+      "alias" "case" "cond" "else" "for" "if" "import" "quote" "raise" "receive" "require" "reraise" "super" "throw" "try" "unless" "unquote" "unquote_splicing" "use" "with"
+      ;; test
+      "doctest" "test" "describe" "assert" "setup")
+      ) @local_function_call
     ]]
 
-	local local_func_query = vim.treesitter.query.parse("elixir", local_call_query_scm)
-	for id, node, _ in local_func_query:iter_captures(root_node, context.bufnr) do
-		local name = local_func_query.captures[id]
-		local start_row, start_col, end_row, end_col = node:range()
-		if
-			name == "local_function_call"
-			and line_not_starts_with_at_symbol(current_line_text)
-			and line_not_ends_with_do(node, current_line_text, current_line_range)
-		then
-			local text = vim.treesitter.get_node_text(node, context.bufnr)
-			local new_text = text .. " |> dbg()"
-			local action = generate_add_dbg(context.bufnr, start_row, start_col, end_row, end_col, new_text, text)
-			table.insert(actions, action)
-		end
-	end
-
-	-- dbg for the single variable at a line
-	local single_var_query_scm = [[
-    ;;query
-    (identifier) @single_var
+  local single_var_query_scm = [[
+      ;; query
+      (identifier) @single_var
   ]]
 
-	local single_var_query = vim.treesitter.query.parse("elixir", single_var_query_scm)
-	for id, node, _ in single_var_query:iter_captures(root_node, context.bufnr) do
-		local name = single_var_query.captures[id]
-		local start_row, start_col, end_row, end_col = node:range()
-		if name == "single_var" and eq_var_range(node, current_line_text, current_line_range) then
-			local text = vim.treesitter.get_node_text(node, context.bufnr)
+	local query_str = remote_call_query_scm .. local_call_query_scm .. single_var_query_scm
+	-- parse the whole file
+	local root_lang_tree = parsers.get_parser(context.bufnr, "elixir")
+	local root_node = ts_utils.get_root_for_position(0, 0, root_lang_tree)
+
+	local query = vim.treesitter.query.parse("elixir", query_str)
+	for id, node, _ in query:iter_captures(root_node, context.bufnr) do
+		local start_row, _, _, _ = node:range()
+    if start_row ~= current_line_range.start.line then
+      goto continue
+    end
+
+		local node_range = { node:range() }
+		local text = vim.treesitter.get_node_text(node, context.bufnr)
+		local name = query.captures[id]
+
+		if name == "alias_call" and line_not_starts_with_at_symbol(current_line_text) then
 			local new_text = text .. " |> dbg()"
-			local action = generate_add_dbg(context.bufnr, start_row, start_col, end_row, end_col, new_text)
+			local action = generate_add_dbg(context.bufnr, node_range, new_text, text)
+			table.insert(actions, action)
+		elseif
+			name == "local_function_call" and line_not_starts_with_at_symbol(current_line_text) and line_not_ends_with_do(current_line_text)
+    then
+			local new_text = text .. " |> dbg()"
+			local action = generate_add_dbg(context.bufnr, node_range, new_text, text)
+			table.insert(actions, action)
+		elseif name == "single_var" and eq_var_range(node_range, current_line_text) then
+			local new_text = text .. " |> dbg()"
+			local action = generate_add_dbg(context.bufnr, node_range, new_text)
 			table.insert(actions, action)
 		end
+
+    ::continue::
 	end
 
 	return actions
