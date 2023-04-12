@@ -30,6 +30,20 @@ neotest.setup({
 		},
 	},
 
+	watch = {
+		enabled = true,
+		symbol_queries = {
+			elixir = [[
+      ;; query
+      (call (identifier) @_func_name
+        (arguments (alias) @symbol)
+        (#match? @_func_name "^(alias|require|import|use)")
+        (#gsub! @symbol ".*%.(.*)" "%1")
+      )
+    ]],
+		},
+	},
+
 	output_panel = {
 		enabled = false,
 	},

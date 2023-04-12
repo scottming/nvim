@@ -13,6 +13,7 @@ return {
 					[vim.fn.stdpath("data") .. "/lazy/nvim-treesitter"] = true,
 					-- for developing neotest
 				},
+				checkThirdParty = false, -- THIS IS THE IMPORTANT LINE TO ADD
 			},
 			telemetry = {
 				enable = false,
