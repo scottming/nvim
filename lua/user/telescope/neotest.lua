@@ -51,13 +51,7 @@ M.strategies = function(opts)
 	local cwd = vim.loop.cwd()
 	local project = string.match(cwd, ".*%/(.*)")
 	local default_strategy = neotest_config.projects[cwd].default_strategy
-
-	local switch_strategy
-	if default_strategy == "integrated" then
-		switch_strategy = "iex"
-	else
-		switch_strategy = "integrated"
-	end
+	local switch_strategy = (default_strategy == "integrated") and "iex" or "integrated"
 
 	opts = opts or {}
 	pickers
@@ -69,12 +63,7 @@ M.strategies = function(opts)
 					{ "dbg", "dbg" },
 				},
 				entry_maker = function(entry)
-					local display
-					if entry[2] == "strategy" then
-						display = "󱇖 " .. entry[1]
-					else
-						display = dbg_display()
-					end
+					local display = (entry[2] == "strategy") and "󱇖 " .. entry[1] or dbg_display()
 					return {
 						value = entry,
 						display = display,

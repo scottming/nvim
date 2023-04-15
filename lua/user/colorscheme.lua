@@ -8,5 +8,5 @@ endtry
 ]])
 
 -- only for onedark
---[[ require("onedark").setup({ style = "cool" }) ]]
---[[ require("onedark").load() ]]
+require("onedark").setup({ style = "cool" })
+require("onedark").load()

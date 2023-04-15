@@ -193,8 +193,15 @@ return require("lazy").setup({
 	"github/copilot.vim",
 
 	-- snippets
-	{ "L3MON4D3/LuaSnip", commit = "9b5be5e9b460fad7134991d3fd0434466959db08", event = "InsertEnter" },
-	{ "rafamadriz/friendly-snippets", commit = "009887b76f15d16f69ae1341f86a7862f61cf2a1", event = "InsertEnter" }, -- a bunch of snippets to use
+	{
+		"L3MON4D3/LuaSnip",
+		-- follow latest release.
+		version = "1.2.1",
+		-- install jsregexp (optional!).
+		build = "make install_jsregexp",
+		event = "InsertEnter",
+	},
+	{ "rafamadriz/friendly-snippets", commit = "781af8c404ce351e999b5102b9724ee847f3ad18", event = "InsertEnter" }, -- a bunch of snippets to use
 
 	-- Telescope
 	{ "nvim-telescope/telescope.nvim", commit = "942fe5faef47b21241e970551eba407bc10d9547" },
