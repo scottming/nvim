@@ -30,8 +30,8 @@ keymap("n", "q", "<Nop>", opts)
 -- 10j 10k
 keymap("n", "<C-d>", "10j", opts)
 keymap("n", "<C-u>", "10k", opts)
-keymap("n", '[g', '<cmd>lua require"gitsigns".prev_hunk()<cr>', opts)
-keymap("n", ']g', '<cmd>lua require"gitsigns".next_hunk()<cr>', opts)
+keymap("n", "[g", '<cmd>lua require"gitsigns".prev_hunk()<cr>', opts)
+keymap("n", "]g", '<cmd>lua require"gitsigns".next_hunk()<cr>', opts)
 
 -- Resize with arrows
 keymap("n", "<C-Up>", ":resize +5<CR>", opts)
@@ -85,29 +85,6 @@ keymap("c", "<C-E>", "<End>", opts)
 keymap("c", "<C-A>", "<Home>", opts)
 keymap("c", "<A-Right>", "<S-Right>", opts)
 keymap("c", "<A-Left>", "<S-Left>", opts)
-
--- hop Motion
-local f =
-	"<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true })<cr>"
-
-local uf =
-	"<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = true })<cr>"
-
-local t =
-	"<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true, hint_offset = -1 })<cr>"
-
-local ut =
-	"<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = true, hint_offset = 1 })<cr>"
-
-keymap("n", "f", f, opts)
-keymap("n", "F", uf, opts)
-keymap("n", "t", t, opts)
-keymap("n", "T", ut, opts)
-
-keymap("v", "f", f, opts)
-keymap("v", "F", uf, opts)
-keymap("v", "t", t, opts)
-keymap("v", "T", ut, opts)
 
 -- for neovide
 keymap("i", "<D-v>", "<C-r>+", opts)

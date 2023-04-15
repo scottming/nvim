@@ -116,17 +116,6 @@ return require("lazy").setup({
 		commit = "9e829d5cfa3de6a2ff561d86399772b0339ae49d",
 	},
 
-	-- move faster
-	{
-		"phaazon/hop.nvim",
-		branch = "v2", -- optional but strongly recommended
-		config = function()
-			-- you can configure Hop the way you like here; see :h hop-config
-			require("hop").setup({ keys = "etovxqpdygfblzhckisuran" })
-		end,
-		event = "VeryLazy",
-	},
-
 	-- resize window when use
 	--[[ { "beauwilliams/focus.nvim", event = "VeryLazy" }, ]]
 	{ "beauwilliams/focus.nvim", commit = "3d9df42aa4f9b572348418207b752f81adea09a5" },
@@ -181,27 +170,64 @@ return require("lazy").setup({
 	{ dir = "~/Code/dracula_pro" },
 	{ "Mofiqul/dracula.nvim" },
 
-	-- cmp plugins
-	{ "hrsh7th/nvim-cmp", commit = "feed47fd1da7a1bad2c7dca456ea19c8a5a9823a", event = "InsertEnter" }, -- The completion plugin
-	{ "hrsh7th/cmp-buffer", commit = "3022dbc9166796b644a841a02de8dd1cc1d311fa", event = "InsertEnter" }, -- buffer completions
-	{ "hrsh7th/cmp-path", commit = "91ff86cd9c29299a64f968ebb45846c485725f23", event = "InsertEnter" }, -- path completions
-	{ "hrsh7th/cmp-cmdline", commit = "8fcc934a52af96120fe26358985c10c035984b53", event = "InsertEnter" }, -- cmdline completions
-	-- snippet completions
-	{ "saadparwaiz1/cmp_luasnip", commit = "18095520391186d634a0045dacaa346291096566", event = "InsertEnter" },
-	{ "hrsh7th/cmp-nvim-lsp", commit = "0e6b2ed705ddcff9738ec4ea838141654f12eeef", event = "InsertEnter" },
-	-- copilot
-	"github/copilot.vim",
-
-	-- snippets
+	-- cmp
 	{
-		"L3MON4D3/LuaSnip",
-		-- follow latest release.
-		version = "1.2.1",
-		-- install jsregexp (optional!).
-		build = "make install_jsregexp",
-		event = "InsertEnter",
+		"hrsh7th/nvim-cmp",
+		commit = "cfafe0a1ca8933f7b7968a287d39904156f2c57d",
+		dependencies = {
+			{
+				"hrsh7th/cmp-nvim-lsp",
+				commit = "0e6b2ed705ddcff9738ec4ea838141654f12eeef",
+			},
+			{
+				"hrsh7th/cmp-buffer",
+				commit = "3022dbc9166796b644a841a02de8dd1cc1d311fa",
+			},
+			{
+				"hrsh7th/cmp-path",
+				commit = "91ff86cd9c29299a64f968ebb45846c485725f23",
+			},
+			{
+				"hrsh7th/cmp-cmdline",
+				commit = "23c51b2a3c00f6abc4e922dbd7c3b9aca6992063",
+			},
+			{
+				"saadparwaiz1/cmp_luasnip",
+				commit = "18095520391186d634a0045dacaa346291096566",
+			},
+			{
+				"L3MON4D3/LuaSnip",
+				commit = "9bff06b570df29434a88f9c6a9cea3b21ca17208",
+				event = "InsertEnter",
+				dependencies = {
+					"rafamadriz/friendly-snippets",
+					commit = "a6f7a1609addb4e57daa6bedc300f77f8d225ab7",
+				},
+			},
+			{
+				"hrsh7th/cmp-nvim-lua",
+				commit = "f3491638d123cfd2c8048aefaf66d246ff250ca6",
+			},
+		},
+		event = {
+			"InsertEnter",
+			"CmdlineEnter",
+		},
 	},
-	{ "rafamadriz/friendly-snippets", commit = "781af8c404ce351e999b5102b9724ee847f3ad18", event = "InsertEnter" }, -- a bunch of snippets to use
+
+	-- copilot
+	{
+		"zbirenbaum/copilot.lua",
+		cmd = "Copilot",
+		event = "InsertEnter",
+		config = function()
+			require("copilot").setup({
+				suggestion = {
+					auto_trigger = true,
+				},
+			})
+		end,
+	},
 
 	-- Telescope
 	{ "nvim-telescope/telescope.nvim", commit = "942fe5faef47b21241e970551eba407bc10d9547" },
