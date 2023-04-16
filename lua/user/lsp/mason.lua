@@ -10,6 +10,7 @@ local servers = {
 	--[[ "elixirls", ]]
 	"tsserver",
 	"pyright",
+  "pylsp",
 	"rust_analyzer",
 }
 

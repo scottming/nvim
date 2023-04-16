@@ -58,6 +58,11 @@ return require("lazy").setup({
 	{ dir = "~/Code/lspsaga-mini.nvim", event = "VeryLazy" },
 	{ "tamago324/nlsp-settings.nvim", commit = "7be82f345f82f304ae817e3910d001aa96be01b1", event = "VeryLazy" }, -- language server settings defined in json for
 	{ "jose-elias-alvarez/null-ls.nvim", commit = "456cd2754c56c991c5e4df60a807d054c1bc7148", event = "VeryLazy" }, -- for formatters and linters
+	{
+		"RRethy/vim-illuminate",
+		commit = "d6ca7f77eeaf61b3e6ce9f0e5a978d606df44298",
+		event = "VeryLazy",
+	},
 
 	-- Debug
 	{ "mfussenegger/nvim-dap", commit = "c1bfcd89ef440a44d02ade7e71befb1e5aa358ca", event = "VeryLazy" },
@@ -230,7 +235,11 @@ return require("lazy").setup({
 	},
 
 	-- Telescope
-	{ "nvim-telescope/telescope.nvim", commit = "942fe5faef47b21241e970551eba407bc10d9547" },
+	{ "nvim-telescope/telescope.nvim", version = "v0.1.1" },
+	{
+		"nvim-telescope/telescope-fzf-native.nvim",
+		build = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build",
+	},
 
 	-- Git
 	{
