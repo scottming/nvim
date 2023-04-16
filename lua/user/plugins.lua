@@ -54,8 +54,8 @@ return require("lazy").setup({
 	{ "williamboman/mason.nvim", commit = "698cd0c4f10480991e665f31977650858d625af1", event = "VeryLazy" },
 	{ "williamboman/mason-lspconfig.nvim", commit = "a81503f0019942111fe464209237f8b4e85f4687", event = "VeryLazy" },
 	--[[ { "glepnir/lspsaga.nvim",  event = "VeryLazy" }, ]]
-	{ dir = "~/Code/lspsaga.nvim", event = "VeryLazy" },
-	{ dir = "~/Code/lspsaga-mini.nvim", event = "VeryLazy" },
+	{ dir = "~/Code/lspsaga.nvim", event = "LspAttach" },
+	{ dir = "~/Code/lspsaga-mini.nvim", event = "LspAttach" },
 	{ "tamago324/nlsp-settings.nvim", commit = "7be82f345f82f304ae817e3910d001aa96be01b1", event = "VeryLazy" }, -- language server settings defined in json for
 	{ "jose-elias-alvarez/null-ls.nvim", commit = "456cd2754c56c991c5e4df60a807d054c1bc7148", event = "VeryLazy" }, -- for formatters and linters
 	{
@@ -88,11 +88,12 @@ return require("lazy").setup({
 		config = function()
 			require("symbols-outline").setup()
 		end,
-		event = { "BufReadPost", "BufNewFile" },
+		evetn = { "LspAttach" },
+		--[[ event = { "BufReadPost", "BufNewFile" }, ]]
 	},
 
 	-- Test
-
+	{ "rcarriga/nvim-notify", commit = "50d037041ada0895aeba4c0215cde6d11b7729c4" },
 	{
 		dir = "~/Code/neotest",
 		--[[ "nvim-neotest/neotest", ]]
@@ -108,7 +109,7 @@ return require("lazy").setup({
 			--[[ "rouge8/neotest-rust", ]]
 			--[[ "haydenmeade/neotest-jest", ]]
 		},
-		event = "VeryLazy",
+		event = "LspAttach",
 	},
 
 	{ dir = "~/Code/neotest-elixir", event = "BufReadPre **/test/**/*_test.exs" },

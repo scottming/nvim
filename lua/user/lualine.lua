@@ -43,6 +43,58 @@ local branch = {
 	icon = "",
 }
 
+local test_status_counts = {
+	function()
+		local ok, neotest = pcall(require, "neotest")
+		if not ok then
+			return ""
+		end
+		local adapters = neotest.state.adapter_ids()
+
+		if #adapters > 0 then
+			local status = neotest.state.status_counts(adapters[1], {
+				buffer = vim.api.nvim_buf_get_name(0),
+			})
+			local sections = {
+				{
+					sign = "",
+					count = status.failed,
+					base = "NeotestFailed",
+					tag = "test_fail",
+				},
+				{
+					sign = "",
+					count = status.running,
+					base = "NeotestRunning",
+					tag = "test_running",
+				},
+				{
+					sign = "",
+					count = status.passed,
+					base = "NeotestPassed",
+					tag = "test_pass",
+				},
+				{
+					sign = "󰙨",
+					count = status.total,
+					base = "NeotestTotal",
+					tag = "test_total",
+				},
+			}
+
+			local result = {}
+			for _, section in ipairs(sections) do
+				if section.count > 0 then
+					table.insert(result, "%#" .. section.base .. "#" .. section.sign .. " " .. section.count)
+				end
+			end
+
+			return table.concat(result, " ")
+		end
+		return ""
+	end,
+}
+
 local location = {
 	"location",
 	padding = 0,
@@ -74,7 +126,7 @@ lualine.setup({
 	sections = {
 		lualine_a = { diagnostics },
 		lualine_b = { mode },
-		lualine_c = {},
+		lualine_c = { test_status_counts },
 		-- lualine_x = { "encoding", "fileformat", "filetype" },
 		lualine_x = { diff, spaces, "encoding", filetype },
 		lualine_y = { location },

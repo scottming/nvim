@@ -3,6 +3,32 @@ if not status_ok then
 	return
 end
 
+_G.toggle_watch = function()
+	local watch = require("neotest").watch
+	local run = require("neotest").run
+	local tree = run.get_tree_from_args({}, true)
+	if not tree then
+		print("no tree exists")
+		return
+	end
+
+	local pos_id = tree:data().id
+	local test
+	if type(pos_id) == "string" then
+		test = string.match(pos_id, "::(.*)")
+	else
+		test = pos_id
+	end
+
+	if watch.is_watching(pos_id) then
+		watch.stop()
+		require("notify")("Stoped watching: " .. test, "warn", { title = "neotest" })
+	else
+		watch.watch()
+		require("notify")("Start watching: " .. test, "info", { title = "neotest" })
+	end
+end
+
 local setup = {
 	plugins = {
 		marks = true, -- shows a list of your marks on ' and `
@@ -234,20 +260,21 @@ local mappings = {
 
 	u = {
 		name = "TestFile",
-		t = { "<cmd>w|TestNearest<cr>", "Test Nearest" },
-		T = { "<cmd>w|TestFile<cr>", "Test File" },
-		l = { "<cmd>w|TestLast<cr>", "Run the last test" },
+		t = { "<cmd>TestNearest<cr>", "Test Nearest" },
+		T = { "<cmd>TestFile<cr>", "Test File" },
+		l = { "<cmd>TestLast<cr>", "Run the last test" },
 		g = { "<cmd>TestVisit<cr>", "Visit the last test" },
 	},
 	t = {
 		name = "Neotest",
-		t = { "<cmd>w|lua require('neotest').run.run()<cr>", "Test under cursor" },
+		t = { "<cmd>lua require('neotest').run.run()<cr>", "Test under cursor" },
 		T = {
-			'<cmd>w|lua require("neotest").run.run({vim.fn.expand("%")})<cr>',
+			'<cmd>lua require("neotest").run.run({vim.fn.expand("%")})<cr>',
 			"Test File",
 		},
-		l = { '<cmd>w|lua require("neotest").run.run_last()<cr>', "Run the last test" },
+		l = { '<cmd>lua require("neotest").run.run_last()<cr>', "Run the last test" },
 		o = { '<cmd>lua require("neotest").output.open({ enter = true })<cr>', "Show neotest output" },
+		w = { "<cmd>lua toggle_watch()<cr>", "Toggle neotest watch" },
 		s = { '<cmd>lua require("neotest").summary.toggle()<cr>', "Toggle neotest summary" },
 		c = {
 			'<cmd>lua require("user.telescope.neotest").strategies(require("telescope.themes").get_dropdown({}))<cr>',

@@ -3,6 +3,8 @@ if not status_ok then
 	return
 end
 
+--[[ local logger = require("neotest.logging") ]]
+
 neotest.setup({
 	adapters = {
 		require("neotest-python")({
@@ -22,6 +24,20 @@ neotest.setup({
 		--[[ 	end, ]]
 		--[[ }), ]]
 	},
+	--[[ consumers = { ]]
+	--[[ 	notify = function(client) ]]
+	--[[ 		client.listeners.results = function(adapter_id, results, partial) ]]
+	--[[ 			-- Partial results can be very frequent ]]
+	--[[ 			if partial then ]]
+	--[[ 				return ]]
+	--[[ 			end ]]
+	--[[]]
+	--[[ 			logger.warn("test results", results) ]]
+	--[[ 			require("notify")("Test completed", "error", { title = "greet the world" }) ]]
+	--[[ 		end ]]
+	--[[ 		return {} ]]
+	--[[ 	end, ]]
+	--[[ }, ]]
 
 	summary = {
 		mappings = {
@@ -32,16 +48,7 @@ neotest.setup({
 
 	watch = {
 		enabled = true,
-		symbol_queries = {
-			elixir = [[
-      ;; query
-      (call (identifier) @_func_name
-        (arguments (alias) @symbol)
-        (#match? @_func_name "^(alias|require|import|use)")
-        (#gsub! @symbol ".*%.(.*)" "%1")
-      )
-    ]],
-		},
+		symbol_queries = {},
 	},
 
 	output_panel = {
