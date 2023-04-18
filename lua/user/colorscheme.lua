@@ -1,12 +1,8 @@
-vim.cmd([[
-try
-  colorscheme dracula_pro_buffy
-catch /^Vim\%((\a\+)\)\=:E185/
-  colorscheme default
-  set background=dark
-endtry
-]])
+local M = {
+	{ "navarasu/onedark.nvim", lazy = false, priority = 800 },
+	{ dir = "~/Code/dracula_pro", lazy = false, priority = 1000 },
+}
 
--- only for onedark
-require("onedark").setup({ style = "cool" })
-require("onedark").load()
+M.name = "dracula_pro_buffy"
+
+return M

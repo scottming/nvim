@@ -1,20 +1,5 @@
-P = function(v)
-	print(vim.inspect(v))
-	return v
-end
-
-RELOAD = function(...)
-	return require("plenary.reload").reload_module(...)
-end
-
-R = function(name)
-	RELOAD(name)
-	return require(name)
-end
-
 local M = {}
 
--- Just make the behavor of win_up and win_down more like Vscode
 M.win_up = function()
 	local last_focus = vim.g.last_focus_win_number
 	-- when there is a focus and the focus is not the current window

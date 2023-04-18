@@ -1,83 +1,69 @@
-local status_ok, neotest = pcall(require, "neotest")
-if not status_ok then
-	return
+local M = {
+	dir = "~/Code/neotest",
+	--[[ "nvim-neotest/neotest", ]]
+	--[[ version = "v2.8.0", ]]
+	commit = "95f95e346090ad96c657f021ad4d47f93c915598",
+	dependencies = {
+		"nvim-lua/plenary.nvim",
+		"nvim-treesitter/nvim-treesitter",
+		"antoinemadec/FixCursorHold.nvim",
+		-- Adpters
+		"nvim-neotest/neotest-python",
+		"nvim-neotest/neotest-plenary",
+		{ dir = "~/Code/neotest-elixir" },
+	},
+	event = "LspAttach",
+}
+
+function M.config()
+	local neotest = require("neotest")
+
+	neotest.setup({
+		adapters = {
+			require("neotest-python")({
+				dap = { justMyCode = false },
+			}),
+			require("neotest-elixir"),
+			require("neotest-plenary"),
+		},
+		summary = {
+			mappings = {
+				next_failed = "]e",
+				prev_failed = "[e",
+			},
+		},
+		watch = {
+			enabled = true,
+			symbol_queries = {},
+		},
+		output_panel = {
+			enabled = false,
+		},
+		quickfix = {
+			enabled = false,
+		},
+		log_level = vim.log.levels.INFO, -- default is WARN
+	})
+
+	local group = vim.api.nvim_create_augroup("NeotestConfig", {})
+	vim.api.nvim_create_autocmd("FileType", {
+		pattern = "neotest-output",
+		group = group,
+		callback = function(opts)
+			vim.keymap.set("n", "q", function()
+				pcall(vim.api.nvim_win_close, 0, true)
+			end, {
+				buffer = opts.buf,
+			})
+		end,
+	})
+
+	-- for vim test
+	vim.g["test#strategy"] = "neovim"
+	-- vim.g["test#neovim#start_normal"] = 1
+
+	-- for ablish highlight integration
+	vim.g["traces_abolish_integration"] = 1
 end
 
---[[ local logger = require("neotest.logging") ]]
-
-neotest.setup({
-	adapters = {
-		require("neotest-python")({
-			dap = { justMyCode = false },
-		}),
-		require("neotest-elixir"),
-		require("neotest-plenary"),
-		--[[ require("neotest-rust")({ ]]
-		--[[ 	args = { "--no-capture" }, ]]
-		--[[ }), ]]
-		--[[ require("neotest-jest")({ ]]
-		--[[ 	jestCommand = "npm test --", ]]
-		--[[ 	jestConfigFile = "custom.jest.config.ts", ]]
-		--[[ 	env = { CI = true }, ]]
-		--[[ 	cwd = function(path) ]]
-		--[[ 		return vim.fn.getcwd() ]]
-		--[[ 	end, ]]
-		--[[ }), ]]
-	},
-	--[[ consumers = { ]]
-	--[[ 	notify = function(client) ]]
-	--[[ 		client.listeners.results = function(adapter_id, results, partial) ]]
-	--[[ 			-- Partial results can be very frequent ]]
-	--[[ 			if partial then ]]
-	--[[ 				return ]]
-	--[[ 			end ]]
-	--[[]]
-	--[[ 			logger.warn("test results", results) ]]
-	--[[ 			require("notify")("Test completed", "error", { title = "greet the world" }) ]]
-	--[[ 		end ]]
-	--[[ 		return {} ]]
-	--[[ 	end, ]]
-	--[[ }, ]]
-
-	summary = {
-		mappings = {
-			next_failed = "]e",
-			prev_failed = "[e",
-		},
-	},
-
-	watch = {
-		enabled = true,
-		symbol_queries = {},
-	},
-
-	output_panel = {
-		enabled = false,
-	},
-
-	quickfix = {
-		enabled = false,
-	},
-
-	log_level = vim.log.levels.INFO, -- default is WARN
-})
-
-local group = vim.api.nvim_create_augroup("NeotestConfig", {})
-vim.api.nvim_create_autocmd("FileType", {
-	pattern = "neotest-output",
-	group = group,
-	callback = function(opts)
-		vim.keymap.set("n", "q", function()
-			pcall(vim.api.nvim_win_close, 0, true)
-		end, {
-			buffer = opts.buf,
-		})
-	end,
-})
-
--- for vim test
-vim.g["test#strategy"] = "neovim"
--- vim.g["test#neovim#start_normal"] = 1
-
--- for ablish highlight integration
-vim.g["traces_abolish_integration"] = 1
+return M

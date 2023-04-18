@@ -1,39 +1,44 @@
-local status_ok, configs = pcall(require, "nvim-treesitter.configs")
-if not status_ok then
-	return
+local M = {
+	"nvim-treesitter/nvim-treesitter",
+	commit = "226c1475a46a2ef6d840af9caa0117a439465500",
+	event = "BufReadPost",
+	dependencies = {
+		{
+			"JoosepAlviste/nvim-ts-context-commentstring",
+			event = "VeryLazy",
+			commit = "729d83ecb990dc2b30272833c213cc6d49ed5214",
+		},
+		{
+			"kyazdani42/nvim-web-devicons",
+			event = "VeryLazy",
+			commit = "0568104bf8d0c3ab16395433fcc5c1638efc25d4",
+		},
+	},
+}
+
+function M.config()
+	local configs = require("nvim-treesitter.configs")
+
+	configs.setup({
+		ensure_installed = { "lua", "markdown", "markdown_inline", "bash", "python", "elixir", "heex", "query" },
+		-- ensure_installed = "all", -- one of "all" or a list of languages
+		ignore_install = { "" }, -- List of parsers to ignore installing
+		sync_install = false, -- install languages synchronously (only applied to `ensure_installed`)
+
+		highlight = {
+			enable = true, -- false will disable the whole extension
+			disable = { "css" }, -- list of language that will be disabled
+		},
+		autopairs = {
+			enable = true,
+		},
+		indent = { enable = true, disable = { "python", "css" } },
+
+		context_commentstring = {
+			enable = true,
+			enable_autocmd = false,
+		},
+	})
 end
 
-configs.setup({
-	-- one of "all", "maintained" (parsers with maintainers), or a list of languages
-	ensure_installed = {
-		"eex",
-		"heex",
-		"elixir",
-		"markdown",
-		"markdown_inline",
-		"lua",
-		"html",
-		"javascript",
-		"typescript",
-		"rust",
-		"query",
-	},
-	sync_install = false, -- install languages synchronously (only applied to `ensure_installed`)
-	ignore_install = { "haskell" }, -- List of parsers to ignore installing
-	autopairs = {
-		enable = true,
-	},
-	highlight = {
-		enable = true, -- false will disable the whole extension
-		disable = { "" }, -- list of language that will be disabled
-		additional_vim_regex_highlighting = true,
-	},
-	indent = { enable = true, disable = { "yaml" } },
-	context_commentstring = {
-		enable = true,
-		enable_autocmd = false,
-	},
-	playground = {
-		enable = true,
-	},
-})
+return M

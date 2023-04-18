@@ -1,7 +1,25 @@
-local status_ok, which_key = pcall(require, "which-key")
-if not status_ok then
-	return
-end
+local M = {
+	"folke/which-key.nvim",
+	commit = "5224c261825263f46f6771f1b644cae33cd06995",
+	event = "VeryLazy",
+	dependencies = {
+		{
+			"ThePrimeagen/harpoon",
+			commit = "f7040fd0c44e7a4010369136547de5604b9c22a1",
+			dependencies = "nvim-lua/plenary.nvim",
+			event = "VeryLazy",
+		},
+		{
+			"scottming/symbols-outline.nvim",
+			--[[ commit = "e459f3262c4c79a62e654ada0fbbb9758313c968", ]]
+			branch = "master",
+			config = function()
+				require("symbols-outline").setup()
+			end,
+			event = { "LspAttach" },
+		},
+	},
+}
 
 _G.toggle_watch = function()
 	local watch = require("neotest").watch
@@ -103,6 +121,7 @@ local opts = {
 	noremap = true, -- use `noremap` when creating keymaps
 	nowait = true, -- use `nowait` when creating keymaps
 }
+
 local vopts = {
 	mode = "v", -- VISUAL mode
 	prefix = "<leader>",
@@ -111,6 +130,7 @@ local vopts = {
 	noremap = true, -- use `noremap` when creating keymaps
 	nowait = true, -- use `nowait` when creating keymaps
 }
+
 -- NOTE: Prefer using : over <cmd> as the latter avoids going back in normal-mode.
 -- see https://neovim.io/doc/user/map.html#:map-cmd
 local vmappings = {
@@ -125,8 +145,8 @@ local mappings = {
 	["a"] = { "<cmd>SymbolsOutline<cr>", "Symbols Outline" },
 	["e"] = { "<cmd>NvimTreeToggle<cr>", "Explorer" },
 	["w"] = { "<cmd>w!<CR>", "Save" },
-	["q"] = { "<cmd>q!|lua require('lspsaga-mini.definition').clean_ctx()<CR>", "Quit" },
-	--[[ ["q"] = { "<cmd>q!<CR>", "Quit" }, ]]
+	-- ["q"] = { "<cmd>q!|lua require('lspsaga-mini.definition').clean_ctx()<CR>", "Quit" },
+	["q"] = { "<cmd>q!<CR>", "Quit" },
 	["/"] = { "<cmd>lua require('Comment.api').toggle.linewise()<CR>", "Comment" },
 	["c"] = { "<cmd>Bdelete!<CR>", "Close Buffer" },
 	["f"] = {
@@ -277,7 +297,7 @@ local mappings = {
 		w = { "<cmd>lua toggle_watch()<cr>", "Toggle neotest watch" },
 		s = { '<cmd>lua require("neotest").summary.toggle()<cr>', "Toggle neotest summary" },
 		c = {
-			'<cmd>lua require("user.telescope.neotest").strategies(require("telescope.themes").get_dropdown({}))<cr>',
+			'<cmd>lua require("utils.telescope.neotest").strategies(require("telescope.themes").get_dropdown({}))<cr>',
 			"Config the strategies",
 		},
 	},
@@ -297,27 +317,11 @@ local mappings = {
 	},
 }
 
--- only for Harpoon
---[[ local group = vim.api.nvim_create_augroup("HarpoonConfig", {}) ]]
---[[ vim.api.nvim_create_autocmd("FileType", { ]]
---[[ 	pattern = "harpoon", ]]
---[[ 	group = group, ]]
---[[ 	callback = function(opts) ]]
---[[ 		vim.keymap.set("n", "o", "<Cmd>lua require('harpoon.ui').select_menu_item()<CR>", { ]]
---[[ 			buffer = opts.buf, ]]
---[[ 		}) ]]
---[[ 		vim.keymap.set("n", "1", "<Cmd>lua require('harpoon.ui').nav_file(1)<CR>", { ]]
---[[ 			buffer = opts.buf, ]]
---[[ 		}) ]]
---[[ 		vim.keymap.set("n", "2", "<Cmd>lua require('harpoon.ui').nav_file(2)<CR>", { ]]
---[[ 			buffer = opts.buf, ]]
---[[ 		}) ]]
---[[ 		vim.keymap.set("n", "3", "<Cmd>lua require('harpoon.ui').nav_file(3)<CR>", { ]]
---[[ 			buffer = opts.buf, ]]
---[[ 		}) ]]
---[[ 	end, ]]
---[[ }) ]]
+function M.config()
+	local which_key = require("which-key")
+	which_key.setup(setup)
+	which_key.register(mappings, opts)
+	which_key.register(vmappings, vopts)
+end
 
-which_key.setup(setup)
-which_key.register(mappings, opts)
-which_key.register(vmappings, vopts)
+return M

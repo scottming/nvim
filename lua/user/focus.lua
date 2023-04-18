@@ -1,12 +1,18 @@
-local status_ok, focus = pcall(require, "focus")
-if not status_ok then
-	return
+local M = {
+	"beauwilliams/focus.nvim",
+	commit = "3d9df42aa4f9b572348418207b752f81adea09a5",
+	event = "VeryLazy",
+}
+
+function M.config()
+	local focus = require("focus")
+	focus.setup({
+		excluded_filetypes = { "toggleterm", "NvimTree" },
+		cursorline = false,
+		number = false,
+		signcolumn = false,
+		colorcolumn = { enable = false, width = 80 },
+	})
 end
 
-focus.setup({
-	excluded_filetypes = { "toggleterm", "NvimTree" },
-	cursorline = false,
-	number = false,
-	signcolumn = false,
-	colorcolumn = { enable = true, width = tonumber(vim.o.colorcolumn) },
-})
+return M

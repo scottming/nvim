@@ -21,8 +21,8 @@ vim.g.maplocalleader = " "
 -- Normal --
 -- Better window navigation
 keymap("n", "<C-h>", "<C-w>h", opts)
-keymap("n", "<C-j>", "<cmd>lua require('user.util').win_down()<CR>", opts)
-keymap("n", "<C-k>", "<cmd>lua require('user.util').win_up()<CR>", opts)
+keymap("n", "<C-j>", "<cmd>lua require('utils').win_down()<CR>", opts)
+keymap("n", "<C-k>", "<cmd>lua require('utils').win_up()<CR>", opts)
 keymap("n", "<C-l>", "<C-w>l", opts)
 -- I use q when there is a lspsaga hover window
 keymap("n", "q", "<Nop>", opts)

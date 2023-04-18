@@ -1,7 +1,4 @@
-local status_ok, lualine = pcall(require, "lualine")
-if not status_ok then
-	return
-end
+local M = { "nvim-lualine/lualine.nvim", commit = "e99d733e0213ceb8f548ae6551b04ae32e590c80", event = "VeryLazy" }
 
 local hide_in_width = function()
 	return vim.fn.winwidth(0) > 80
@@ -37,11 +34,11 @@ local filetype = {
 	icon = nil,
 }
 
-local branch = {
-	"branch",
-	icons_enabled = true,
-	icon = "",
-}
+-- local branch = {
+-- 	"branch",
+-- 	icons_enabled = true,
+-- 	icon = "",
+-- }
 
 local test_status_counts = {
 	function()
@@ -114,33 +111,39 @@ local spaces = function()
 	return "spaces: " .. vim.api.nvim_buf_get_option(0, "shiftwidth")
 end
 
-lualine.setup({
-	options = {
-		icons_enabled = true,
-		theme = "auto",
-		component_separators = { left = "", right = "" },
-		section_separators = { left = "", right = "" },
-		disabled_filetypes = { "alpha", "dashboard", "NvimTree", "Outline" },
-		always_divide_middle = true,
-	},
-	sections = {
-		lualine_a = { diagnostics },
-		lualine_b = { mode },
-		lualine_c = { test_status_counts },
-		-- lualine_x = { "encoding", "fileformat", "filetype" },
-		--[[ lualine_x = { diff, spaces, "encoding", filetype }, ]]
-		lualine_x = { diff, spaces, filetype },
-		lualine_y = { location },
-		lualine_z = { progress },
-	},
-	inactive_sections = {
-		lualine_a = {},
-		lualine_b = {},
-		lualine_c = { "filename" },
-		lualine_x = { "location" },
-		lualine_y = {},
-		lualine_z = {},
-	},
-	tabline = {},
-	extensions = {},
-})
+function M.config()
+	local lualine = require("lualine")
+
+	lualine.setup({
+		options = {
+			icons_enabled = true,
+			theme = "auto",
+			component_separators = { left = "", right = "" },
+			section_separators = { left = "", right = "" },
+			disabled_filetypes = { "alpha", "dashboard", "NvimTree", "Outline" },
+			always_divide_middle = true,
+		},
+		sections = {
+			lualine_a = { diagnostics },
+			lualine_b = { mode },
+			lualine_c = { test_status_counts },
+			-- lualine_x = { "encoding", "fileformat", "filetype" },
+			--[[ lualine_x = { diff, spaces, "encoding", filetype }, ]]
+			lualine_x = { diff, spaces, filetype },
+			lualine_y = { location },
+			lualine_z = { progress },
+		},
+		inactive_sections = {
+			lualine_a = {},
+			lualine_b = {},
+			lualine_c = { "filename" },
+			lualine_x = { "location" },
+			lualine_y = {},
+			lualine_z = {},
+		},
+		tabline = {},
+		extensions = {},
+	})
+end
+
+return M
