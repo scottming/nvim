@@ -55,9 +55,7 @@ M.setup = function()
 	-- action
 	vim.keymap.set("n", "<a-cr>", "<cmd>Lspsaga code_action<cr>", { silent = true })
 	vim.keymap.set("n", "<F15>", "<cmd>Lspsaga code_action<cr>", { silent = true })
-	vim.keymap.set("i", "<a-cr>", "<cmd>Lspsaga code_action<cr>", { silent = true })
 	-- Just for neovide
-	vim.keymap.set("n", "<M-cr>", "<cmd>Lspsaga code_action<cr>", { silent = true })
 
 	-- signature
 	vim.keymap.set("n", "gs", "<cmd>lua vim.lsp.buf.signature_help()<cr>", { silent = true })

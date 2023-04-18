@@ -231,6 +231,11 @@ return require("lazy").setup({
 				suggestion = {
 					auto_trigger = true,
 				},
+        panel = {
+          keymap = {
+            open = "<M-S-CR>",
+          }
+        }
 			})
 		end,
 	},

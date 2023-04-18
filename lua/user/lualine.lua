@@ -128,7 +128,8 @@ lualine.setup({
 		lualine_b = { mode },
 		lualine_c = { test_status_counts },
 		-- lualine_x = { "encoding", "fileformat", "filetype" },
-		lualine_x = { diff, spaces, "encoding", filetype },
+		--[[ lualine_x = { diff, spaces, "encoding", filetype }, ]]
+		lualine_x = { diff, spaces, filetype },
 		lualine_y = { location },
 		lualine_z = { progress },
 	},
