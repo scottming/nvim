@@ -10,11 +10,12 @@ M.servers = {
 	"lua_ls",
 	"html",
 	"cssls",
-	"emmet_ls",
+	-- "emmet_ls",
 	"tsserver",
 	"pyright",
 	"pylsp",
 	"rust_analyzer",
+	"zls",
 }
 
 return M

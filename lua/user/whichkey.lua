@@ -145,7 +145,6 @@ local mappings = {
 	["a"] = { "<cmd>SymbolsOutline<cr>", "Symbols Outline" },
 	["e"] = { "<cmd>NvimTreeToggle<cr>", "Explorer" },
 	["w"] = { "<cmd>w!<CR>", "Save" },
-	-- ["q"] = { "<cmd>q!|lua require('lspsaga-mini.definition').clean_ctx()<CR>", "Quit" },
 	["q"] = { "<cmd>q!<CR>", "Quit" },
 	["/"] = { "<cmd>lua require('Comment.api').toggle.linewise()<CR>", "Comment" },
 	["c"] = { "<cmd>Bdelete!<CR>", "Close Buffer" },

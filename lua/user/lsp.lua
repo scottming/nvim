@@ -6,9 +6,10 @@ local M = {
 		{
 			"hrsh7th/cmp-nvim-lsp",
 			commit = "0e6b2ed705ddcff9738ec4ea838141654f12eeef",
+			event = "LspAttach",
 		},
-		{ dir = "~/Code/lspsaga.nvim" },
-		{ dir = "~/Code/lspsaga-mini.nvim" },
+		{ dir = "~/Code/lspsaga.nvim", event = "LspAttach" },
+		{ "j-hui/fidget.nvim", event = "LspAttach", commit = "0ba1e16d07627532b6cae915cc992ecac249fb97" },
 	},
 }
 
@@ -82,7 +83,6 @@ local function lsp_keymaps(bufnr)
 	keymap(bufnr, "n", "gh", "<cmd>Lspsaga lsp_finder<CR>", opts)
 	keymap(bufnr, "n", "gp", "<cmd>Lspsaga peek_definition<CR>", opts)
 	keymap(bufnr, "n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
-	-- keymap(bufnr, "n", "gp", "<cmd>lua require('lspsaga-mini.definition'):peek_definition(1)<CR>", { silent = true })
 
 	-- hover
 	keymap(bufnr, "n", "K", "<cmd>Lspsaga hover_doc<CR>", { silent = true })
@@ -108,6 +108,22 @@ function M.config()
 	-- setup lspsaga and config diagnostic
 	setup_lspsaga()
 	config_diagnostic()
+	require("fidget").setup({
+		timer = {
+			spinner_rate = 125, -- frame rate of spinner animation, in ms
+			-- fidget_decay = 2000, -- how long to keep around empty fidget, in ms
+			fidget_decay = 1000,
+			-- task_decay = 1000, -- how long to keep around completed task, in ms
+			task_decay = 500,
+		},
+		sources = {
+			["null-ls"] = { ignore = true },
+		},
+	})
+
+	-- log
+	-- vim.lsp.set_log_level("debug")
+	require("vim.lsp.log").set_format_func(vim.inspect)
 
 	-- cmp
 	local cmp_nvim_lsp = require("cmp_nvim_lsp")
