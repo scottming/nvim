@@ -1,11 +1,13 @@
 local M = {
 	"nvim-telescope/telescope.nvim",
+	-- commit = "6258d50b09f9ae087317e392efe7c05a7323492d",
 	version = "v0.1.1",
 	event = "BufEnter",
 	dependencies = {
 		{ "nvim-lua/plenary.nvim", commit = "9ac3e9541bbabd9d73663d757e4fe48a675bb054" },
 		{
 			"nvim-telescope/telescope-fzf-native.nvim",
+			lazy = false,
 			build = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build",
 			commit = "580b6c48651cabb63455e97d7e131ed557b8c7e2",
 		},
