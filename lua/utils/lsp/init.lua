@@ -10,6 +10,7 @@ M.servers = {
 	"lua_ls",
 	"html",
 	"cssls",
+  -- "elixirls",
 	-- "emmet_ls",
 	"tsserver",
 	"pyright",

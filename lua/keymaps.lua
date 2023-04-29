@@ -47,6 +47,9 @@ keymap("n", "<S-h>", "<cmd>BufferLineCyclePrev<CR>", opts)
 keymap("n", "<leader>z", "<cmd>MaximizerToggle<CR>", opts)
 keymap("n", "<A-\\>", "<cmd>ToggleTermSendCurrentLine<CR> j", opts)
 
+vim.g.undotree_SetFocusWhenToggle = 1
+keymap("n", "<F5>", "<cmd>UndotreeToggle<CR>", opts)
+
 -- Move text up and down
 -- keymap("n", "<A-j>", "<Esc>:m .+1<CR>==gi", opts)
 -- keymap("n", "<A-k>", "<Esc>:m .-2<CR>==gi", opts)

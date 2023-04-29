@@ -11,4 +11,5 @@ return {
 	{ "moll/vim-bbye", commit = "25ef93ac5a87526111f43e5110675032dbcacf56", event = "VeryLazy" },
 	-- maximize the window by <leader>z
 	{ "szw/vim-maximizer", commit = "2e54952fe91e140a2e69f35f22131219fcd9c5f1", event = "VeryLazy" },
+	{ "mbbill/undotree", commit = "485f01efde4e22cb1ce547b9e8c9238f36566f21", event = "VeryLazy" },
 }

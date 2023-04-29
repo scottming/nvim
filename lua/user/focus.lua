@@ -7,7 +7,7 @@ local M = {
 function M.config()
 	local focus = require("focus")
 	focus.setup({
-		excluded_filetypes = { "toggleterm", "NvimTree" },
+		excluded_filetypes = { "toggleterm", "NvimTree", "undotree" },
 		cursorline = false,
 		number = false,
 		signcolumn = false,
