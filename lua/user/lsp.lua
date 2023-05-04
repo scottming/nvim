@@ -93,7 +93,7 @@ local function lsp_keymaps(bufnr)
 	-- Just for neovide
 
 	-- signature
-	keymap(bufnr, "n", "gs", "<cmd>lua vim.lsp.buf.signature_help()<cr>", { silent = true })
+	-- keymap(bufnr, "n", "gs", "<cmd>lua vim.lsp.buf.signature_help()<cr>", { silent = true })
 
 	-- rename
 	keymap(bufnr, "n", "gr", "<cmd>Lspsaga rename<CR>", { silent = true })

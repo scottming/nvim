@@ -10,3 +10,7 @@ vim.cmd("highlight! RenameBorder guifg=#9F70A9 guibg=none")
 -- #848b98
 vim.cmd([[highlight IndentBlanklineContextChar guifg=#7a818e gui=nocombine]])
 vim.cmd([[highlight IndentBlanklineContextStart guifg=#7a818e gui=nocombine]])
+
+-- vim.api.nvim_set_hl(0, "LeapMatch", { bold = true, bg = "#ff007c" })
+-- vim.api.nvim_set_hl(0, "LeapLabelPrimary", { bold = true, fg = "#ff007c" })
+vim.api.nvim_set_hl(0, "LeapBackdrop", { link = "Comment" })

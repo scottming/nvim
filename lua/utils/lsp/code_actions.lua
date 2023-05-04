@@ -12,12 +12,12 @@ local function eq_var_range(node_range, current_line_text)
 	return start_col == var_start_col and end_col == var_end_col
 end
 
-local function line_not_ends_with_do(current_line_text)
+local function is_not_def(current_line_text)
 	local trimed = current_line_text:match("^%s*(.-)%s*$")
-	return string.sub(trimed, -2) ~= "do"
+	return not (string.sub(trimed, -2) == "do" and string.sub(trimed, 0, 3) == "def")
 end
 
-local function line_not_starts_with_at_symbol(current_line_text)
+local function is_not_starts_with_at_symbol(current_line_text)
 	local trimed = string.match(current_line_text, "^%s*(.-)$")
 	return trimed:find("^@") == nil
 end
@@ -131,10 +131,10 @@ M.add_or_remove_dbg = function(context)
 		if
 			(
 				name == "local_function_call"
-				and line_not_starts_with_at_symbol(current_line_text)
-				and line_not_ends_with_do(current_line_text)
+				and is_not_starts_with_at_symbol(current_line_text)
+				and is_not_def(current_line_text)
 			)
-			or (name == "alias_call" and line_not_starts_with_at_symbol(current_line_text))
+			or (name == "alias_call" and is_not_starts_with_at_symbol(current_line_text))
 			or (name == "single_var" and eq_var_range(node_range, current_line_text))
 		then
 			table.insert(actions, action)
