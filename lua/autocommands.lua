@@ -32,6 +32,7 @@ vim.cmd([[
   augroup _elixir
     autocmd!
     autocmd FileType elixir setlocal indentkeys+=0=end
+    autocmd FileType elixir lua require('utils').set_iex()
     autocmd FileType eelixir setlocal indentkeys+=0=end
   augroup end
 ]])
