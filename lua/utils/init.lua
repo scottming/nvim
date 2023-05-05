@@ -22,17 +22,4 @@ M.win_down = function()
 	end
 end
 
-M.set_iex = function()
-	local neotest = require("neotest")
-	local neotest_config = require("neotest.config")
-
-	local cwd = vim.loop.cwd()
-	local default_strategy = neotest_config.projects[cwd].default_strategy
-	if default_strategy == "integrated" then
-		neotest.setup_project(cwd, {
-			default_strategy = "iex",
-		})
-	end
-end
-
 return M
