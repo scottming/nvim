@@ -5,5 +5,8 @@
     "workspace.checkThirdParty": false
   },
   "Lua.diagnostics.globals": ["vim", "pcall", "require", "set_test_keybindings"],
-    "workspace.checkThirdParty": false
+    "workspace.checkThirdParty": false,
+    "diagnostics.disable": [
+        "unused-local"
+    ]
 }

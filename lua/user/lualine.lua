@@ -40,6 +40,27 @@ local filetype = {
 -- 	icon = "",
 -- }
 
+local test_strategy = {
+	function()
+		local ok, neotest_config = pcall(require, "neotest.config")
+		if not ok then
+			return ""
+		end
+		local utils = require("utils")
+		local cwd = vim.loop.cwd()
+
+		if utils.is_elixir_test_file() then
+			if neotest_config.projects[cwd].default_strategy == "iex" then
+				return ""
+			else
+				return "󰳗"
+			end
+		else
+			return ""
+		end
+	end,
+}
+
 local test_status_counts = {
 	function()
 		local ok, neotest = pcall(require, "neotest")
@@ -130,7 +151,7 @@ function M.config()
 			-- lualine_x = { "encoding", "fileformat", "filetype" },
 			--[[ lualine_x = { diff, spaces, "encoding", filetype }, ]]
 			lualine_x = { diff, spaces, filetype },
-			lualine_y = { location },
+			lualine_y = { test_strategy, location },
 			lualine_z = { progress },
 		},
 		inactive_sections = {

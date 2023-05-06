@@ -22,4 +22,9 @@ M.win_down = function()
 	end
 end
 
+M.is_elixir_test_file = function()
+	local file_name = vim.fn.expand("%:t")
+	return file_name:match("_test%.exs$") ~= nil
+end
+
 return M

@@ -36,6 +36,7 @@ local function setup_lspsaga()
 			virtual_text = true,
 		},
 		ui = { kind = { ["Folder"] = "@comment" } },
+		symbol_in_winbar = { enable = false },
 	})
 end
 
