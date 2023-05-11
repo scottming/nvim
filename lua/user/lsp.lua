@@ -117,6 +117,9 @@ function M.config()
 			-- task_decay = 1000, -- how long to keep around completed task, in ms
 			task_decay = 250,
 		},
+		window = {
+			blend = 50,
+		},
 		sources = {
 			["null-ls"] = { ignore = true },
 		},

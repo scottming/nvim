@@ -21,11 +21,19 @@ local function dbg_registered()
 	return false
 end
 
-local function dbg_display()
+local function dbg_switch()
 	if dbg_registered() then
 		return " dbg"
 	else
 		return " dbg"
+	end
+end
+
+local function strategy_switch(strategy)
+	if strategy == "integrated" then
+		return " iex"
+	else
+		return "󰳗 integrated"
 	end
 end
 
@@ -63,7 +71,7 @@ M.strategies = function(opts)
 					{ "dbg", "dbg" },
 				},
 				entry_maker = function(entry)
-					local display = (entry[2] == "strategy") and "󱇖 " .. entry[1] or dbg_display()
+					local display = (entry[2] == "strategy") and strategy_switch(default_strategy) or dbg_switch()
 					return {
 						value = entry,
 						display = display,
