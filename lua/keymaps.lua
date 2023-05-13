@@ -93,3 +93,5 @@ keymap("c", "<A-Left>", "<S-Left>", opts)
 keymap("i", "<D-v>", "<C-r>+", opts)
 keymap("n", "<D-v>", '"+p', opts)
 keymap("c", "<D-v>", "<C-r>+", opts)
+
+keymap("s", "<C-g>", "<ESC>", opts)

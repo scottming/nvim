@@ -39,7 +39,7 @@ function M.config()
 	local cmp_autopairs = require("nvim-autopairs.completion.cmp")
 	local cmp = require("cmp")
 
-	cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done({}))
+	cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done({ filetypes = { elixir = false } }))
 end
 
 return M
