@@ -1,4 +1,4 @@
-local M = { dir = "~/Code/project.nvim", event = "BufEnter" }
+local M = { "ahmedkhalf/project.nvim", commit = "8c6bad7d22eef1b71144b401c9f74ed01526a4fb", event = "BufEnter" }
 
 local function is_mix_project()
 	local cwd = vim.fn.getcwd()
@@ -57,17 +57,6 @@ function M.config()
 		---@type string
 		---@usage path to store the project history for use in telescope
 		datapath = vim.fn.stdpath("data"),
-		-- use a callback to setup neotest default_strategy as 'iex' when change to mix project
-		after_changed_cwd_callback = function()
-			if is_mix_project() then
-				local neotest = require("neotest")
-				neotest.setup_project(vim.loop.cwd(), {
-					adapters = { require("neotest-elixir") },
-					default_strategy = "iex",
-				})
-				vim.notify("setup neotest default_strategy as `iex`")
-			end
-		end,
 	})
 
 	local tele_status_ok, telescope = pcall(require, "telescope")

@@ -13,7 +13,7 @@ M.servers = {
   -- "elixirls",
 	-- "emmet_ls",
 	"tsserver",
-	"pyright",
+	-- "pyright",
 	"pylsp",
 	"rust_analyzer",
 	"zls",
