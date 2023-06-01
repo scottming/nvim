@@ -112,6 +112,7 @@ function M.config()
 			["<C-y>"] = {
 				i = cmp.mapping.confirm({ select = true }),
 			},
+			["<C-Space>"] = cmp.mapping.complete(),
 			["<C-b>"] = cmp.mapping(cmp.mapping.scroll_docs(-1), { "i", "c" }),
 			["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(1), { "i", "c" }),
 			["<C-e>"] = cmp.mapping({

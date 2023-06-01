@@ -95,3 +95,5 @@ keymap("n", "<D-v>", '"+p', opts)
 keymap("c", "<D-v>", "<C-r>+", opts)
 
 keymap("s", "<C-g>", "<ESC>", opts)
+-- disable paste in select mode
+keymap("s", "p", "p", opts)
