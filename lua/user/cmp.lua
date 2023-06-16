@@ -61,6 +61,7 @@ local M = {
 
 function M.config()
 	local cmp = require("cmp")
+	local compare = require("cmp.config.compare")
 	local luasnip = require("luasnip")
 
 	require("luasnip/loaders/from_vscode").lazy_load()
@@ -175,6 +176,19 @@ function M.config()
 		experimental = {
 			ghost_text = false,
 			native_menu = false,
+		},
+		sorting = {
+			priority_weight = 2,
+			comparators = {
+				compare.offset,
+				compare.exact,
+				compare.score,
+				compare.recently_used,
+				compare.sort_text,
+				compare.kind,
+				compare.length,
+				compare.order,
+			},
 		},
 	})
 end
