@@ -21,32 +21,6 @@ local M = {
 	},
 }
 
-_G.toggle_watch = function()
-	local watch = require("neotest").watch
-	local run = require("neotest").run
-	local tree = run.get_tree_from_args({}, true)
-	if not tree then
-		print("no tree exists")
-		return
-	end
-
-	local pos_id = tree:data().id
-	local test
-	if type(pos_id) == "string" then
-		test = string.match(pos_id, "::(.*)")
-	else
-		test = pos_id
-	end
-
-	if watch.is_watching(pos_id) then
-		watch.stop()
-		require("notify")("Stoped watching: " .. test, "warn", { title = "neotest" })
-	else
-		watch.watch()
-		require("notify")("Start watching: " .. test, "info", { title = "neotest" })
-	end
-end
-
 local setup = {
 	plugins = {
 		marks = true, -- shows a list of your marks on ' and `
@@ -291,9 +265,10 @@ local mappings = {
 			'<cmd>lua require("neotest").run.run({vim.fn.expand("%")})<cr>',
 			"Test File",
 		},
+		w = { '<cmd>lua require("neotest").watch.toggle()<cr>', "Toggle neotest watch" },
+		W = { '<cmd>lua require("neotest").watch.toggle({vim.fn.expand("%")})<cr>', "Toggle neotest file watch" },
 		l = { '<cmd>lua require("neotest").run.run_last()<cr>', "Run the last test" },
 		o = { '<cmd>lua require("neotest").output.open({ enter = true })<cr>', "Show neotest output" },
-		w = { "<cmd>lua toggle_watch()<cr>", "Toggle neotest watch" },
 		s = { '<cmd>lua require("neotest").summary.toggle()<cr>', "Toggle neotest summary" },
 		c = {
 			'<cmd>lua require("utils.telescope.neotest").strategies(require("telescope.themes").get_dropdown({}))<cr>',

@@ -22,7 +22,9 @@ function M.config()
 			require("neotest-python")({
 				dap = { justMyCode = false },
 			}),
-			require("neotest-elixir"),
+			require("neotest-elixir")({
+				iex_shell_direction = "float",
+			}),
 			require("neotest-plenary"),
 		},
 		summary = {
