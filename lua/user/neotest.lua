@@ -25,7 +25,10 @@ function M.config()
 			require("neotest-elixir")({
 				iex_shell_direction = "float",
 			}),
-			require("neotest-plenary"),
+			require("neotest-plenary").setup({
+				-- "../utils/test_init.lua",
+				min_init = "~/.config/nvim/lua/utils/test_init.lua",
+			}),
 		},
 		summary = {
 			mappings = {
