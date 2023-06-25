@@ -53,7 +53,8 @@ local function config_diagnostic()
 	end
 
 	local config = {
-		-- disable virtual text
+		-- disable it, and if you really need them,
+		-- you can use `gl` to show the diagnostic float window.
 		virtual_text = false,
 		-- show signs
 		signs = {

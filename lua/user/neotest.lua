@@ -10,6 +10,7 @@ local M = {
 		"nvim-neotest/neotest-python",
 		"nvim-neotest/neotest-plenary",
 		{ dir = "~/Code/neotest-elixir" },
+		"rouge8/neotest-rust",
 	},
 	event = "LspAttach",
 }
@@ -21,6 +22,7 @@ function M.config()
 		adapters = {
 			require("neotest-python")({
 				dap = { justMyCode = false },
+				runner = "pytest",
 			}),
 			require("neotest-elixir")({
 				iex_shell_direction = "float",
@@ -28,6 +30,9 @@ function M.config()
 			require("neotest-plenary").setup({
 				-- "../utils/test_init.lua",
 				min_init = "~/.config/nvim/lua/utils/test_init.lua",
+			}),
+			require("neotest-rust")({
+				args = { "--no-capture" },
 			}),
 		},
 		summary = {
@@ -40,12 +45,16 @@ function M.config()
 			enabled = true,
 			symbol_queries = {},
 		},
+		output = {
+			short = true,
+		},
 		output_panel = {
 			enabled = false,
 		},
 		quickfix = {
 			enabled = false,
 		},
+
 		log_level = vim.log.levels.INFO, -- default is WARN
 	})
 
