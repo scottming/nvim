@@ -235,20 +235,6 @@ local mappings = {
 		f = { "<cmd>Telescope git_files<cr>", "Find File in project" },
 		r = { "<cmd>Telescope oldfiles <cr>", "  Recently used files" },
 		c = { ":e ~/.config/nvim/init.lua <CR>", "  Configuration" },
-		s = {
-			s = {
-				'<cmd>lua require("persistence").load()<cr>',
-				"Restore Session",
-			},
-			l = {
-				'<cmd>lua require("persistence").load({ last = true })<cr>',
-				"Restore Last Session",
-			},
-			d = {
-				'<cmd>lua require("persistence").stop()<cr>',
-				"Don't Save Current Session",
-			},
-		},
 	},
 
 	u = {
