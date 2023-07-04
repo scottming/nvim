@@ -15,8 +15,8 @@ M.servers = {
 	"tsserver",
 	-- "pyright",
 	"pylsp",
-	"rust_analyzer",
-	"zls",
+	-- "rust_analyzer",
+	-- "zls",
 }
 
 return M

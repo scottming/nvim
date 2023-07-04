@@ -1,10 +1,10 @@
 local M = {
 	"nvim-telescope/telescope.nvim",
 	-- commit = "6258d50b09f9ae087317e392efe7c05a7323492d",
-	version = "v0.1.1",
+	version = "v0.1.2",
 	event = "BufEnter",
 	dependencies = {
-		{ "nvim-lua/plenary.nvim", commit = "9ac3e9541bbabd9d73663d757e4fe48a675bb054" },
+		{ "nvim-lua/plenary.nvim", commit = "36aaceb6e93addd20b1b18f94d86aecc552f30c4" },
 		{
 			"nvim-telescope/telescope-fzf-native.nvim",
 			lazy = false,
