@@ -9,6 +9,7 @@ local M = {
 			event = "LspAttach",
 		},
 		{ dir = "~/Code/lspsaga.nvim", event = "LspAttach" },
+    { "nvimdev/lspsaga.nvim", event='LspAttach', commit = "4f075452c466df263e69ae142f6659dcf9324bf6"},
 		{ "j-hui/fidget.nvim", event = "LspAttach", commit = "0ba1e16d07627532b6cae915cc992ecac249fb97" },
 	},
 }
