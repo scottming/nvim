@@ -1,31 +1,5 @@
 local M = { "ahmedkhalf/project.nvim", commit = "8c6bad7d22eef1b71144b401c9f74ed01526a4fb", event = "BufEnter" }
 
-local function is_mix_project()
-	local cwd = vim.fn.getcwd()
-	local uv = vim.loop
-
-	local req = uv.fs_scandir(cwd)
-	if req == nil then
-		return false
-	end
-
-	local is_mix = false
-
-	while true do
-		local file = uv.fs_scandir_next(req)
-
-		if file == "mix.exs" then
-			is_mix = true
-		end
-
-		if file == nil then
-			break
-		end
-	end
-
-	return is_mix
-end
-
 function M.config()
 	local project = require("project_nvim")
 
@@ -51,7 +25,7 @@ function M.config()
 		show_hidden = false,
 		---@usage When set to false, you will get a message when project.nvim changes your directory.
 		-- When set to false, you will get a message when project.nvim changes your directory.
-		silent_chdir = false,
+		silent_chdir = true,
 		---@usage list of lsp client names to ignore when using **lsp** detection. eg: { "efm", ... }
 		ignore_lsp = { "lua_ls", "null-ls" },
 		---@type string
