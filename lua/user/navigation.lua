@@ -36,7 +36,7 @@ return {
 		config = function()
 			local focus = require("focus")
 			focus.setup({
-				excluded_filetypes = { "toggleterm", "NvimTree", "undotree" },
+				excluded_filetypes = { "toggleterm", "NvimTree", "undotree", "Trouble" },
 				cursorline = false,
 				number = false,
 				signcolumn = false,
