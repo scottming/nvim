@@ -1,7 +1,7 @@
 local M = {
 	"nvim-neotest/neotest",
-	--[[ version = "v2.8.0", ]]
-	commit = "e46eae5739c470aa011ee43108ea8a730736174e",
+	version = "v3.4.4",
+	-- commit = "e46eae5739c470aa011ee43108ea8a730736174e",
 	dependencies = {
 		"nvim-lua/plenary.nvim",
 		"nvim-treesitter/nvim-treesitter",
