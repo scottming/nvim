@@ -3,7 +3,7 @@ local configs = require("lspconfig.configs")
 
 local M = {
 	filetypes = { "elixir", "eelixir", "heex", "surface" },
-	cmd = { "/Users/scottming/Code/lexical/_build/dev/rel/lexical/start_lexical.sh" },
+	cmd = { "/Users/scottming/Code/lexical/_build/dev/package/lexical/bin/start_lexical.sh" },
 	settings = {},
 }
 
