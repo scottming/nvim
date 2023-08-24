@@ -1,3 +1,11 @@
+function _G.set_iex_strategy_after_delay()
+	vim.defer_fn(function()
+		if not _G.neotest_strategy_manually then
+			require("utils").set_iex_strategy()
+		end
+	end, 100)
+end
+
 vim.cmd([[
   augroup _general_settings
     autocmd!
@@ -34,6 +42,8 @@ vim.cmd([[
     autocmd FileType elixir setlocal indentkeys+=0=end
     autocmd FileType eelixir setlocal indentkeys+=0=end
     autocmd FileType elixir setlocal indentkeys-=0{
+    autocmd BufReadPost *.exs lua set_iex_strategy_after_delay()
+    autocmd DirChanged * lua if vim.bo.filetype == 'elixir' then set_iex_strategy_after_delay() end
   augroup end
 ]])
 

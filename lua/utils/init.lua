@@ -27,4 +27,13 @@ M.is_elixir_test_file = function()
 	return file_name:match("_test%.exs$") ~= nil
 end
 
+M.set_iex_strategy = function()
+	local neotest = require("neotest")
+	local cwd = vim.loop.cwd()
+	neotest.setup_project(cwd, {
+		adapters = { require("neotest-elixir") },
+		default_strategy = "iex",
+	})
+end
+
 return M

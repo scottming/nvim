@@ -37,11 +37,13 @@ local function strategy_switch(strategy)
 	end
 end
 
-local function config_neotest_strategy(cwd, strategy)
+local function config_neotest_strategy(strategy)
+	local cwd = vim.loop.cwd()
 	neotest.setup_project(cwd, {
 		adapters = { require("neotest-elixir") },
 		default_strategy = strategy,
 	})
+	_G.neotest_strategy_manually = true
 end
 
 local function toggle_dbg()
@@ -88,7 +90,7 @@ M.strategies = function(opts)
 
 					if kind == "strategy" then
 						local strategy = selection.value[1]
-						config_neotest_strategy(cwd, strategy)
+						config_neotest_strategy(strategy)
 						print("Configured " .. strategy .. " for: " .. cwd)
 					else
 						toggle_dbg()
