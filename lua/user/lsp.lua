@@ -8,8 +8,7 @@ local M = {
 			commit = "0e6b2ed705ddcff9738ec4ea838141654f12eeef",
 			event = "LspAttach",
 		},
-		{ dir = "~/Code/lspsaga.nvim", event = "LspAttach" },
-    { "nvimdev/lspsaga.nvim", event='LspAttach', commit = "4f075452c466df263e69ae142f6659dcf9324bf6"},
+		{ "nvimdev/lspsaga.nvim", event = "LspAttach", commit = "02544a10d81f1faf3022fd944dace1b8b7ef3956" },
 		{ "j-hui/fidget.nvim", event = "LspAttach", commit = "0ba1e16d07627532b6cae915cc992ecac249fb97" },
 	},
 }
@@ -83,7 +82,7 @@ local function lsp_keymaps(bufnr)
 	local keymap = vim.api.nvim_buf_set_keymap
 
 	-- finder and preview
-	keymap(bufnr, "n", "gh", "<cmd>Lspsaga lsp_finder<CR>", opts)
+	keymap(bufnr, "n", "gh", "<cmd>Lspsaga finder<CR>", opts)
 	keymap(bufnr, "n", "gp", "<cmd>Lspsaga peek_definition<CR>", opts)
 	keymap(bufnr, "n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
 

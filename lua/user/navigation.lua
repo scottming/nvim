@@ -29,19 +29,13 @@ return {
 		end,
 		event = "BufEnter",
 	},
-	{
-		"beauwilliams/focus.nvim",
-		commit = "3d9df42aa4f9b572348418207b752f81adea09a5",
-		event = "VeryLazy",
-		config = function()
-			local focus = require("focus")
-			focus.setup({
-				excluded_filetypes = { "toggleterm", "NvimTree", "undotree", "Trouble" },
-				cursorline = false,
-				number = false,
-				signcolumn = false,
-				colorcolumn = { enable = false, width = 80 },
-			})
-		end,
-	},
+	-- {
+	-- 	"nvim-focus/focus.nvim",
+	-- 	commit = "1e2752aa3233497a17640e6474dbd6b35aaeeb26",
+	-- 	event = "VeryLazy",
+	-- 	config = function()
+	-- 		local focus = require("focus")
+	-- 		focus.setup({})
+	-- 	end,
+	-- },
 }
