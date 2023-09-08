@@ -9,15 +9,6 @@ local M = {
 			dependencies = "nvim-lua/plenary.nvim",
 			event = "VeryLazy",
 		},
-		{
-			"scottming/symbols-outline.nvim",
-			--[[ commit = "e459f3262c4c79a62e654ada0fbbb9758313c968", ]]
-			branch = "master",
-			config = function()
-				require("symbols-outline").setup()
-			end,
-			event = { "LspAttach" },
-		},
 	},
 }
 
@@ -116,7 +107,7 @@ local vmappings = {
 }
 
 local mappings = {
-	["a"] = { "<cmd>SymbolsOutline<cr>", "Symbols Outline" },
+	["a"] = { "<cmd>Lspsaga outline<cr>", "Symbols Outline" },
 	["e"] = { "<cmd>NvimTreeToggle<cr>", "Explorer" },
 	["w"] = { "<cmd>w!<CR>", "Save" },
 	["q"] = { "<cmd>q!<CR>", "Quit" },
