@@ -114,7 +114,7 @@ local mappings = {
 	["/"] = { "<cmd>lua require('Comment.api').toggle.linewise()<CR>", "Comment" },
 	["c"] = { "<cmd>Bdelete!<CR>", "Close Buffer" },
 	["f"] = {
-		"<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown{previewer = false})<cr>",
+		'<cmd>lua require("fzf-lua").files({ fzf_opts = { ["--layout"] = "default" }, winopts = { height = 0.5 , preview = { hidden = "hidden" } }, })<CR>',
 		"Find files",
 	},
 	["F"] = { "<cmd>Telescope live_grep theme=ivy<cr>", "Find Text" },
