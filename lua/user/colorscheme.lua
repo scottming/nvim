@@ -8,8 +8,8 @@ local M = {
 	},
 }
 
--- M.name = "dracula_pro_buffy"
-M.name = "dracula_pro_morbius"
+M.name = "dracula_pro_buffy"
+-- M.name = "dracula_pro_morbius"
 -- M.name = "onedark"
 
 return M

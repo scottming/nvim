@@ -117,7 +117,7 @@ local mappings = {
 		'<cmd>lua require("fzf-lua").files({ fzf_opts = { ["--layout"] = "default" }, winopts = { height = 0.5 , preview = { hidden = "hidden" } }, })<CR>',
 		"Find files",
 	},
-	["F"] = { "<cmd>Telescope live_grep theme=ivy<cr>", "Find Text" },
+	["F"] = { "<cmd>FzfLua live_grep<cr>", "Find Text" },
 	["P"] = { "<cmd>lua require('telescope').extensions.projects.projects()<cr>", "Projects" },
 
 	b = {
