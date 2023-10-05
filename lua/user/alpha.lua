@@ -18,8 +18,16 @@ function M.config()
 
 	dashboard.section.header.val = logo
 	dashboard.section.buttons.val = {
-		dashboard.button("f", " " .. " Find file", ":Telescope find_files <CR>"),
-		dashboard.button("r", " " .. " Recent files", ":Telescope oldfiles <CR>"),
+		dashboard.button(
+			"f",
+			" " .. " Find file",
+			'<cmd>lua require("fzf-lua").files({ fzf_opts = { ["--layout"] = "default" }, winopts = { height = 0.5 , preview = { hidden = "hidden" } }, })<CR>'
+		),
+		dashboard.button(
+			"r",
+			" " .. " Recent files",
+			'<cmd>lua require("telescope.builtin").oldfiles({only_cwd=true})<cr>'
+		),
 		dashboard.button("p", " " .. " Find project", ":Telescope projects <CR>"),
 		dashboard.button("c", " " .. " Config", ":e $MYVIMRC <CR>"),
 		dashboard.button("l", "󰒲 " .. " Lazy", ":Lazy<CR>"),
