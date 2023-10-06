@@ -4,7 +4,7 @@ return {
 	dependencies = {
 		"MunifTanjim/nui.nvim",
 	},
-	commit = "7e358170cea2314d9768b3f63616e8fad186195e",
+	commit = "f77689c9b2436bcd70741a20311496233acb4fb9",
 	opts = {
 		lsp = {
 			progress = {
