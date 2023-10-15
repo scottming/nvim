@@ -8,7 +8,7 @@ local M = {
 			commit = "0e6b2ed705ddcff9738ec4ea838141654f12eeef",
 			event = "LspAttach",
 		},
-		{ "nvimdev/lspsaga.nvim", event = "LspAttach", commit = "798c1b650d541bb14492fb54d533673162fb848f" },
+		{ "nvimdev/lspsaga.nvim", event = "LspAttach", commit = "c66acbdf3dd10ab42219d270d1a6b9a096e85ff8" },
 		{ "j-hui/fidget.nvim", event = "LspAttach", commit = "0ba1e16d07627532b6cae915cc992ecac249fb97" },
 	},
 }
