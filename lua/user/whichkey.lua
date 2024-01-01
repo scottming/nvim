@@ -5,7 +5,7 @@ local M = {
 	dependencies = {
 		{
 			"ThePrimeagen/harpoon",
-			commit = "f7040fd0c44e7a4010369136547de5604b9c22a1",
+			commit = "ccae1b9bec717ae284906b0bf83d720e59d12b91",
 			dependencies = "nvim-lua/plenary.nvim",
 			event = "VeryLazy",
 		},

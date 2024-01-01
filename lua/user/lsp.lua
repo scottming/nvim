@@ -31,7 +31,7 @@ local function setup_lspsaga()
 			auto_refresh = true,
 		},
 		lightbulb = {
-			enable = false,
+			enable = true,
 			enable_in_insert = false,
 			virtual_text = true,
 		},
@@ -98,7 +98,7 @@ local function lsp_keymaps(bufnr)
 	-- keymap(bufnr, "n", "gs", "<cmd>lua vim.lsp.buf.signature_help()<cr>", { silent = true })
 
 	-- rename
-	keymap(bufnr, "n", "gr", "<cmd>Lspsaga rename<CR>", { silent = true })
+	keymap(bufnr, "n", "gr", "<cmd>lua vim.lsp.buf.rename()<CR>", { silent = true })
 
 	-- or use command
 	keymap(bufnr, "n", "]e", "<cmd>Lspsaga diagnostic_jump_next<CR>", { silent = true })
