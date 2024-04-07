@@ -8,7 +8,7 @@ local M = {
 			commit = "0e6b2ed705ddcff9738ec4ea838141654f12eeef",
 			event = "LspAttach",
 		},
-		{ "nvimdev/lspsaga.nvim", event = "LspAttach", commit = "c66acbdf3dd10ab42219d270d1a6b9a096e85ff8" },
+		{ "nvimdev/lspsaga.nvim", event = "LspAttach", commit = "a4d442896a9ff1f83ee3db965d81b659ebc977d5" },
 		{ "j-hui/fidget.nvim", event = "LspAttach", commit = "0ba1e16d07627532b6cae915cc992ecac249fb97" },
 	},
 }
@@ -31,7 +31,7 @@ local function setup_lspsaga()
 			auto_refresh = true,
 		},
 		lightbulb = {
-			enable = true,
+			enable = false,
 			enable_in_insert = false,
 			virtual_text = true,
 		},
