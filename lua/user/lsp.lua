@@ -159,63 +159,6 @@ function M.config()
 	require("utils.lsp.settings.lexical").load_lexical()
 
 	for _, server in pairs(require("utils.lsp").servers) do
-		if server == "lexical" then
-			local workspaceCaps = {
-				--
-				workspace = {
-					applyEdit = true,
-					configuration = true,
-					didChangeWatchedFiles = {
-						-- this is a really strange issue. In order to modify a setting in the workspace, I need to input the entire content of the workspace, otherwise, it won't take effect.
-						dynamicRegistration = true,
-						relativePatternSupport = true,
-					},
-					semanticTokens = {
-						refreshSupport = true,
-					},
-					symbol = {
-						dynamicRegistration = false,
-						hierarchicalWorkspaceSymbolSupport = true,
-						symbolKind = {
-							valueSet = {
-								1,
-								2,
-								3,
-								4,
-								5,
-								6,
-								7,
-								8,
-								9,
-								10,
-								11,
-								12,
-								13,
-								14,
-								15,
-								16,
-								17,
-								18,
-								19,
-								20,
-								21,
-								22,
-								23,
-								24,
-								25,
-								26,
-							},
-						},
-					},
-					workspaceEdit = {
-						resourceOperations = { "rename", "create", "delete" },
-					},
-					workspaceFolders = true,
-				},
-			}
-			capabilities = vim.tbl_deep_extend("force", capabilities, workspaceCaps)
-		end
-
 		Opts = {
 			on_attach = on_attach,
 			capabilities = capabilities,
