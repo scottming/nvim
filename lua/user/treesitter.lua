@@ -1,6 +1,6 @@
 local M = {
 	"nvim-treesitter/nvim-treesitter",
-	commit = "226c1475a46a2ef6d840af9caa0117a439465500",
+	version = "v0.9.2",
 	event = "BufReadPost",
 	dependencies = {
 		{
@@ -32,7 +32,7 @@ function M.config()
 			"typescript",
 			"rust",
 		},
-		auto_install = true,
+		-- auto_install = true,
 		-- ensure_installed = "all", -- one of "all" or a list of languages
 		ignore_install = { "" }, -- List of parsers to ignore installing
 		sync_install = false, -- install languages synchronously (only applied to `ensure_installed`)
