@@ -39,7 +39,7 @@ keymap("n", "<C-Down>", ":resize -5<CR>", opts)
 keymap("n", "<C-Left>", ":vertical resize -5<CR>", opts)
 keymap("n", "<C-Right>", ":vertical resize +5<CR>", opts)
 keymap("n", "_", "10<C-w><<CR>", opts)
-keymap("n", "+", "10<C-w>><CR>", opts)
+keymap("n", "=", "10<C-w>><CR>", opts)
 
 -- Navigate buffers
 keymap("n", "<S-l>", "<cmd>BufferLineCycleNext<CR>", opts)
