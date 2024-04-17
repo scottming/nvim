@@ -1,7 +1,7 @@
 local M = {
 	"nvim-telescope/telescope.nvim",
 	-- commit = "6258d50b09f9ae087317e392efe7c05a7323492d",
-	version = "v0.1.2",
+	version = "v0.1.6",
 	event = "BufEnter",
 	dependencies = {
 		{ "nvim-lua/plenary.nvim", commit = "36aaceb6e93addd20b1b18f94d86aecc552f30c4" },
