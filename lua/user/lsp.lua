@@ -17,14 +17,14 @@ local function setup_lspsaga()
 	local saga = require("lspsaga")
 
 	saga.setup({
-		show_outline = {
+		outline = {
 			win_position = "right",
 			--set special filetype win that outline window split.like NvimTree neotree
 			-- defx, db_ui
 			win_with = "",
 			win_width = 50,
 			auto_enter = false,
-			auto_preview = true,
+			auto_preview = false,
 			virt_text = "┃",
 			jump_key = "o",
 			-- auto refresh when change buffer

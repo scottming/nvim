@@ -44,6 +44,7 @@ vim.cmd([[
     autocmd FileType elixir setlocal indentkeys-=0{
     autocmd BufReadPost *.exs lua set_iex_strategy_after_delay()
     autocmd DirChanged * lua if vim.bo.filetype == 'elixir' then set_iex_strategy_after_delay() end
+    autocmd BufReadPost mix.exs lua vim.lsp.codelens.refresh()
   augroup end
 ]])
 
