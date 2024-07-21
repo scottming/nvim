@@ -44,6 +44,9 @@ vim.opt.linebreak = true
 -- for neovide
 vim.g.neovide_padding_top = 10
 
+-- for dracula
+vim.g.dracula_full_special_attrs_support = 1
+
 if vim.g.neovide then
 	vim.o.guifont = "MonoLisa Nerd Font:h12"
 	vim.g.neovide_input_macos_alt_is_meta = true
