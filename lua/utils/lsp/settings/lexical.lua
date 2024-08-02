@@ -22,7 +22,7 @@ function M.load_lexical()
 					if project and is_special_umbrella_project(project) then
 						return project
 					else
-						return lspconfig.util.root_pattern("mix.exs", ".git")(fname) or vim.loop.os_homedir()
+						return lspconfig.util.root_pattern("mix.exs", ".git")(fname)
 					end
 				end,
 			},
