@@ -219,4 +219,4 @@
 
 ((map
   (struct
-    (identifier) @module)))
+    (identifier) @keyword)))
