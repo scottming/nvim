@@ -155,9 +155,6 @@ function M.config()
 		-- require("illuminate").on_attach(client)
 	end
 
-	-- load custom lsp server to lspconfig first(i.e: lexical)
-	require("utils.lsp.settings.lexical").load_lexical()
-
 	for _, server in pairs(require("utils.lsp").servers) do
 		Opts = {
 			on_attach = on_attach,
