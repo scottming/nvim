@@ -108,7 +108,7 @@ local vmappings = {
 
 local mappings = {
 	["a"] = { "<cmd>Lspsaga outline<cr>", "Symbols Outline" },
-	["e"] = { "<cmd>NvimTreeToggle<cr>", "Explorer" },
+	["e"] = { "<cmd>Neotree toggle<cr>", "Explorer" },
 	["w"] = { "<cmd>w!<CR>", "Save" },
 	["q"] = { "<cmd>q!<CR>", "Quit" },
 	["/"] = { "<cmd>lua require('Comment.api').toggle.linewise()<CR>", "Comment" },
