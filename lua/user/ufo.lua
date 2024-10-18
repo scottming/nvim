@@ -4,7 +4,7 @@ local M = {
 		"kevinhwang91/promise-async",
 		"nvim-treesitter/nvim-treesitter",
 	},
-	commit = "1b5f2838099f283857729e820cc05e2b19df7a2c",
+	commit = "203c9f434feec57909ab4b1e028abeb3349b7847",
 	event = "BufEnter",
 }
 
