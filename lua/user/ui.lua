@@ -25,12 +25,19 @@ return {
 		"nvim-tree/nvim-web-devicons", -- optional dependency
 	},
 	opts = {
-		-- configurations go here
 		theme = {
-			separator = { link = "@comment" },
-			dirname = { link = "@comment" },
-			basename = { link = "@comment" },
-			context_file = { link = "@comment" },
+			-- Get the comment fg color
+			-- local hl = vim.api.nvim_get_hl(0, { name = "@comment", link = false })
+			-- local "#9f70a9"
+			-- if hl.fg then
+			-- 	"#9f70a9" = string.format("#%06x", hl.fg)
+			-- end
+
+			-- Because Dracula doesn’t load fast enough, a static value is needed here.
+			separator = { fg = "#9f70a9" },
+			dirname = { fg = "#9f70a9" },
+			basename = { fg = "#9f70a9" },
+			context_file = { fg = "#9f70a9" },
 		},
 
 		lead_custom_section = function()
