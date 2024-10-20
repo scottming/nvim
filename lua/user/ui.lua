@@ -15,6 +15,7 @@ local test_strategy = function()
 end
 
 return {
+	-- winbar tool
 	"utilyre/barbecue.nvim",
 	name = "barbecue",
 	version = "v1.2.0",
