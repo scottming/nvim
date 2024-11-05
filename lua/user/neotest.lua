@@ -1,14 +1,15 @@
 local M = {
 	"nvim-neotest/neotest",
-	version = "v4.4.2",
+	version = "5.6.1",
 	dependencies = {
 		"nvim-lua/plenary.nvim",
 		"nvim-treesitter/nvim-treesitter",
 		"antoinemadec/FixCursorHold.nvim",
+		"nvim-neotest/nvim-nio",
 		-- Adpters
 		"nvim-neotest/neotest-python",
 		"nvim-neotest/neotest-plenary",
-		{ dir = "~/Code/neotest-elixir" },
+		"jfpedroza/neotest-elixir",
 		"rouge8/neotest-rust",
 	},
 	event = "LspAttach",
