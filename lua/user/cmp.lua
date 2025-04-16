@@ -37,6 +37,7 @@ local M = {
 		},
 		{
 			"zbirenbaum/copilot.lua",
+			commit = "1a237cf50372830a61d92b0adf00d3b23882e0e1",
 			cmd = "Copilot",
 			event = "InsertEnter",
 			config = function()

@@ -1,6 +1,6 @@
 local M = {
 	"nvim-neotest/neotest",
-	version = "5.6.1",
+	version = "5.8.0",
 	dependencies = {
 		"nvim-lua/plenary.nvim",
 		"nvim-treesitter/nvim-treesitter",
