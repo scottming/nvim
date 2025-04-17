@@ -13,6 +13,12 @@ return {
 			mappings = {
 				["l"] = "open",
 				["h"] = "close_node",
+				["Y"] = {
+					function(state)
+						vim.fn.setreg("+", state.tree:get_node().path)
+					end,
+					desc = "copy path to clipboard",
+				},
 			},
 		}
 		opts.filesystem = {
