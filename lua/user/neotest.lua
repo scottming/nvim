@@ -1,6 +1,7 @@
 local M = {
 	"nvim-neotest/neotest",
 	version = "5.8.0",
+	-- dir = "/Users/scottming/Code/neotest",
 	dependencies = {
 		"nvim-lua/plenary.nvim",
 		"nvim-treesitter/nvim-treesitter",
@@ -9,7 +10,8 @@ local M = {
 		-- Adpters
 		"nvim-neotest/neotest-python",
 		"nvim-neotest/neotest-plenary",
-		"jfpedroza/neotest-elixir",
+		-- "jfpedroza/neotest-elixir",
+		{ dir = "/Users/scottming/Code/neotest-elixir" },
 		"rouge8/neotest-rust",
 	},
 	event = "LspAttach",
@@ -55,7 +57,7 @@ function M.config()
 			enabled = false,
 		},
 
-		log_level = vim.log.levels.INFO, -- default is WARN
+		-- log_level = vim.log.levels.INFO, -- default is WARN
 	})
 
 	local group = vim.api.nvim_create_augroup("NeotestConfig", {})
