@@ -11,7 +11,14 @@
       "Bash(git status:*)",
       "WebFetch(domain:codeberg.org)",
       "Bash(make clean:*)",
-      "Bash(make:*)"
+      "Bash(make:*)",
+      "Bash(brew install:*)",
+      "WebFetch(domain:registry.npmjs.org)",
+      "Bash(sudo chown:*)"
     ]
+  },
+  "sandbox": {
+    "enabled": true,
+    "autoAllowBashIfSandboxed": true
   }
 }

@@ -41,6 +41,11 @@ vim.opt.iskeyword:append("-") -- treats words with `-` as single words
 vim.opt.formatoptions:remove({ "c", "r", "o" }) -- This is a sequence of letters which describes how automatic formatting is to be done
 vim.opt.linebreak = true
 
+-- disable unused providers
+vim.g.loaded_perl_provider = 0
+vim.g.loaded_ruby_provider = 0
+vim.g.loaded_python3_provider = 0
+
 -- for neovide
 vim.g.neovide_padding_top = 10
 

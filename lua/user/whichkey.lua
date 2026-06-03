@@ -102,7 +102,7 @@ local vmappings = {
 	["/"] = { "<ESC><CMD>lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<CR>", "Comment" },
 	l = {
 		name = "lsp",
-		f = { "<cmd>lua vim.lsp.buf.format()<CR><ESC>", "format" },
+		f = { "<cmd>lua require('conform').format({ async = true, lsp_fallback = true })<CR><ESC>", "format" },
 	},
 }
 
@@ -179,8 +179,8 @@ local mappings = {
 		name = "LSP",
 		a = { "<cmd>lua vim.lsp.buf.code_action()<cr>", "Code Action" },
 		d = { "<cmd>TroubleToggle<cr>", "Document Diagnostics" },
-		f = { "<cmd>lua vim.lsp.buf.format({async = true})<cr>", "Format" },
-		i = { "<cmd>LspInfo<cr>", "Info" },
+		f = { "<cmd>lua require('conform').format({ async = true, lsp_fallback = true })<cr>", "Format" },
+		i = { "<cmd>LspClients<cr>", "Info" },
 		j = {
 			"<cmd>lua vim.diagnostic.goto_next()<CR>",
 			"Next Diagnostic",
@@ -245,14 +245,6 @@ local mappings = {
 		f = { "<cmd>ToggleTerm direction=float<cr>", "Float" },
 		h = { "<cmd>ToggleTerm size=10 direction=horizontal<cr>", "Horizontal" },
 		v = { "<cmd>ToggleTerm size=80 direction=vertical<cr>", "Vertical" },
-	},
-	d = {
-		name = "Debug",
-		b = { '<cmd>lua require("dap").toggle_breakpoint()<cr>', "Toggle Breakpoint" },
-		n = { '<cmd>lua require("dap").continue()<cr>', "Continue" },
-		l = { '<cmd>lua require("dap").step_into()<cr>', "Step into" },
-		j = { '<cmd>lua require("dap").step_over()<cr>', "Step Over" },
-		r = { '<cmd>lua require("dap").repl.open()<cr>', "Open REPL" },
 	},
 }
 

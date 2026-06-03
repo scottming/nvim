@@ -20,6 +20,7 @@ local colorscheme_name = require("user.colorscheme").name
 require("lazy").setup("user", {
 	install = { colorscheme = { colorscheme_name } },
 	defaults = { lazy = true, version = "v11.11.1" },
+	rocks = { enabled = false },
 	ui = { wrap = "true" },
 	checker = { enabled = false },
 	change_detection = { enabled = false },

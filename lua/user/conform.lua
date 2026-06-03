@@ -14,7 +14,9 @@ return {
 			css = { "prettierd", "prettier", stop_after_first = true },
 			yaml = { "prettierd", "prettier", stop_after_first = true },
 			markdown = { "prettierd", "prettier", stop_after_first = true },
-			heex = { "prettierd", "prettier", stop_after_first = true },
+			elixir = { "mix" },
+			eelixir = { "mix" },
+			heex = { "mix" },
 		},
 	},
 }

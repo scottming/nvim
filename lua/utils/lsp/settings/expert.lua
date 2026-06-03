@@ -6,7 +6,7 @@ local function is_special_umbrella_project(project)
 end
 
 return {
-	cmd = { "/Users/scottming/Code/lexical/_build/dev/package/lexical/bin/start_lexical.sh" },
+	cmd = { "/Users/scottming/Code/expert/apps/expert/_build/prod/rel/plain/bin/start_expert", "--stdio" },
 	filetypes = { "elixir", "eelixir", "heex" },
 	root_dir = function(bufnr, on_dir)
 		local git_root = vim.fs.root(bufnr, ".git")

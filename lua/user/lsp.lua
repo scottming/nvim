@@ -1,6 +1,6 @@
 local M = {
 	"neovim/nvim-lspconfig",
-	lazy = true,
+	event = "BufReadPre",
 	dependencies = {
 		{ "hrsh7th/cmp-nvim-lsp", event = "LspAttach" },
 		{ "nvimdev/lspsaga.nvim", event = "LspAttach" },
@@ -41,12 +41,10 @@ local function config_diagnostic()
 		-- you can use `gl` to show the diagnostic float window.
 		virtual_text = false,
 		signs = {
-			text = {
-				[vim.diagnostic.severity.ERROR] = "",
-				[vim.diagnostic.severity.WARN] = "",
-				[vim.diagnostic.severity.HINT] = "",
-				[vim.diagnostic.severity.INFO] = "",
-			},
+			[vim.diagnostic.severity.ERROR] = { sign = "" },
+			[vim.diagnostic.severity.WARN] = { sign = "" },
+			[vim.diagnostic.severity.HINT] = { sign = "" },
+			[vim.diagnostic.severity.INFO] = { sign = "" },
 		},
 		update_in_insert = true,
 		underline = true,
@@ -126,19 +124,6 @@ function M.config()
 	-- LspAttach autocmd (replaces on_attach)
 	vim.api.nvim_create_autocmd("LspAttach", {
 		callback = function(args)
-			local client = vim.lsp.get_client_by_id(args.data.client_id)
-			if not client then
-				return
-			end
-
-			if client.name == "ts_ls" then
-				client.server_capabilities.documentFormattingProvider = false
-			end
-
-			if client.name == "lua_ls" then
-				client.server_capabilities.documentFormattingProvider = false
-			end
-
 			lsp_keymaps(args.buf)
 		end,
 	})

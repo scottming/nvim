@@ -2,7 +2,7 @@ local M = {}
 
 M.servers = {
 	-- not in lspconfigs yet
-	"lexical",
+	"expert",
 	--
 	"bashls",
 	"jsonls",

@@ -79,3 +79,16 @@ vim.api.nvim_create_autocmd("ModeChanged", {
 --   autocmd!
 --   autocmd BufWritePre * lua vim.lsp.buf.formatting()
 -- augroup end
+
+vim.api.nvim_create_user_command("LspClients", function()
+	local clients = vim.lsp.get_clients({ bufnr = 0 })
+	if #clients == 0 then
+		vim.notify("No LSP clients attached to this buffer", vim.log.levels.WARN)
+		return
+	end
+	local lines = { "LSP clients for: " .. vim.fn.expand("%:p"), "" }
+	for _, c in ipairs(clients) do
+		table.insert(lines, string.format("  %-20s id=%d  root=%s", c.name, c.id, c.root_dir or "(none)"))
+	end
+	vim.notify(table.concat(lines, "\n"), vim.log.levels.INFO)
+end, { desc = "Show LSP clients attached to current buffer" })

@@ -38,8 +38,8 @@ function M.config()
 		},
 		summary = {
 			mappings = {
-				next_failed = "]e",
-				prev_failed = "[e",
+				next_failed = "]f",
+				prev_failed = "[f",
 			},
 		},
 		watch = {

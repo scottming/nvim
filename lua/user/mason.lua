@@ -25,21 +25,28 @@ local settings = {
 
 local servers = require("utils.lsp").servers
 
-local function remove_item(tbl, item)
-	local new_tbl = {}
+local mason_excluded = { "lexical", "expert" }
+
+local function exclude_servers(tbl, excluded)
+	local skip = {}
+	for _, name in ipairs(excluded) do
+		skip[name] = true
+	end
+	local result = {}
 	for _, value in ipairs(tbl) do
-		if value ~= item then
-			table.insert(new_tbl, value)
+		if not skip[value] then
+			table.insert(result, value)
 		end
 	end
-	return new_tbl
+	return result
 end
 
 function M.config()
 	require("mason").setup(settings)
 	require("mason-lspconfig").setup({
-		ensure_installed = remove_item(servers, "lexical"),
+		ensure_installed = exclude_servers(servers, mason_excluded),
 		automatic_installation = true,
+		automatic_enable = false,
 	})
 end
 

@@ -1,4 +1,4 @@
-local M = { "ahmedkhalf/project.nvim", event = "BufEnter" }
+local M = { "ahmedkhalf/project.nvim", dir = "/Users/scottming/Code/project.nvim", event = "BufEnter" }
 
 function M.config()
 	local project = require("project_nvim")
