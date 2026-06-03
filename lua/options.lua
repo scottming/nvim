@@ -52,6 +52,9 @@ vim.g.neovide_padding_top = 10
 -- for dracula
 vim.g.dracula_full_special_attrs_support = 1
 
+-- ts_context_commentstring: skip deprecated nvim-treesitter module
+vim.g.skip_ts_context_commentstring_module = true
+
 if vim.g.neovide then
 	vim.o.guifont = "MonoLisa Nerd Font:h12"
 	vim.g.neovide_input_macos_alt_is_meta = true

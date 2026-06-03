@@ -23,7 +23,7 @@ require("lazy").setup("user", {
 	rocks = { enabled = false },
 	ui = { wrap = "true" },
 	checker = { enabled = false },
-	change_detection = { enabled = false },
+	change_detection = { enabled = true },
 	debug = false,
 	performance = {
 		rtp = {

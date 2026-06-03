@@ -2,7 +2,6 @@ local M = {
 	"nvim-treesitter/nvim-treesitter",
 	event = "BufReadPost",
 	dependencies = {
-		{ "JoosepAlviste/nvim-ts-context-commentstring", event = "VeryLazy" },
 		{ "nvim-tree/nvim-web-devicons", event = "VeryLazy" },
 	},
 }
@@ -34,9 +33,6 @@ function M.config()
 			disable = { "css" }, -- list of language that will be disabled
 		},
 		injections = {
-			enable = true,
-		},
-		autopairs = {
 			enable = true,
 		},
 		indent = { enable = true, disable = { "python", "css" } },

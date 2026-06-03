@@ -1,11 +1,9 @@
 local M = {
 	"folke/which-key.nvim",
-	commit = "5224c261825263f46f6771f1b644cae33cd06995",
 	event = "VeryLazy",
 	dependencies = {
 		{
 			"ThePrimeagen/harpoon",
-			commit = "ccae1b9bec717ae284906b0bf83d720e59d12b91",
 			dependencies = "nvim-lua/plenary.nvim",
 			event = "VeryLazy",
 		},

@@ -74,12 +74,6 @@ vim.api.nvim_create_autocmd("ModeChanged", {
 	end,
 })
 
--- Autoformat
--- augroup _lsp
---   autocmd!
---   autocmd BufWritePre * lua vim.lsp.buf.formatting()
--- augroup end
-
 vim.api.nvim_create_user_command("LspClients", function()
 	local clients = vim.lsp.get_clients({ bufnr = 0 })
 	if #clients == 0 then
