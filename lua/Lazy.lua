@@ -14,10 +14,10 @@ vim.opt.rtp:prepend(lazypath)
 -- example using a list of specs with the default options
 vim.g.mapleader = " " -- make sure to set `mapleader` before lazy so your mappings are correct
 
-local colorscheme_name = require("user.colorscheme").name
+local colorscheme_name = require("plugins.colorscheme.colorscheme").name
 
 -- load lazy
-require("lazy").setup("user", {
+require("lazy").setup("plugins", {
 	install = { colorscheme = { colorscheme_name } },
 	defaults = { lazy = true, version = "v11.11.1" },
 	rocks = { enabled = false },
