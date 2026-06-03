@@ -47,7 +47,7 @@ local test_strategy = {
 			return ""
 		end
 		local utils = require("utils")
-		local cwd = vim.loop.cwd()
+		local cwd = vim.uv.cwd()
 
 		if utils.is_elixir_test_file() then
 			if neotest_config.projects[cwd].default_strategy == "iex" then

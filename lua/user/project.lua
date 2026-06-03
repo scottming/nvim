@@ -1,4 +1,4 @@
-local M = { "ahmedkhalf/project.nvim", commit = "8c6bad7d22eef1b71144b401c9f74ed01526a4fb", event = "BufEnter" }
+local M = { "ahmedkhalf/project.nvim", event = "BufEnter" }
 
 function M.config()
 	local project = require("project_nvim")
@@ -27,7 +27,7 @@ function M.config()
 		-- When set to false, you will get a message when project.nvim changes your directory.
 		silent_chdir = true,
 		---@usage list of lsp client names to ignore when using **lsp** detection. eg: { "efm", ... }
-		ignore_lsp = { "lua_ls", "null-ls" },
+		ignore_lsp = { "lua_ls" },
 		---@type string
 		---@usage path to store the project history for use in telescope
 		datapath = vim.fn.stdpath("data"),

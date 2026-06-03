@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(grep:*)",
+      "Bash(ls:*)",
+      "Bash(xargs:*)",
+      "Bash(nvim:*)",
+      "WebFetch(domain:neovim.io)",
+      "Bash(xxd:*)",
+      "Bash(python3:*)",
+      "Bash(git status:*)",
+      "WebFetch(domain:codeberg.org)",
+      "Bash(make clean:*)",
+      "Bash(make:*)"
+    ]
+  }
+}

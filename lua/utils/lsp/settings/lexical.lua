@@ -1,5 +1,3 @@
-local util = require("lspconfig.util")
-
 local function is_special_umbrella_project(project)
 	return string.find(project, "lexical")
 		or string.find(project, "kyc")
@@ -10,13 +8,12 @@ end
 return {
 	cmd = { "/Users/scottming/Code/lexical/_build/dev/package/lexical/bin/start_lexical.sh" },
 	filetypes = { "elixir", "eelixir", "heex" },
-	root_dir = function(fname)
-		-- Set `~/Code/lexical` as root_dir for lexical project
-		local project = util.root_pattern(".git")(fname)
-		if project and is_special_umbrella_project(project) then
-			return project
+	root_dir = function(bufnr)
+		local git_root = vim.fs.root(bufnr, ".git")
+		if git_root and is_special_umbrella_project(git_root) then
+			return git_root
 		else
-			return util.root_pattern("mix.exs", ".git")(fname)
+			return vim.fs.root(bufnr, { "mix.exs", ".git" })
 		end
 	end,
 }

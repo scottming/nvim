@@ -29,7 +29,7 @@ end
 
 M.set_iex_strategy = function()
 	local neotest = require("neotest")
-	local cwd = vim.loop.cwd()
+	local cwd = vim.uv.cwd()
 	neotest.setup_project(cwd, {
 		adapters = { require("neotest-elixir") },
 		default_strategy = "iex",

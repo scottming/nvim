@@ -6,7 +6,7 @@ end
 local utils = require("utils")
 
 local test_strategy = function()
-	local cwd = vim.loop.cwd()
+	local cwd = vim.uv.cwd()
 	if neotest_config.projects[cwd].default_strategy == "iex" then
 		return ""
 	else

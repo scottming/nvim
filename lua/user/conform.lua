@@ -3,9 +3,18 @@ return {
 	event = "BufRead",
 	opts = {
 		formatters_by_ft = {
-			-- Conform will run the first available formatter
-			seex = { "prettierd", "prettier", stop_after_first = true },
+			lua = { "stylua" },
+			python = { "black" },
+			javascript = { "prettierd", "prettier", stop_after_first = true },
+			typescript = { "prettierd", "prettier", stop_after_first = true },
+			javascriptreact = { "prettierd", "prettier", stop_after_first = true },
+			typescriptreact = { "prettierd", "prettier", stop_after_first = true },
+			json = { "prettierd", "prettier", stop_after_first = true },
+			html = { "prettierd", "prettier", stop_after_first = true },
+			css = { "prettierd", "prettier", stop_after_first = true },
+			yaml = { "prettierd", "prettier", stop_after_first = true },
+			markdown = { "prettierd", "prettier", stop_after_first = true },
+			heex = { "prettierd", "prettier", stop_after_first = true },
 		},
 	},
-	version = "v8.4.0",
 }

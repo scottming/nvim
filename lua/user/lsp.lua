@@ -1,15 +1,10 @@
 local M = {
 	"neovim/nvim-lspconfig",
-	commit = "d710f5c58d3b4b010504472d58752d5cef115d99",
 	lazy = true,
 	dependencies = {
-		{
-			"hrsh7th/cmp-nvim-lsp",
-			commit = "0e6b2ed705ddcff9738ec4ea838141654f12eeef",
-			event = "LspAttach",
-		},
-		{ "nvimdev/lspsaga.nvim", event = "LspAttach", commit = "a4d442896a9ff1f83ee3db965d81b659ebc977d5" },
-		{ "j-hui/fidget.nvim", event = "LspAttach", commit = "0ba1e16d07627532b6cae915cc992ecac249fb97" },
+		{ "hrsh7th/cmp-nvim-lsp", event = "LspAttach" },
+		{ "nvimdev/lspsaga.nvim", event = "LspAttach" },
+		{ "j-hui/fidget.nvim", event = "LspAttach" },
 	},
 }
 
@@ -41,24 +36,17 @@ local function setup_lspsaga()
 end
 
 local function config_diagnostic()
-	local signs = {
-		{ name = "DiagnosticSignError", text = "" },
-		{ name = "DiagnosticSignWarn", text = "" },
-		{ name = "DiagnosticSignHint", text = "" },
-		{ name = "DiagnosticSignInfo", text = "" },
-	}
-
-	for _, sign in ipairs(signs) do
-		vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = "" })
-	end
-
-	local config = {
+	vim.diagnostic.config({
 		-- disable it, and if you really need them,
 		-- you can use `gl` to show the diagnostic float window.
 		virtual_text = false,
-		-- show signs
 		signs = {
-			active = signs,
+			text = {
+				[vim.diagnostic.severity.ERROR] = "",
+				[vim.diagnostic.severity.WARN] = "",
+				[vim.diagnostic.severity.HINT] = "",
+				[vim.diagnostic.severity.INFO] = "",
+			},
 		},
 		update_in_insert = true,
 		underline = true,
@@ -67,13 +55,10 @@ local function config_diagnostic()
 			focusable = false,
 			style = "minimal",
 			border = "rounded",
-			-- source = "always",
 			header = "",
 			prefix = "",
 		},
-		ui = { kind = { ["Folder"] = "@comment" } },
-	}
-	vim.diagnostic.config(config)
+	})
 end
 
 -- Lsp keymaps only works after lsp client attached
@@ -111,18 +96,10 @@ function M.config()
 	setup_lspsaga()
 	config_diagnostic()
 	require("fidget").setup({
-		timer = {
-			spinner_rate = 125, -- frame rate of spinner animation, in ms
-			-- fidget_decay = 2000, -- how long to keep around empty fidget, in ms
-			fidget_decay = 500,
-			-- task_decay = 1000, -- how long to keep around completed task, in ms
-			task_decay = 250,
-		},
-		window = {
-			blend = 50,
-		},
-		sources = {
-			["null-ls"] = { ignore = true },
+		notification = {
+			window = {
+				winblend = 50,
+			},
 		},
 	})
 
@@ -130,46 +107,57 @@ function M.config()
 	-- vim.lsp.set_log_level("debug")
 	require("vim.lsp.log").set_format_func(vim.inspect)
 
-	-- cmp
-	local cmp_nvim_lsp = require("cmp_nvim_lsp")
+	-- capabilities
 	local capabilities = vim.lsp.protocol.make_client_capabilities()
 	capabilities.textDocument.completion.completionItem.snippetSupport = true
-	capabilities = cmp_nvim_lsp.default_capabilities(capabilities)
 
-	-- lsp config
-	local lspconfig = require("lspconfig")
-
-	local on_attach = function(client, bufnr)
-		if client.name == "tsserver" then
-			client.server_capabilities.documentFormattingProvider = false
-		end
-
-		if client.name == "sumneko_lua" then
-			client.server_capabilities.documentFormattingProvider = false
-		end
-
-		lsp_keymaps(bufnr)
-
-		-- NTOE: use this require line elixir files won't work
-		-- maybe because of the find reference not provide by lexical
-		-- require("illuminate").on_attach(client)
+	-- Merge cmp_nvim_lsp capabilities if already loaded, otherwise it will
+	-- update capabilities on its own when it loads (on LspAttach)
+	local ok, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
+	if ok then
+		capabilities = cmp_nvim_lsp.default_capabilities(capabilities)
 	end
 
-	for _, server in pairs(require("utils.lsp").servers) do
-		Opts = {
-			on_attach = on_attach,
-			capabilities = capabilities,
-		}
+	-- Set default capabilities for all servers
+	vim.lsp.config("*", {
+		capabilities = capabilities,
+	})
 
-		server = vim.split(server, "@")[1]
+	-- LspAttach autocmd (replaces on_attach)
+	vim.api.nvim_create_autocmd("LspAttach", {
+		callback = function(args)
+			local client = vim.lsp.get_client_by_id(args.data.client_id)
+			if not client then
+				return
+			end
 
-		local require_ok, conf_opts = pcall(require, "utils.lsp.settings." .. server)
+			if client.name == "ts_ls" then
+				client.server_capabilities.documentFormattingProvider = false
+			end
+
+			if client.name == "lua_ls" then
+				client.server_capabilities.documentFormattingProvider = false
+			end
+
+			lsp_keymaps(args.buf)
+		end,
+	})
+
+	-- Configure each server with custom settings
+	local servers = require("utils.lsp").servers
+	local server_names = {}
+	for _, server in pairs(servers) do
+		local name = vim.split(server, "@")[1]
+		table.insert(server_names, name)
+
+		local require_ok, conf_opts = pcall(require, "utils.lsp.settings." .. name)
 		if require_ok then
-			Opts = vim.tbl_deep_extend("force", conf_opts, Opts)
+			vim.lsp.config(name, conf_opts)
 		end
-
-		lspconfig[server].setup(Opts)
 	end
+
+	-- Enable all servers
+	vim.lsp.enable(server_names)
 end
 
 return M
