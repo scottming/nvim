@@ -1,14 +1,17 @@
 local M = { "nvim-lualine/lualine.nvim", commit = "e99d733e0213ceb8f548ae6551b04ae32e590c80", event = "VeryLazy" }
 
-local hide_in_width = function()
+local icons = require("utils.styles").style.icons
+
+local function hide_in_width()
 	return vim.fn.winwidth(0) > 80
 end
 
+-- static components
 local diagnostics = {
 	"diagnostics",
 	sources = { "nvim_diagnostic" },
 	sections = { "error", "warn" },
-	symbols = { error = " ", warn = " " },
+	symbols = { error = icons.lsp.error .. " ", warn = icons.lsp.warn .. " " },
 	colored = false,
 	update_in_insert = false,
 	always_visible = true,
@@ -17,7 +20,11 @@ local diagnostics = {
 local diff = {
 	"diff",
 	colored = false,
-	symbols = { added = " ", modified = " ", removed = " " }, -- changes diff symbols
+	symbols = {
+		added = icons.git.add .. " ",
+		modified = icons.git.mod .. " ",
+		removed = icons.git.remove .. " ",
+	},
 	cond = hide_in_width,
 }
 
@@ -34,108 +41,76 @@ local filetype = {
 	icon = nil,
 }
 
--- local branch = {
--- 	"branch",
--- 	icons_enabled = true,
--- 	icon = "",
--- }
+local location = { "location", padding = 0 }
 
-local test_strategy = {
-	function()
-		local ok, neotest_config = pcall(require, "neotest.config")
-		if not ok then
-			return ""
-		end
-		local utils = require("utils")
-		local cwd = vim.uv.cwd()
+local progress_chars = { "__", "▁▁", "▂▂", "▃▃", "▄▄", "▅▅", "▆▆", "▇▇", "██" }
 
-		if utils.is_elixir_test_file() then
-			if neotest_config.projects[cwd].default_strategy == "iex" then
-				return ""
-			else
-				return "󰳗"
-			end
-		else
-			return ""
-		end
-	end,
-}
-
-local test_status_counts = {
-	function()
-		local ok, neotest = pcall(require, "neotest")
-		if not ok then
-			return ""
-		end
-		local adapters = neotest.state.adapter_ids()
-
-		if #adapters > 0 then
-			local status = neotest.state.status_counts(adapters[1], {
-				buffer = vim.api.nvim_buf_get_name(0),
-			})
-			local sections = {
-				{
-					sign = "",
-					count = status.failed,
-					base = "NeotestFailed",
-					tag = "test_fail",
-				},
-				{
-					sign = "",
-					count = status.running,
-					base = "NeotestRunning",
-					tag = "test_running",
-				},
-				{
-					sign = "",
-					count = status.passed,
-					base = "NeotestPassed",
-					tag = "test_pass",
-				},
-				{
-					sign = "󰙨",
-					count = status.total,
-					base = "NeotestTotal",
-					tag = "test_total",
-				},
-			}
-
-			local result = {}
-			for _, section in ipairs(sections) do
-				if section.count > 0 then
-					table.insert(result, "%#" .. section.base .. "#" .. section.sign .. " " .. section.count)
-				end
-			end
-
-			return table.concat(result, " ")
-		end
-		return ""
-	end,
-}
-
-local location = {
-	"location",
-	padding = 0,
-}
-
--- cool function for progress
-local progress = function()
+local function progress()
 	local current_line = vim.fn.line(".")
 	local total_lines = vim.fn.line("$")
-	local chars = { "__", "▁▁", "▂▂", "▃▃", "▄▄", "▅▅", "▆▆", "▇▇", "██" }
-	local line_ratio = current_line / total_lines
-	local index = math.ceil(line_ratio * #chars)
-	return chars[index]
+	local index = math.ceil((current_line / total_lines) * #progress_chars)
+	return progress_chars[index]
 end
 
-local spaces = function()
+local function spaces()
 	return "spaces: " .. vim.api.nvim_get_option_value("shiftwidth", { buffer = 0 })
 end
 
-function M.config()
-	local lualine = require("lualine")
+-- neotest components
+local neotest_status_sections = {
+	{ sign = "", field = "failed", base = "NeotestFailed" },
+	{ sign = "", field = "running", base = "NeotestRunning" },
+	{ sign = "", field = "passed", base = "NeotestPassed" },
+	{ sign = "󰙨", field = "total", base = "NeotestTotal" },
+}
 
-	lualine.setup({
+local function format_neotest_status(status)
+	local parts = {}
+	for _, section in ipairs(neotest_status_sections) do
+		local count = status[section.field]
+		if count > 0 then
+			table.insert(parts, "%#" .. section.base .. "#" .. section.sign .. " " .. count)
+		end
+	end
+	return table.concat(parts, " ")
+end
+
+local function neotest_strategy_label()
+	local ok, neotest_config = pcall(require, "neotest.config")
+	if not ok or not require("utils").is_elixir_test_file() then
+		return ""
+	end
+
+	local project = neotest_config.projects[vim.uv.cwd()]
+	if not project then
+		return ""
+	end
+
+	return project.default_strategy == "iex" and "" or "󰳗"
+end
+
+local function neotest_status_label()
+	local ok, neotest = pcall(require, "neotest")
+	if not ok then
+		return ""
+	end
+
+	local adapters = neotest.state.adapter_ids()
+	if #adapters == 0 then
+		return ""
+	end
+
+	local status = neotest.state.status_counts(adapters[1], {
+		buffer = vim.api.nvim_buf_get_name(0),
+	})
+	return format_neotest_status(status)
+end
+
+local test_strategy = { neotest_strategy_label }
+local test_status_counts = { neotest_status_label }
+
+function M.config()
+	require("lualine").setup({
 		options = {
 			icons_enabled = true,
 			theme = "auto",
@@ -148,8 +123,6 @@ function M.config()
 			lualine_a = { diagnostics },
 			lualine_b = { mode },
 			lualine_c = { test_status_counts },
-			-- lualine_x = { "encoding", "fileformat", "filetype" },
-			--[[ lualine_x = { diff, spaces, "encoding", filetype }, ]]
 			lualine_x = { diff, spaces, filetype },
 			lualine_y = { test_strategy, location },
 			lualine_z = { progress },

@@ -26,7 +26,7 @@ function M.config()
 			show_buffer_close_icons = false,
 			diagnostics = "nvim_lsp",
 			diagnostics_indicator = function(count, level)
-				return (icons[level] or "?") .. " " .. count
+				return (icons.lsp[level] or "?") .. " " .. count
 			end,
 			diagnostics_update_in_insert = false,
 			offsets = {

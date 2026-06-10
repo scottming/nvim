@@ -40,12 +40,7 @@ local function config_diagnostic()
 		-- disable it, and if you really need them,
 		-- you can use `gl` to show the diagnostic float window.
 		virtual_text = false,
-		signs = {
-			[vim.diagnostic.severity.ERROR] = { sign = "" },
-			[vim.diagnostic.severity.WARN] = { sign = "" },
-			[vim.diagnostic.severity.HINT] = { sign = "" },
-			[vim.diagnostic.severity.INFO] = { sign = "" },
-		},
+		signs = require("utils.styles").diagnostic_signs(),
 		update_in_insert = true,
 		underline = true,
 		severity_sort = true,
@@ -89,48 +84,36 @@ local function lsp_keymaps(bufnr)
 	keymap(bufnr, "n", "gl", "<cmd>lua vim.diagnostic.open_float()<CR>", { silent = true })
 end
 
-function M.config()
-	-- setup lspsaga and config diagnostic
-	setup_lspsaga()
-	config_diagnostic()
+local function setup_fidget()
 	require("fidget").setup({
-		notification = {
-			window = {
-				winblend = 50,
-			},
-		},
+		notification = { window = { winblend = 50 } },
 	})
+end
 
-	-- log
-	-- vim.lsp.set_log_level("debug")
-	require("vim.lsp.log").set_format_func(vim.inspect)
-
-	-- capabilities
+local function setup_capabilities()
 	local capabilities = vim.lsp.protocol.make_client_capabilities()
 	capabilities.textDocument.completion.completionItem.snippetSupport = true
 
-	-- Merge cmp_nvim_lsp capabilities if already loaded, otherwise it will
-	-- update capabilities on its own when it loads (on LspAttach)
 	local ok, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
 	if ok then
 		capabilities = cmp_nvim_lsp.default_capabilities(capabilities)
 	end
 
-	-- Set default capabilities for all servers
-	vim.lsp.config("*", {
-		capabilities = capabilities,
-	})
+	vim.lsp.config("*", { capabilities = capabilities })
+end
 
-	-- LspAttach autocmd (replaces on_attach)
+local function setup_attach()
 	vim.api.nvim_create_autocmd("LspAttach", {
 		callback = function(args)
 			lsp_keymaps(args.buf)
 		end,
 	})
+end
 
-	-- Configure each server with custom settings
+local function enable_servers()
 	local servers = require("utils.lsp").servers
 	local server_names = {}
+
 	for _, server in pairs(servers) do
 		local name = vim.split(server, "@")[1]
 		table.insert(server_names, name)
@@ -141,8 +124,17 @@ function M.config()
 		end
 	end
 
-	-- Enable all servers
 	vim.lsp.enable(server_names)
+end
+
+function M.config()
+	setup_lspsaga()
+	config_diagnostic()
+	setup_fidget()
+	require("vim.lsp.log").set_format_func(vim.inspect)
+	setup_capabilities()
+	setup_attach()
+	enable_servers()
 end
 
 return M

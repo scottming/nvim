@@ -32,11 +32,11 @@ M.style = {
 			vert_top_half_block = "▀",
 		},
 		lsp = {
-			error = "", -- '✗'
+			error = "",
 			warn = "",
 			warning = "",
-			info = "", -- 
-			hint = "", -- ⚑
+			hint = "",
+			info = "",
 		},
 		git = {
 			add = "", -- '',
@@ -222,5 +222,19 @@ M.style = {
 	},
 	palette = palette,
 }
+
+function M.lsp_kind_icons(variant)
+	return M.style.lsp.kinds[variant or "nerdfonts"]
+end
+
+function M.diagnostic_signs()
+	local icons = M.style.icons.lsp
+	return {
+		[vim.diagnostic.severity.ERROR] = { sign = icons.error },
+		[vim.diagnostic.severity.WARN] = { sign = icons.warn },
+		[vim.diagnostic.severity.HINT] = { sign = icons.hint },
+		[vim.diagnostic.severity.INFO] = { sign = icons.info },
+	}
+end
 
 return M
